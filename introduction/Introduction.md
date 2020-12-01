@@ -1,6 +1,5 @@
 # Introduction
 
-###  
 
 ## About this Workshop
 
