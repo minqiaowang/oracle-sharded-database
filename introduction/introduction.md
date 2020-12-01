@@ -13,7 +13,7 @@ Oracle Sharding provides superior run-time performance and simpler life-cycle ma
 
 When deploying a sharded configuration, there are two different `GDSCTL` commands, `ADD SHARD` and `CREATE SHARD`, that can be used to add a shard.
 
-Before you start to configure the sharding topology, decide which shard creation method to use because this decision affects some of the configuration steps.
+Before you start to configure the sharding topology, decide which shard creation method to use because this decision affects some of the configuration steps. In this workshop, We will use the multitenant database for the shard database, so only the `ADD SHARD` command supported. 
 
 The differences between the `ADD SHARD` and `CREATE SHARD` methods are explained where necessary in the configuration instructions.
 

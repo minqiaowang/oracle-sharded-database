@@ -2,11 +2,11 @@
 
 In this lab, you will perform the following steps:
 
-- Connect to a shard by specifying a sharding_key - via the shard director
+- Connect to a shard by specifying a `sharding_key` - via the shard director
 
 - Connect to the shardcatalog via GDS$CATALOG service
 
-This lab is just to understand how the routing works when a sharding_key is specified using SQL*Plus. For production application scenario, you would be using Oracle Integrated Connection pools – UCP, OCI, ODP.NET, JDBC etc which will allow direct routing based on the sharding_key. 
+This lab is just to understand how the routing works when a `sharding_key` is specified using SQL*Plus. For production application scenario, you would be using Oracle Integrated Connection pools – UCP, OCI, ODP.NET, JDBC etc which will allow direct routing based on the `sharding_key`. 
 
 ## **Step 1:** Connect to a Shard by a Sharding key
 
