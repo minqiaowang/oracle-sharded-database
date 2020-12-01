@@ -1,10 +1,26 @@
 # Cross Shard Query
 
+## Introduction
+
 In a sharded database, a database client connects to the shard using a connection string with a sharding key value. If a sharding key is specified then all requests submitted in that session will be routed to the shard corresponding to the key value. They are referred to as Single Shard Queries (SSQ).
 
 If the sharding key cannot be provided as part of database connection string, then a session will have to be established on the coordinator database (catadb). All the queries submitted from such sessions can in principle touch data on any set of shard databases. They are referred to as Cross Shard Queries (CSQ). 
 
 At a high level the coordinator rewrites each incoming query, Q, into a distributive form composed of two queries, CQ and SQ, where SQ (Shard Query) is the portion of Q that executes on each participating shard and CQ (Coordinator Query) is the portion that executes on the coordinator shard. 
+
+Estimated Lab Time: 20 minutes.
+
+### Objectives
+
+In this lab, you will perform the following steps:
+- run Cross Shard Query from the demo tables
+
+### Prerequisites
+
+This lab assumes you have already completed the following:
+- Sharded Database Deployment
+- Create Demo App Schema
+- Custom Demo Data Loading
 
 1. Login to the catalog database host, switch to oracle user, and make sure you are in the cata environment.
 

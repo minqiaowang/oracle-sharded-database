@@ -181,12 +181,12 @@ When using Resource Manager to deploy an environment, execute a terraform **Plan
 
     ![](./images/pseftns.png " ")
 
-5.  Connect to the Database using SQL*Plus as the **oracle** user.
+5.  Connect to the Database using SQL*Plus as the **oracle** user. The 4 CDBs we created named `cata, shd1, shd2, shd3` and the PDB named `catapdb, shdpdb1, shdpdb2, shdpdb3`.
 
     ````
     <copy>
     sudo su - oracle
-    sqlplus system/Ora_DB4U@localhost:1521/orclpdb
+    sqlplus system/Ora_DB4U@localhost:1521/catapdb
     </copy>
     ````
     
@@ -209,7 +209,7 @@ When using Resource Manager to deploy an environment, execute a terraform **Plan
     </copy>
     ````
 
-You now have a fully functional Oracle Database 19c instance running on Oracle Cloud Compute.
+You now have a fully functional Oracle Database 19c instance running on Oracle Cloud Compute. Check all the 4 instances and make sure they are ready.
 
 You may proceed to the next lab.
 

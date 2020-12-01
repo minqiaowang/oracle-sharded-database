@@ -1,6 +1,24 @@
 # Elastic Scaling
 
+## Introduction
+
 In this lab, we will add the shard (on shd3) to the Shard Database and thus elastically scale the SDB. Make sure you have done all steps in the shard3 host according to the lab 2 "Shard Database Deployment" to configure the shard host and setup shard database.
+
+Estimated Lab Time: 20 minutes.
+
+### Objectives
+
+In this lab, you will perform the following steps:
+- Add the New Shard
+- Deploy and Verify the New Shard
+- Run the custom data loading again on 3 sharded database
+
+### Prerequisites
+
+This lab assumes you have already completed the following:
+- Sharded database deployment
+- Create demo app schema
+- Custom data loading
 
 ## **Step 1:** Add the New Shard
 

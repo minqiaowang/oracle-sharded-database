@@ -1,6 +1,22 @@
 # Custom Data Loading
 
+## Introduction
+
 To learn more about Oracle Sharded Databases, download and deploy the system-managed SDB demo application. The demo application uses the SDB environment and schema you have just created to simulate the workload of an online retail store. 
+
+Estimated Lab Time: 20 minutes.
+
+### Objectives
+
+In this lab, you will perform the following steps:
+- Setup and Configure the sharding demo application
+- Start the workload to load the demo data
+
+### Prerequisites
+
+This lab assumes you have already completed the following:
+- Sharded Database Deployment
+- Create Demo App Schema
 
 ## **Step 1:** Setup and Configure the Sharding Demo Application
 
@@ -21,7 +37,7 @@ To learn more about Oracle Sharded Databases, download and deploy the system-man
 2. Download the `sdb_demo_app.zip`  file. 
 
    ```
-   
+   oracle@cata ~]$ wget https://github.com/minqiaowang/oracle-sharded-database/raw/main/custom-data-loading/sdb_demo_app.zip
    ```
 
    
