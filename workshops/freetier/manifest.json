@@ -1,0 +1,39 @@
+{
+    "workshoptitle": "Oracle Sharded Database",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "The Introduction is always second. The title and contents menu title match for the Introduction.",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Lab 1: Setup the Environment",
+            "description": "Labs that follow the introduction are numbered, starting with Lab 1",
+            "filename": "../../setup-environment/setup-environment.md"
+        },
+        {
+            "title": "Lab 2: Deployment the Sharded Database",
+            "filename": "../../shard-db-deployment/shard-db-deployment.md"
+        },
+        {
+            "title": "Lab 3: Data Dependent Routing",
+            "filename": "../../data-dependent-routing/data-dependent-routing.md"
+        },
+        {
+            "title": "Lab 4: Create Demo App Schema",
+            "filename": "../../create-app-schema/create-app-schema.md"
+        },
+        {
+            "title": "Lab 5: Custom Data Loading",
+            "filename": "../../custom-data-loading/custom-data-loading.md"
+        },
+        {
+            "title": "Lab 6: Cross Sharding Query",
+            "filename": "../../cross-shard-query/cross-shard-query.md"
+        },
+        {
+            "title": "Lab 7: Sharded Database Elastic Scaling",
+            "filename": "../../elastic-scaling/elastic-scaling.md"
+        }
+    ]
+}
