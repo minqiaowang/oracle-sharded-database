@@ -1,10 +1,23 @@
 # Oracle Shard Database Deployment
 
-Now, we have 4 database instance. We will use cata as the catalog database, shd1 and shd2 use as the shard database. The shd3 use as the third shard which will be add to the shard database in the last lab.
+## Introduction
+
+Now, we have 4 database instances. We will use cata as the catalog database, shd1 and shd2 use as the shard database. The shd3 use as the third shard which will be add to the shard database in the last lab.
 
 Here is the topology used for System Managed Sharding:
 
 ![image-20201201125945082](images/image-20201201125945082.png)
+
+Estimated Lab Time: 60 minutes.
+
+### Objectives
+
+In this lab, you will deploy shard database with 2 shard.
+
+### Prerequisites
+
+This lab assumes you have already completed the following:
+- Setup Environment to provision catalog and shard database.
 
 ## **Step 1:** Configure Shard Hosts
 

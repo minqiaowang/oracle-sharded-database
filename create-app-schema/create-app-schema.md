@@ -1,12 +1,21 @@
 # Create Shard App Schema
 
+## Introduction
 
+In this lab, you will create a app schema. you will create a sharded table family `Customers->Orders->LineItems` and a duplicate table `Products`.
+
+Estimated Lab Time: 20 minutes.
+
+### Objectives
 
 In this lab, you will perform the following steps:
-
 - Create the schema user, tablespace set, sharded tables and duplicated tables
 - Verify that the DDLs have been propagated to all the shards
 
+### Prerequisites
+
+This lab assumes you have already completed the following:
+- Sharded Database Deployment
 
 
 ## **Step 1:** Create Shard App Schema
@@ -27,10 +36,10 @@ In this lab, you will perform the following steps:
 
    
 
-2. Download the SQL scripts [create-app-schema.sql](https://create)
+2. Download the SQL scripts `create-app-schema.sql`.
 
    ```
-   
+   [oracle@cata ~]$ wget https://github.com/minqiaowang/oracle-sharded-database/raw/main/create-app-schema/create-app-schema.sql
    ```
 
    
@@ -415,11 +424,6 @@ In this lab, you will perform the following steps:
 
    
 
-   
-
-
-
-
 ## **Step 2:** Verify the Shard App Schema
 
 1. Switch to the GSM environment, run GDSCTL.
@@ -799,7 +803,3 @@ In this lab, you will perform the following steps:
     ```
 
     
-
-    
-
-

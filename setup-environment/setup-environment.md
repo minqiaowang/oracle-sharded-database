@@ -18,7 +18,7 @@ This lab assumes you have already completed the following:
 
 Click on the link below to download the Resource Manager zip files you need to build your enviornment.
 
-- [sdb19c-primary-num.zip](https://github.com/minqiaowang/on-p) - Packaged terraform primary database instance creation script
+- [sdb19c-primary-num.zip](https://github.com/minqiaowang/oracle-sharded-database/raw/main/setup-environment/sdb19c-primary-num.zip) - Packaged terraform primary database instance creation script
 
 
 

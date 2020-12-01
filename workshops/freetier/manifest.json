@@ -21,12 +21,12 @@
             "filename": "../../shard-db-deployment/shard-db-deployment.md"
         },
         {
-            "title": "Lab 3: Data Dependent Routing",
-            "filename": "../../data-dependent-routing/data-dependent-routing.md"
+            "title": "Lab 3: Create Demo App Schema",
+            "filename": "../../create-app-schema/create-app-schema.md"
         },
         {
-            "title": "Lab 4: Create Demo App Schema",
-            "filename": "../../create-app-schema/create-app-schema.md"
+            "title": "Lab 4: Data Dependent Routing",
+            "filename": "../../data-dependent-routing/data-dependent-routing.md"
         },
         {
             "title": "Lab 5: Custom Data Loading",
