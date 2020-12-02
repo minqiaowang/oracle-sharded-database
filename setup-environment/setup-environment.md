@@ -2,13 +2,13 @@
 
 ## Introduction
 
-In this lab you will setup 4 compute instances using Oracle Resource Manager and Terraform. The databases are automatically installed in the instances. One will be used as the catalog named cata. Others are used as the shard database name shd1, shd2 and shd3.
+In this lab you will setup 4 compute instances using Oracle Resource Manager and Terraform. The databases are automatically installed in the instances. One will be used as the sharding catalog named cata. Others are used as the sharded database name shd1, shd2 and shd3.
 
 Estimated Lab Time: 30 minutes.
 
 ### Objectives
 
--   Use Terraform and Resource Manager to setup the catalog and shard database.
+-   Use Terraform and Resource Manager to setup the shard catalog and sharded database.
 
 ### Prerequisites
 
@@ -18,7 +18,7 @@ This lab assumes you have already completed the following:
 
 Click on the link below to download the Resource Manager zip files you need to build your enviornment.
 
-- [sdb19c-primary-num.zip](https://github.com/minqiaowang/oracle-sharded-database/raw/main/setup-environment/sdb19c-primary-num.zip) - Packaged terraform primary database instance creation script
+- [sdb19c-primary-num.zip](https://github.com/minqiaowang/oracle-sharded-database/raw/main/setup-environment/sdb19c-primary-num.zip) - Packaged terraform primary database instances creation script.
 
 
 
@@ -34,7 +34,7 @@ Click on the link below to download the Resource Manager zip files you need to b
 
     ![](./images/step1.3-createstackpage.png " ")
 
-2. Check the **ZIP FILE**, Click the **Browse** link and select the primary database setup zip file (s`db19c-primary-num.zip`) that you downloaded. Click **Select** to upload the zip file.
+2. Check the **ZIP FILE**, Click the **Browse** link and select the setup zip file (`sdb19c-primary-num.zip`) that you downloaded. Click **Select** to upload the zip file.
 
     ![](images/image-20201030094139692.png)
 
@@ -85,9 +85,9 @@ When using Resource Manager to deploy an environment, execute a terraform **Plan
 
     
 
-2. Once this job succeeds, you will get an apply complete notification from Terraform.  In the end of the apply log,  you can get the **public ip address** and **private ip address** for each of the instances. Congratulations, your environment is created! Time to login to your instance to finish the configuration.
+2. Once this job succeeds, you will get an apply complete notification from Terraform.  Click **Outputs**,  you can get the **public ip address** and **private ip address** for each of the instances. Congratulations, your environment is created! Time to login to your instances to finish the configuration.
 
-    ![](images/image-20201030100144873.png)
+    ![image-20201202090351134](images/image-20201202090351134.png)
 
 3.  Write down all the public and private ip for later use. It's same like the following.
 

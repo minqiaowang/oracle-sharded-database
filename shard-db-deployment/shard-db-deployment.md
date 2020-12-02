@@ -4,7 +4,16 @@
 
 Now, we have 4 database instances. We will use cata as the catalog database, shd1 and shd2 use as the shard database. The shd3 use as the third shard which will be add to the shard database in the last lab.
 
-Here is the topology used for System Managed Sharding:
+The 4 database instances sample information like this:
+
+| Public IP      | Private IP | Hostname | CDB Name | PDB Name |
+| -------------- | ---------- | -------- | -------- | -------- |
+| 152.67.196.50  | 10.0.0.2   | cata     | cata     | catapdb  |
+| 152.67.196.240 | 10.0.0.3   | shd1     | shd1     | shdpdb1  |
+| 152.67.199.233 | 10.0.0.4   | shd2     | shd2     | shdpdb2  |
+| 152.67.196.227 | 10.0.0.5   | shd3     | shd3     | shdpdb3  |
+
+Following is the topology used for System Managed Sharding we will create in this workshop:
 
 ![image-20201201125945082](images/image-20201201125945082.png)
 
@@ -12,7 +21,7 @@ Estimated Lab Time: 60 minutes.
 
 ### Objectives
 
-In this lab, you will deploy shard database with 2 shard.
+In this lab, you will deploy a sharded database with 2 shard.
 
 ### Prerequisites
 
@@ -49,9 +58,9 @@ This lab assumes you have already completed the following:
 3. For each of the shard host, open 1521 port.
 
    ```
-   sudo firewall-cmd --add-port=1521/tcp --permanent
+   <copy>sudo firewall-cmd --add-port=1521/tcp --permanent
    sudo firewall-cmd --reload
-   sudo firewall-cmd --list-all
+   sudo firewall-cmd --list-all</copy>
    ```
 
    
@@ -59,11 +68,11 @@ This lab assumes you have already completed the following:
 4. For the catalog host, we will install GSM in the same hosts, The default listener port of the shard director is 1522, so we need open 1522 port for gsm host. There is a demo application which need open the 8081 port.
 
    ```
-   sudo firewall-cmd --add-port=1521/tcp --permanent
+   <copy>sudo firewall-cmd --add-port=1521/tcp --permanent
    sudo firewall-cmd --add-port=1522/tcp --permanent
    sudo firewall-cmd --add-port=8081/tcp --permanent
    sudo firewall-cmd --reload
-   sudo firewall-cmd --list-all
+   sudo firewall-cmd --list-all</copy>
    ```
 
    
@@ -72,7 +81,7 @@ This lab assumes you have already completed the following:
 
 In this workshop we choose to co-locate the shard director software on the same host as the shard catalog database, it must be installed in a separate Oracle Home. 
 
-1. Connect to the cata host, switch to the **oracle** user.
+1. Connect to the catalog host, switch to the **oracle** user.
 
    ```
    $ ssh -i labkey opc@152.67.196.50
@@ -93,10 +102,10 @@ In this workshop we choose to co-locate the shard director software on the same 
    - create a file named gsm.sh.
 
       ```
-      export ORACLE_BASE=/u01/app/oracle
+      <copy>export ORACLE_BASE=/u01/app/oracle
       export ORACLE_HOME=/u01/app/oracle/product/19c/gsmhome_1
       export LD_LIBRARY_PATH=$ORACLE_HOME/lib
-      export PATH=$ORACLE_HOME/bin:$PATH
+      export PATH=$ORACLE_HOME/bin:$PATH</copy>
       ```
 
       
@@ -104,10 +113,10 @@ In this workshop we choose to co-locate the shard director software on the same 
    - create a file named cata.sh.
 
       ```
-      export ORACLE_BASE=/u01/app/oracle
+      <copy>export ORACLE_BASE=/u01/app/oracle
       export ORACLE_HOME=/u01/app/oracle/product/19c/dbhome_1
       export LD_LIBRARY_PATH=$ORACLE_HOME/lib
-      export PATH=$ORACLE_HOME/bin:$PATH
+      export PATH=$ORACLE_HOME/bin:$PATH</copy>
       ```
 
       
@@ -115,7 +124,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 3. Switch to the GSM environment.
 
    ```
-   [oracle@cata ~]$ . ./gsm.sh
+   [oracle@cata ~]$ <copy>. ./gsm.sh</copy>
    [oracle@cata ~]$
    ```
 
@@ -124,7 +133,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 4. Download the GSM installation file. You can download it from [OTN](https://otn.oracle.com) or [edelivery](https://edelivery.oracle.com/) using your own account. We have download it and save it in the object storage. You can use the following command to get the installation file.
 
    ```
-   wget https://objectstorage.ap-seoul-1.oraclecloud.com/p/yb_DbuhcpKQjOWPpU2Z4kpR3j0a9B-p1X-OZAqVICk2ssp8zCrIuJNIuME_HSjkA/n/oraclepartnersas/b/DB19c-GSM/o/LINUX.X64_193000_gsm.zip
+   <copy>wget https://objectstorage.ap-seoul-1.oraclecloud.com/p/yb_DbuhcpKQjOWPpU2Z4kpR3j0a9B-p1X-OZAqVICk2ssp8zCrIuJNIuME_HSjkA/n/oraclepartnersas/b/DB19c-GSM/o/LINUX.X64_193000_gsm.zip</copy>
    ```
 
    
@@ -132,7 +141,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 5. Unzip the zip file
 
    ```
-   [oracle@cata ~]$ unzip LINUX.X64_193000_gsm.zip
+   [oracle@cata ~]$ <copy>unzip LINUX.X64_193000_gsm.zip</copy>
    ```
 
    
@@ -169,7 +178,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 7. Create the gsm home directory.
 
    ```
-   [oracle@cata ~]$ mkdir -p /u01/app/oracle/product/19c/gsmhome_1
+   [oracle@cata ~]$ <copy>mkdir -p /u01/app/oracle/product/19c/gsmhome_1</copy>
    [oracle@cata ~]$
    ```
 
@@ -178,7 +187,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 8. Install the gsm
 
    ```
-   [oracle@cata ~]$ ./gsm/runInstaller -silent -responseFile /home/oracle/gsm/response/gsm_install.rsp -showProgress -ignorePrereq
+   [oracle@cata ~]$ <copy>./gsm/runInstaller -silent -responseFile /home/oracle/gsm/response/gsm_install.rsp -showProgress -ignorePrereq</copy>
    ```
 
    
@@ -252,20 +261,28 @@ In this workshop we choose to co-locate the shard director software on the same 
 
    
 
-10. Press **Enter** to return to the command line. Exit to the opc user, run the root.sh.
+10. Press **Enter** to return to the command line. Exit to the opc user.
 
    ```
    [oracle@cata ~]$ exit
    logout
    
-   [opc@cata ~]$ sudo /u01/app/oracle/product/19c/gsmhome_1/root.sh
-   Check /u01/app/oracle/product/19c/gsmhome_1/install/root_cata_2020-11-28_01-45-39-535370417.log for the output of root script
    [opc@cata ~]$ 
    ```
-
+   
    
 
-11. Switch back to the oracle user
+11. Run the root.sh as opc user.
+
+    ```
+    [opc@cata ~]$ <copy>sudo /u01/app/oracle/product/19c/gsmhome_1/root.sh</copy>
+    Check /u01/app/oracle/product/19c/gsmhome_1/install/root_cata_2020-11-28_01-45-39-535370417.log for the output of root script
+    [opc@cata ~]$ 
+    ```
+
+    
+
+12. Switch back to the oracle user
 
     ```
     [opc@cata ~]$ sudo su - oracle
@@ -283,7 +300,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 1. Make sure you are in the catalog database environmet.
 
    ```
-   [oracle@cata ~]$ . ./cata.sh
+   [oracle@cata ~]$ <copy>. ./cata.sh</copy>
    [oracle@cata ~]$ 
    ```
 
@@ -292,7 +309,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 2. Connect to the catalog database with sysdba. 
 
    ```
-   [oracle@cata ~]$ sqlplus / as sysdba
+   [oracle@cata ~]$ <copy>sqlplus / as sysdba</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sun Nov 29 02:50:15 2020
    Version 19.7.0.0.0
@@ -328,7 +345,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 4. Set the `DB_FILES` database initialization parameter greater than or equal to the total number of chunks and/or tablespaces in the system.
 
    ```
-   SQL> alter system set db_files=1024 scope=spfile;
+   SQL> <copy>alter system set db_files=1024 scope=spfile;</copy>
    
    System altered.
    
@@ -340,7 +357,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 5. To support Oracle Managed Files, which is used by the sharding chunk management infrastructure, the `DB_CREATE_FILE_DEST` database parameter must be set to a valid value.
 
    ```
-   SQL> alter system set db_create_file_dest='/u01/app/oracle/oradata' scope=spfile;    
+   SQL> <copy>alter system set db_create_file_dest='/u01/app/oracle/oradata' scope=spfile;</copy>    
    
    System altered.
    
@@ -502,7 +519,7 @@ The following steps need to do in all the shard database side. We only provide s
 2. Connect to the shard database as sysdba. 
 
    ```
-   [oracle@shd1 ~]$ sqlplus / as sysdba
+   [oracle@shd1 ~]$ <copy>sqlplus / as sysdba</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sun Nov 29 03:16:25 2020
    Version 19.7.0.0.0
@@ -580,7 +597,7 @@ The following steps need to do in all the shard database side. We only provide s
 6. Set the `DB_FILES` database initialization parameter greater than or equal to the total number of chunks and/or tablespaces in the system.
 
    ```
-   SQL> alter system set db_files=1024 scope=spfile;
+   SQL> <copy>alter system set db_files=1024 scope=spfile;</copy>
    
    System altered.
    
@@ -592,7 +609,7 @@ The following steps need to do in all the shard database side. We only provide s
 7. Set the `dg_broker_start` to true even we have no data guard set in this workshop.
 
    ```
-   SQL> alter system set dg_broker_start=true scope=both;
+   SQL> <copy>alter system set dg_broker_start=true scope=both;</copy>
    
    System altered.
    
@@ -604,7 +621,7 @@ The following steps need to do in all the shard database side. We only provide s
 8. (Optional) To support file movement from shard to shard, the `DB_FILE_NAME_CONVERT` database parameter must be set to a valid value. This location is used when standby databases are in use, as is typical with non-sharded databases, and the location can also be used during chunk movement operations.
 
    ```
-   SQL> alter system set db_file_name_convert='/SHDSTB1/','/SHD1/' scope=spfile;
+   SQL> <copy>alter system set db_file_name_convert='/SHDSTB1/','/SHD1/' scope=spfile;</copy>
    
    System altered.
    
@@ -669,7 +686,7 @@ The following steps need to do in all the shard database side. We only provide s
 12. A directory object named `DATA_PUMP_DIR` must be created and accessible in the shard database from the `GSMADMIN_INTERNAL` account.
 
     ```
-    SQL> grant read, write on directory DATA_PUMP_DIR to gsmadmin_internal;
+    SQL> <copy>grant read, write on directory DATA_PUMP_DIR to gsmadmin_internal;</copy>
     
     Grant succeeded.
     SQL> 
@@ -728,7 +745,7 @@ The following steps need to do in all the shard database side. We only provide s
 14. (Optional)  If your shard database will use standby shard databases, you must enable the `FORCE LOGGING` mode.
 
     ```
-    SQL> alter database force logging;
+    SQL> <copy>alter database force logging;</copy>
     
     Database altered.
     
@@ -810,7 +827,7 @@ The following steps need to do in all the shard database side. We only provide s
 3. Switch to the GSM environment.
 
    ```
-   [oracle@cata ~]$ . ./gsm.sh
+   [oracle@cata ~]$ <copy>. ./gsm.sh</copy>
    [oracle@cata ~]$
    ```
 
@@ -819,7 +836,7 @@ The following steps need to do in all the shard database side. We only provide s
 4. Launch `GDSCTL` to configure the sharded database topology.
 
    ```
-   [oracle@cata ~]$ gdsctl
+   [oracle@cata ~]$ <copy>gdsctl</copy>
    GDSCTL: Version 19.0.0.0.0 - Production on Sun Nov 29 04:13:41 GMT 2020
    
    Copyright (c) 2011, 2019, Oracle.  All rights reserved.
@@ -836,7 +853,7 @@ The following steps need to do in all the shard database side. We only provide s
 4. Create the shard catalog using the System-Managed sharding method. In this workshop, we have no data guard environment, so just set one region.
 
    ```
-   GDSCTL> create shardcatalog -database cata:1521/catapdb -user mysdbadmin/Ora_DB4U -chunks 12 -region region1
+   GDSCTL> <copy>create shardcatalog -database cata:1521/catapdb -user mysdbadmin/Ora_DB4U -chunks 12 -region region1</copy>
    Catalog is created
    GDSCTL>
    ```
@@ -864,7 +881,7 @@ The following steps need to do in all the shard database side. We only provide s
 6. Add shard group, each shardspace must contain at least one primary shardgroup and may contain any number or type of standby shardgroups. In this workshop, we have only one primary shardgroup.
 
    ```
-   GDSCTL> add shardgroup -shardgroup shardgroup_primary -deploy_as primary -region region1
+   GDSCTL> <copy>add shardgroup -shardgroup shardgroup_primary -deploy_as primary -region region1<copy>
    The operation completed successfully
    GDSCTL> 
    ```
@@ -1007,7 +1024,7 @@ The following steps need to do in all the shard database side. We only provide s
 
     
 
-11. Run `GDSCTL CONFIG SHARD` to view the shard metadata on the shard catalog.
+11. Run `CONFIG SHARD` to view the shard metadata on the shard catalog.
 
     ```
     GDSCTL> config shard

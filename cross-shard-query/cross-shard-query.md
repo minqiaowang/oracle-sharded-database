@@ -13,7 +13,7 @@ Estimated Lab Time: 20 minutes.
 ### Objectives
 
 In this lab, you will perform the following steps:
-- run Cross Shard Query from the demo tables
+- Run Cross Shard Query from the demo sharded tables.
 
 ### Prerequisites
 
@@ -41,7 +41,7 @@ This lab assumes you have already completed the following:
 2. Use sqlplus connect as `app_schema` user.
 
    ```
-   [oracle@cata ~]$ sqlplus app_schema/app_schema@catapdb
+   [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@catapdb</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 09:23:44 2020
    Version 19.7.0.0.0

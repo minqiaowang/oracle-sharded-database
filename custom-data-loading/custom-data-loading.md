@@ -37,7 +37,7 @@ This lab assumes you have already completed the following:
 2. Download the `sdb_demo_app.zip`  file. 
 
    ```
-   oracle@cata ~]$ wget https://github.com/minqiaowang/oracle-sharded-database/raw/main/custom-data-loading/sdb_demo_app.zip
+   oracle@cata ~]$ <copy>wget https://github.com/minqiaowang/oracle-sharded-database/raw/main/custom-data-loading/sdb_demo_app.zip</copy>
    ```
 
    
@@ -45,7 +45,7 @@ This lab assumes you have already completed the following:
 3. Unzip the file. This will create `sdb_demo_app` directory under the `/home/oracle`
 
    ```
-   [oracle@cata ~]$ unzip sdb_demo_app.zip 
+   [oracle@cata ~]$ <copy>unzip sdb_demo_app.zip</copy> 
    Archive:  sdb_demo_app.zip
       creating: sdb_demo_app/
      inflating: sdb_demo_app/.DS_Store  
@@ -229,7 +229,7 @@ This lab assumes you have already completed the following:
 4. Change to the `sdb_demo_app/sql` directory.
 
    ```
-   [oracle@cata sql]$ cd ~/sdb_demo_app/sql
+   [oracle@cata sql]$ <copy>cd ~/sdb_demo_app/sql</copy>
    [oracle@cata sql]$
    ```
 
@@ -238,7 +238,7 @@ This lab assumes you have already completed the following:
 5. View the content of the `demo_app_ext.sql`. Make sure the connect string is correct.
 
    ```
-   [oracle@cata sql]$ cat demo_app_ext.sql 
+   [oracle@cata sql]$ <copy>cat demo_app_ext.sql</copy> 
    -- Create catalog monitor packages
    connect / as sysdba
    alter session set container=catapdb;
@@ -432,7 +432,7 @@ This lab assumes you have already completed the following:
 
    
 
-9. Modify the `demo.properties` file like the following. Because we have no data guard standby database setup in this lab, we use the `oltp_rw_srvc.orasdb.oradbcloud` for the readonly service.
+9. Modify the `demo.properties` file like the following. Because we have no data guard standby database setup in this lab, we also use the `oltp_rw_srvc.orasdb.oradbcloud` for the readonly service.
 
    ```
    name=demo
@@ -457,7 +457,7 @@ This lab assumes you have already completed the following:
 1. Start the workload by executing command: `./run.sh demo`.
 
    ```
-   [oracle@cata sdb_demo_app]$ ./run.sh demo
+   [oracle@cata sdb_demo_app]$ <copy>./run.sh demo</copy>
    ```
 
    
@@ -516,7 +516,7 @@ This lab assumes you have already completed the following:
 4. Start the monitoring tool via the following command. Ignore the FileNotFoundException message.
 
    ```
-    [oracle@cata sdb_demo_app]$ ./run.sh monitor
+    [oracle@cata sdb_demo_app]$ <copy>./run.sh monitor</copy>
    @oracle.monitor.Main.registerDatabase : INFO 2020-11-30T06:17:33.417 : Context : /db/demo/info
    @oracle.monitor.DatabaseMonitor$BackgroundStatusCheck.run : java.lang.ArrayIndexOutOfBoundsException : 2
    @oracle.monitor.DatabaseMonitor$BackgroundStatusCheck.run : java.lang.ArrayIndexOutOfBoundsException : 3

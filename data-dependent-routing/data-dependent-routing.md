@@ -1,15 +1,15 @@
 # Data Dependent Routing
 
 ## Introduction
-This lab is just to understand how the routing works when a `sharding_key` is specified using SQL*Plus. For production application scenario, you would be using Oracle Integrated Connection pools – UCP, OCI, ODP.NET, JDBC etc which will allow direct routing based on the `sharding_key`. 
+In this lab you will understand how the routing works when a `sharding_key` is specified using SQL*Plus. For production application scenario, you would be using Oracle Integrated Connection pools – UCP, OCI, ODP.NET, JDBC etc which will allow direct routing based on the `sharding_key`. 
 
 Estimated Lab Time: 10 minutes.
 
 ### Objectives
 
 In this lab, you will perform the following steps:
-- Connect to a shard by specifying a `sharding_key` - via the shard director
-- Connect to the shardcatalog via `GDS$CATALOG` service
+- Connect to a shard by specifying a `sharding_key` - via the shard director.
+- Connect to the shardcatalog via `GDS$CATALOG` service.
 
 ### Prerequisites
 
@@ -33,10 +33,10 @@ This lab assumes you have already completed the following:
 
    
 
-2. Check the shard director listener status. You can see a service name `oltp_rw_srvc.orasdb.oradbcloud` listening on 1522 port.
+2. Check the shard director listener status. You can see a service named `oltp_rw_srvc.orasdb.oradbcloud` and a service named `GDS$CATALOG.oradbcloud` listening on 1522 port.
 
    ```
-   [oracle@cata ~]$ lsnrctl status SHARDDIRECTOR1
+   [oracle@cata ~]$ <copy>lsnrctl status SHARDDIRECTOR1</copy>
    
    LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 30-NOV-2020 03:34:25
    
@@ -77,7 +77,7 @@ This lab assumes you have already completed the following:
 3. For single-shard queries, connect to a shard with a given sharding_key using GSM.
 
    ```
-   [oracle@cata ~]$ sqlplus app_schema/app_schema@'(description=(address=(protocol=tcp)(host=cata)(port=1522))(connect_data=(service_name=oltp_rw_srvc.orasdb.oradbcloud)(region=region1)(SHARDING_KEY=james.parker@x.bogus)))'
+   [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@'(description=(address=(protocol=tcp)(host=cata)(port=1522))(connect_data=(service_name=oltp_rw_srvc.orasdb.oradbcloud)(region=region1)(SHARDING_KEY=james.parker@x.bogus)))'</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 04:24:10 2020
    Version 19.3.0.0.0
@@ -98,7 +98,7 @@ This lab assumes you have already completed the following:
 4. Insert a record and commit.
 
    ```
-   SQL> INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('james.parker@x.bogus', 'James', 'Parker', NULL, 'Gold', 'east', hextoraw('8d1c00e'));
+   SQL> <copy>INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('james.parker@x.bogus', 'James', 'Parker', NULL, 'Gold', 'east', hextoraw('8d1c00e'));</copy>
    
    1 row created.
    
@@ -114,7 +114,7 @@ This lab assumes you have already completed the following:
 5. Check current connected shard database. 
 
    ```
-   SQL> select db_unique_name from v$database;
+   SQL> <copy>select db_unique_name from v$database;</copy>
    
    DB_UNIQUE_NAME
    ------------------------------
@@ -128,7 +128,7 @@ This lab assumes you have already completed the following:
 6. Select from the customer table. You can see there is one record which you just insert in the table.
 
    ```
-   SQL> select * from customers;
+   SQL> <copy>select * from customers;</copy>
    
    CUSTID
    ------------------------------------------------------------
@@ -177,7 +177,7 @@ This lab assumes you have already completed the following:
 8. Connect to a shard with another shard key.
 
    ```
-   [oracle@cata ~]$ sqlplus app_schema/app_schema@'(description=(address=(protocol=tcp)(host=cata)(port=1522))(connect_data=(service_name=oltp_rw_srvc.orasdb.oradbcloud)(region=region1)(SHARDING_KEY=tom.edwards@x.bogus)))'
+   [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@'(description=(address=(protocol=tcp)(host=cata)(port=1522))(connect_data=(service_name=oltp_rw_srvc.orasdb.oradbcloud)(region=region1)(SHARDING_KEY=tom.edwards@x.bogus)))'</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 04:36:45 2020
    Version 19.3.0.0.0
@@ -198,7 +198,7 @@ This lab assumes you have already completed the following:
 9. Insert another record and commit.
 
    ```
-   SQL> INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('tom.edwards@x.bogus', 'Tom', 'Edwards', NULL, 'Gold', 'west', hextoraw('9a3b00c'));
+   SQL> <copy>INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('tom.edwards@x.bogus', 'Tom', 'Edwards', NULL, 'Gold', 'west', hextoraw('9a3b00c'));</copy>
    
    1 row created.
    
@@ -214,7 +214,7 @@ This lab assumes you have already completed the following:
 10. Check current connected shard database.
 
     ```
-    SQL> select db_unique_name from v$database;
+    SQL> <copy>select db_unique_name from v$database;</copy>
     
     DB_UNIQUE_NAME
     ------------------------------
@@ -228,7 +228,7 @@ This lab assumes you have already completed the following:
 11. Select from the table. You can see there is only one record in the shard2 database.
 
     ```
-    SQL> select * from customers;
+    SQL> <copy>select * from customers;</copy>
     
     CUSTID
     ------------------------------------------------------------
@@ -276,10 +276,10 @@ This lab assumes you have already completed the following:
 
 ## **Step 2:** Cross Shard Query
 
-1. Connect to the shardcatalog (coordinator database) using the GDS$CATALOG service (from cata or any shard host):
+1. Connect to the shardcatalog (coordinator database) using the GDS$CATALOG service (from catalog or any shard host):
 
    ```
-   [oracle@cata ~]$ sqlplus app_schema/app_schema@cata:1522/GDS\$CATALOG.oradbcloud
+   [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@cata:1522/GDS\$CATALOG.oradbcloud</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 04:49:23 2020
    Version 19.3.0.0.0
@@ -300,7 +300,7 @@ This lab assumes you have already completed the following:
 2. Select records from customers table. You can see all the records are selected.
 
    ```
-   SQL> select custid from customers;
+   SQL> <copy>select custid from customers;</copy>
    
    CUSTID
    ------------------------------------------------------------
@@ -315,7 +315,7 @@ This lab assumes you have already completed the following:
 3. Check current connected database.
 
    ```
-   SQL> select db_unique_name from v$database;
+   SQL> <copy>select db_unique_name from v$database;</copy>
    
    DB_UNIQUE_NAME
    ------------------------------

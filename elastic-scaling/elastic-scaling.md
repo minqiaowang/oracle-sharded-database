@@ -78,7 +78,7 @@ This lab assumes you have already completed the following:
 5. Add the third shard CDB.
 
    ```
-   GDSCTL> add cdb -connect shd3:1521/shd3 -pwd Ora_DB4U
+   GDSCTL> <copy>add cdb -connect shd3:1521/shd3 -pwd Ora_DB4U</copy>
    DB Unique Name: shd3
    The operation completed successfully
    GDSCTL> 
@@ -89,7 +89,7 @@ This lab assumes you have already completed the following:
 6. List of current CDBs in the catalog.
 
    ```
-   GDSCTL> config cdb
+   GDSCTL> <copy>config cdb</copy>
    shd1                          
    shd2                          
    shd3                          
@@ -102,7 +102,7 @@ This lab assumes you have already completed the following:
 7. Add the third shard information to the shard catalog.
 
    ```
-   GDSCTL> add shard -connect shd3:1521/shdpdb3 -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd3
+   GDSCTL> <copy>add shard -connect shd3:1521/shdpdb3 -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd3</copy>
    INFO: Data Guard shard validation requested.
    INFO: Database role is PRIMARY.
    INFO: Database name is SHD3.
@@ -136,7 +136,7 @@ This lab assumes you have already completed the following:
 8. View the shard metadata on the shard catalog.
 
    ```
-   GDSCTL> config shard
+   GDSCTL> <copy>config shard</copy>
    Name                Shard Group         Status    State       Region    Availability 
    ----                -----------         ------    -----       ------    ------------ 
    shd1_shdpdb1        shardgroup_primary  Ok        Deployed    region1   ONLINE       
@@ -151,7 +151,7 @@ This lab assumes you have already completed the following:
 9. View a list of trusted hosts.
 
    ```
-   GDSCTL> config vncr
+   GDSCTL> <copy>config vncr</copy>
    Name                          Group ID                      
    ----                          --------                      
    10.0.0.2                                                    
@@ -180,7 +180,7 @@ This lab assumes you have already completed the following:
 11. View the list of trusted hosts again.
 
     ```
-    GDSCTL> config vncr
+    GDSCTL> <copy>config vncr</copy>
     Name                          Group ID                      
     ----                          --------                      
     10.0.0.2                                                    
@@ -216,7 +216,7 @@ This lab assumes you have already completed the following:
 2. Observe the newly added shard.
 
    ```
-   GDSCTL> config shard
+   GDSCTL> <copy>config shard</copy>
    Name                Shard Group         Status    State       Region    Availability 
    ----                -----------         ------    -----       ------    ------------ 
    shd1_shdpdb1        shardgroup_primary  Ok        Deployed    region1   ONLINE       
@@ -231,7 +231,7 @@ This lab assumes you have already completed the following:
 3. Run the following command every minute or two to see the progress of automatic rebalancing of chunks.
 
    ```
-   GDSCTL> config chunks -show_reshard
+   GDSCTL> <copy>config chunks -show_reshard</copy>
    Chunks
    ------------------------
    Database                      From      To        
@@ -280,7 +280,7 @@ This lab assumes you have already completed the following:
 5. Observe that the “databases” are automatically registered.
 
    ```
-   GDSCTL> databases
+   GDSCTL> <copy>databases</copy>
    Database: "shd1_shdpdb1" Registered: Y State: Ok ONS: N. Role: PRIMARY Instances: 1 Region: region1
       Service: "oltp_rw_srvc" Globally started: Y Started: Y
                Scan: N Enabled: Y Preferred: Y
@@ -305,7 +305,7 @@ This lab assumes you have already completed the following:
 6. Observe that the “services” are automatically brought up on the newly added shard.
 
    ```
-   GDSCTL> services
+   GDSCTL> <copy>services</copy>
    Service "oltp_rw_srvc.orasdb.oradbcloud" has 3 instance(s). Affinity: ANYWHERE
       Instance "orasdb%1", name: "shd1", db: "shd1_shdpdb1", region: "region1", status: ready.
       Instance "orasdb%11", name: "shd2", db: "shd2_shdpdb2", region: "region1", status: ready.
@@ -359,7 +359,7 @@ This lab assumes you have already completed the following:
 3. Manually update the monitored shard list.
 
    ```
-   SQL> exec dbms_global_views.create_all_database_links();
+   SQL> <copy>exec dbms_global_views.create_all_database_links();</copy>
    
    PL/SQL procedure successfully completed.
    
@@ -434,7 +434,7 @@ This lab assumes you have already completed the following:
 7. Start the monitoring tool via the following command. 
 
    ```
-   [oracle@cata sdb_demo_app]$ ./run.sh monitor
+   [oracle@cata sdb_demo_app]$ <copy>./run.sh monitor</copy>
    @oracle.monitor.Main.registerDatabase : INFO 2020-12-01T03:30:41.501 : Context : /db/demo/info
    @oracle.monitor.DatabaseMonitor$BackgroundStatusCheck.run : java.lang.ArrayIndexOutOfBoundsException : 3
    @oracle.monitor.DatabaseMonitor$BackgroundStatusCheck.run : java.lang.ArrayIndexOutOfBoundsException : 4

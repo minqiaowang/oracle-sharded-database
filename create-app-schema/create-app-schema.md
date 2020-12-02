@@ -2,9 +2,9 @@
 
 ## Introduction
 
-In this lab, you will create a app schema. you will create a sharded table family `Customers->Orders->LineItems` and a duplicate table `Products`.
+In this lab, you will create a shard app schema. You will create a sharded table family `Customers->Orders->LineItems` sharded by `CustId`, and a duplicate table `Products`.
 
-Estimated Lab Time: 20 minutes.
+Estimated Lab Time: 10 minutes.
 
 ### Objectives
 
@@ -39,7 +39,7 @@ This lab assumes you have already completed the following:
 2. Download the SQL scripts `create-app-schema.sql`.
 
    ```
-   [oracle@cata ~]$ wget https://github.com/minqiaowang/oracle-sharded-database/raw/main/create-app-schema/create-app-schema.sql
+   [oracle@cata ~]$ <copy>wget https://github.com/minqiaowang/oracle-sharded-database/raw/main/create-app-schema/create-app-schema.sql</copy>
    ```
 
    
@@ -47,7 +47,7 @@ This lab assumes you have already completed the following:
 3. Review the content in the sql scripts file.
 
    ```
-   [oracle@cata ~]$ cat create-app-schema.sql 
+   [oracle@cata ~]$ <copy>cat create-app-schema.sql</copy> 
    set echo on 
    set termout on
    set time on
@@ -408,11 +408,10 @@ This lab assumes you have already completed the following:
    01:26:41 SQL> REM
    01:26:41 SQL> spool off
    01:26:41 SQL> 
-   01:26:41 SQL> 
    ```
-
    
 
+   
 6. The shard app demo schema is created. Exit the sqlplus.
 
    ```
@@ -553,7 +552,7 @@ This lab assumes you have already completed the following:
 6. Connect to the shard pdb1.
 
    ```
-   [oracle@cata ~]$ sqlplus sys/Ora_DB4U@shd1:1521/shdpdb1 as sysdba
+   [oracle@cata ~]$ <copy>sqlplus sys/Ora_DB4U@shd1:1521/shdpdb1 as sysdba</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 02:01:17 2020
    Version 19.3.0.0.0
@@ -573,7 +572,7 @@ This lab assumes you have already completed the following:
 7. Check the created tablespace set.
 
    ```
-   SQL> select TABLESPACE_NAME, BYTES/1024/1024 MB from sys.dba_data_files order by tablespace_name;
+   SQL> <copy>select TABLESPACE_NAME, BYTES/1024/1024 MB from sys.dba_data_files order by tablespace_name;</copy>
    
    TABLESPACE_NAME 		       MB
    ------------------------------ ----------
@@ -643,7 +642,7 @@ This lab assumes you have already completed the following:
 9. Connect to the shard pdb2.
 
    ```
-   SQL> connect sys/Ora_DB4U@shd2:1521/shdpdb2 as sysdba
+   SQL> <copy>connect sys/Ora_DB4U@shd2:1521/shdpdb2 as sysdba</copy>
    Connected.
    SQL>
    ```
@@ -653,7 +652,7 @@ This lab assumes you have already completed the following:
 10. Check the created tablespace set.
 
     ```
-    SQL> select TABLESPACE_NAME, BYTES/1024/1024 MB from sys.dba_data_files order by tablespace_name;
+    SQL> <copy>select TABLESPACE_NAME, BYTES/1024/1024 MB from sys.dba_data_files order by tablespace_name;</copy>
     
     TABLESPACE_NAME 		       MB
     ------------------------------ ----------
@@ -723,7 +722,7 @@ This lab assumes you have already completed the following:
 12. Connect to the shardcatalog.
 
     ```
-    SQL> connect sys/Ora_DB4U@cata:1521/catapdb as sysdba
+    SQL> <copy>connect sys/Ora_DB4U@cata:1521/catapdb as sysdba</copy>
     Connected.
     SQL> 
     ```
