@@ -7,7 +7,7 @@ endpoint=$ENDPOINT
 catalog.dba.name=app_schema
 catalog.dba.pass=$PASSW
 app.service.write=oltp_rw.shpool.oradbcloud
-app.service.readonly=oltp_ro.shpool.oradbcloud
+app.service.readonly=oltp_rw.shpool.oradbcloud
 app.user=app_schema
 app.pass=$PASSW
 EOF

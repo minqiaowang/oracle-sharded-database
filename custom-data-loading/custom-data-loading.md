@@ -551,3 +551,4 @@ This lab assumes you have already completed the following:
 7. Press `Ctrl+C` to cancel the demo in both of the terminal.
 
    
+You may proceed to the next lab.

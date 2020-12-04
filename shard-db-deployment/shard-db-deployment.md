@@ -606,7 +606,7 @@ The following steps need to do in all the shard database side. We only provide s
 
    
 
-7. Set the `dg_broker_start` to true even we have no data guard set in this workshop.
+7. Set the `dg_broker_start` to true for data guard replication. We will not use the data guard standby in this workshop.
 
    ```
    SQL> <copy>alter system set dg_broker_start=true scope=both;</copy>
@@ -860,7 +860,7 @@ The following steps need to do in all the shard database side. We only provide s
 
    
 
-5. Add and start  the shard director.
+5. Add and start the shard director.
 
    ```
    GDSCTL> connect mysdbadmin/Ora_DB4U@cata:1521/catapdb
@@ -1162,5 +1162,5 @@ The following steps need to do in all the shard database side. We only provide s
    ```
 
    
-
+You may proceed to the next lab.
    
