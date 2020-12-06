@@ -20,7 +20,7 @@ This lab assumes you have already completed the following:
 
 ## **Step 1:** Create Shard App Schema
 
-1. Login to the catalog database host, switch to oracle user, and make sure you are in the cata environment.
+1. Login to the catalog database host, switch to oracle user.
 
    ```
    $ ssh -i labkey opc@152.67.196.50
@@ -29,8 +29,7 @@ This lab assumes you have already completed the following:
    
    [opc@cata ~]$ sudo su - oracle
    Last login: Sun Nov 29 02:49:51 GMT 2020 on pts/0
-   
-   [oracle@cata ~]$ . ./cata.sh 
+    
    [oracle@cata ~]$ 
    ```
 

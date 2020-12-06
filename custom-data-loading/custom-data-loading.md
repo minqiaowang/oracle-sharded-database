@@ -229,7 +229,7 @@ This lab assumes you have already completed the following:
 4. Change to the `sdb_demo_app/sql` directory.
 
    ```
-   [oracle@cata sql]$ <copy>cd ~/sdb_demo_app/sql</copy>
+   [oracle@cata ~]$ <copy>cd ~/sdb_demo_app/sql</copy>
    [oracle@cata sql]$
    ```
 
@@ -423,7 +423,7 @@ This lab assumes you have already completed the following:
 
    
 
-8. Change directory to the `sdb_demo_app`.
+8. Exit the sqlplus. Change directory to the `sdb_demo_app`.
 
    ```
    [oracle@cata ~]$ cd ~/sdb_demo_app
@@ -551,4 +551,5 @@ This lab assumes you have already completed the following:
 7. Press `Ctrl+C` to cancel the demo in both of the terminal.
 
    
+
 You may proceed to the next lab.

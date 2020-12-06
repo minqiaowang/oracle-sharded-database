@@ -6,12 +6,12 @@ Now, we have 4 database instances. We will use cata as the catalog database, shd
 
 The 4 database instances sample information like this:
 
-| Public IP      | Private IP | Hostname | CDB Name | PDB Name |
-| -------------- | ---------- | -------- | -------- | -------- |
-| 152.67.196.50  | 10.0.0.2   | cata     | cata     | catapdb  |
-| 152.67.196.240 | 10.0.0.3   | shd1     | shd1     | shdpdb1  |
-| 152.67.199.233 | 10.0.0.4   | shd2     | shd2     | shdpdb2  |
-| 152.67.196.227 | 10.0.0.5   | shd3     | shd3     | shdpdb3  |
+| Public IP       | Private IP | Hostname | CDB Name | PDB Name |
+| --------------- | ---------- | -------- | -------- | -------- |
+| 193.122.102.140 | 10.0.1.5   | cata     | cata     | catapdb  |
+| 193.122.120.205 | 10.0.1.2   | shd1     | shd1     | shdpdb1  |
+| 193.123.240.181 | 10.0.1.4   | shd2     | shd2     | shdpdb2  |
+| 193.123.236.194 | 10.0.1.3   | shd3     | shd3     | shdpdb3  |
 
 Following is the topology used for System Managed Sharding we will create in this workshop:
 
@@ -26,7 +26,7 @@ In this lab, you will deploy a sharded database with 2 shard.
 ### Prerequisites
 
 This lab assumes you have already completed the following:
-- Setup Environment to provision catalog and shard database.
+- Setup environment to provision catalog and shard database.
 
 ## **Step 1:** Configure Shard Hosts
 
@@ -39,23 +39,31 @@ This lab assumes you have already completed the following:
    Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
    Warning: Permanently added '152.67.196.50' (ECDSA) to the list of known hosts.
    
+   [opc@cata ~]$ 
+   ```
+
+   
+
+2. Edit the `/etc/hosts` file.
+
+   ```
    [opc@cata ~]$ sudo vi /etc/hosts
    ```
+   
+    
+   
+3. Add the private ip address and host names in the hosts file.
+
+   ```
+   10.0.1.5 cata
+   10.0.1.2 shd1
+   10.0.1.4 shd2
+   10.0.1.3 shd3
+   ```
 
    
 
-2. Add following lines in the hosts file.
-
-   ```
-   10.0.0.2 cata
-   10.0.0.3 shd1
-   10.0.0.4 shd2
-   10.0.0.5 shd3
-   ```
-
-   
-
-3. For each of the shard host, open 1521 port.
+4. For each of the shard host(shard1, shard2, shard3), open 1521 port.
 
    ```
    <copy>sudo firewall-cmd --add-port=1521/tcp --permanent
@@ -65,7 +73,7 @@ This lab assumes you have already completed the following:
 
    
 
-4. For the catalog host, we will install GSM in the same hosts, The default listener port of the shard director is 1522, so we need open 1522 port for gsm host. There is a demo application which need open the 8081 port.
+5. For the catalog host, we will install GSM in the same hosts, The default listener port of the shard director is 1522, so we need open 1522 port for gsm host. There is a demo application which need open the 8081 port.
 
    ```
    <copy>sudo firewall-cmd --add-port=1521/tcp --permanent
@@ -84,11 +92,11 @@ In this workshop we choose to co-locate the shard director software on the same 
 1. Connect to the catalog host, switch to the **oracle** user.
 
    ```
-   $ ssh -i labkey opc@152.67.196.50
-   The authenticity of host '152.67.196.50 (152.67.196.50)' can't be established.
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+   The authenticity of host 'xxx.xxx.xxx.xxx (xxx.xxx.xxx.xxx)' can't be established.
    ECDSA key fingerprint is SHA256:pa9pwe2ytZJQPPEJxdCSaR2E0IBtp+jtsVN2qXIbcoI.
    Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-   Warning: Permanently added '152.67.196.50' (ECDSA) to the list of known hosts.
+   Warning: Permanently added 'xxx.xxx.xxx.xxx' (ECDSA) to the list of known hosts.
    
    [opc@cata ~]$ sudo su - oracle
    Last login: Fri Nov 27 06:57:03 UTC 2020
@@ -133,7 +141,19 @@ In this workshop we choose to co-locate the shard director software on the same 
 4. Download the GSM installation file. You can download it from [OTN](https://otn.oracle.com) or [edelivery](https://edelivery.oracle.com/) using your own account. We have download it and save it in the object storage. You can use the following command to get the installation file.
 
    ```
-   <copy>wget https://objectstorage.ap-seoul-1.oraclecloud.com/p/yb_DbuhcpKQjOWPpU2Z4kpR3j0a9B-p1X-OZAqVICk2ssp8zCrIuJNIuME_HSjkA/n/oraclepartnersas/b/DB19c-GSM/o/LINUX.X64_193000_gsm.zip</copy>
+   [oracle@cata ~]$ <copy>wget https://objectstorage.ap-seoul-1.oraclecloud.com/p/yb_DbuhcpKQjOWPpU2Z4kpR3j0a9B-p1X-OZAqVICk2ssp8zCrIuJNIuME_HSjkA/n/oraclepartnersas/b/DB19c-GSM/o/LINUX.X64_193000_gsm.zip</copy>
+   --2020-12-06 08:51:16--  https://objectstorage.ap-seoul-1.oraclecloud.com/p/yb_DbuhcpKQjOWPpU2Z4kpR3j0a9B-p1X-OZAqVICk2ssp8zCrIuJNIuME_HSjkA/n/oraclepartnersas/b/DB19c-GSM/o/LINUX.X64_193000_gsm.zip
+   Resolving objectstorage.ap-seoul-1.oraclecloud.com (objectstorage.ap-seoul-1.oraclecloud.com)... 134.70.96.3
+   Connecting to objectstorage.ap-seoul-1.oraclecloud.com (objectstorage.ap-seoul-1.oraclecloud.com)|134.70.96.3|:443... connected.
+   HTTP request sent, awaiting response... 200 OK
+   Length: 959891519 (915M) [application/zip]
+   Saving to: ‘LINUX.X64_193000_gsm.zip’
+   
+   100%[===============================================================>] 959,891,519 77.0MB/s   in 11s    
+   
+   2020-12-06 08:51:27 (82.2 MB/s) - ‘LINUX.X64_193000_gsm.zip’ saved [959891519/959891519]
+   
+   [oracle@cata ~]$ 
    ```
 
    
@@ -147,6 +167,11 @@ In this workshop we choose to co-locate the shard director software on the same 
    
 
 6. Edit the `./gsm/response/gsm_install.rsp` file. Specify the variables like following.
+
+   - `UNIX_GROUP_NAME=oinstall`
+   - `INVENTORY_LOCATION=/u01/app/oraInventory`
+   - `ORACLE_HOME=/u01/app/oracle/product/19c/gsmhome_1`
+   - `ORACLE_BASE=/u01/app/oracle`
 
    ```
    #-------------------------------------------------------------------------------
@@ -192,17 +217,20 @@ In this workshop we choose to co-locate the shard director software on the same 
 
    
 
-9. The progress screen like this.
+9. The progress screen like this. Ignore the warning.
 
    ```
    Starting Oracle Universal Installer...
    
-   Checking Temp space: must be greater than 551 MB.   Actual 35941 MB    Passed
-   Preparing to launch Oracle Universal Installer from /tmp/OraInstall2020-11-28_01-41-57AM. Please wait ...[oracle@cata ~]$ The response file for this session can be found at:
-    /u01/app/oracle/product/19c/gsmhome_1/install/response/gsm_2020-11-28_01-41-57AM.rsp
+   Checking Temp space: must be greater than 551 MB.   Actual 33580 MB    Passed
+   Preparing to launch Oracle Universal Installer from /tmp/OraInstall2020-12-06_08-54-28AM. Please wait ...[oracle@cata ~]$ [WARNING] [INS-13014] Target environment does not meet some optional requirements.
+      CAUSE: Some of the optional prerequisites are not met. See logs for details. /u01/app/oraInventory/logs/installActions2020-12-06_08-54-28AM.log
+      ACTION: Identify the list of failed prerequisite checks from the log: /u01/app/oraInventory/logs/installActions2020-12-06_08-54-28AM.log. Then either from the log file or from installation manual find the appropriate configuration to meet the prerequisites and fix it manually.
+   The response file for this session can be found at:
+    /u01/app/oracle/product/19c/gsmhome_1/install/response/gsm_2020-12-06_08-54-28AM.rsp
    
    You can find the log of this install session at:
-    /u01/app/oraInventory/logs/installActions2020-11-28_01-41-57AM.log
+    /u01/app/oraInventory/logs/installActions2020-12-06_08-54-28AM.log
    
    Prepare in progress.
    ..................................................   8% Done.
@@ -210,8 +238,8 @@ In this workshop we choose to co-locate the shard director software on the same 
    Prepare successful.
    
    Copy files in progress.
-   [oracle@cata ~]$ ..........   13% Done.
-   [oracle@cata ~]$ ..................................................   19% Done.
+   ..................................................   13% Done.
+   ..................................................   19% Done.
    ..................................................   27% Done.
    ..................................................   33% Done.
    ..................................................   38% Done.
@@ -243,7 +271,7 @@ In this workshop we choose to co-locate the shard director software on the same 
    
    Finish Setup successful.
    The installation of Oracle Distributed Service and Load Management was successful.
-   Please check '/u01/app/oraInventory/logs/silentInstall2020-11-28_01-41-57AM.log' for more details.
+   Please check '/u01/app/oraInventory/logs/silentInstall2020-12-06_08-54-28AM.log' for more details.
    
    Setup Oracle Base in progress.
    
@@ -255,24 +283,24 @@ In this workshop we choose to co-locate the shard director software on the same 
    
    
    
-   Successfully Setup Software.
+   Successfully Setup Software with warning(s).
    ..................................................   100% Done.
    ```
 
    
 
-10. Press **Enter** to return to the command line. Exit to the opc user.
+10. When you see the installation `100% Done`, press **Enter** to return to the command line. Exit to the opc user.
 
-   ```
-   [oracle@cata ~]$ exit
-   logout
-   
-   [opc@cata ~]$ 
-   ```
-   
-   
+  ```
+  [oracle@cata ~]$ exit
+  logout
+  
+  [opc@cata ~]$ 
+  ```
 
-11. Run the root.sh as opc user.
+  
+
+11. Run the root.sh as **opc** user.
 
     ```
     [opc@cata ~]$ <copy>sudo /u01/app/oracle/product/19c/gsmhome_1/root.sh</copy>
@@ -495,17 +523,26 @@ In this workshop we choose to co-locate the shard director software on the same 
 
   
 
-     
+11. Exit from SQLPLUS.
+
+   ```
+   SQL> exit
+   Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+   Version 19.7.0.0.0
+   [oracle@cata ~]$ 
+   ```
+
+      
 
 
 ## **Step 4:** Setup Shard Databases
 
 The following steps need to do in all the shard database side. We only provide steps for shard1. 
 
-1. Connect to the shd1 host, switch to the oracle user.
+1. From your laptop, connect to the shard1 host, switch to the oracle user.
 
    ```
-   $ ssh -i labkey opc@152.67.196.240
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    Last login: Sun Nov 29 01:36:00 2020 from 59.66.120.23
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
@@ -815,7 +852,7 @@ The following steps need to do in all the shard database side. We only provide s
 1. Connect to the catalog database host. Switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@193.122.127.164
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    Last login: Sat Nov 28 03:43:05 2020 from 59.66.120.23
    [opc@cata ~]$ sudo su - oracle
    Last login: Sat Nov 28 03:43:21 UTC 2020 on pts/0
@@ -850,7 +887,7 @@ The following steps need to do in all the shard database side. We only provide s
    
    
 
-4. Create the shard catalog using the System-Managed sharding method. In this workshop, we have no data guard environment, so just set one region.
+4. Create the shard catalog using the System-Managed sharding method. In this workshop, we have no data guard environment, so just set one region. In this workshop, we set the chunks to 12, the default value is 120 for each of the shard database.
 
    ```
    GDSCTL> <copy>create shardcatalog -database cata:1521/catapdb -user mysdbadmin/Ora_DB4U -chunks 12 -region region1</copy>
@@ -1044,7 +1081,7 @@ The following steps need to do in all the shard database side. We only provide s
     GDSCTL> config vncr
     Name                          Group ID                      
     ----                          --------                      
-    10.0.0.2                                                    
+    10.0.1.5                                                    
     shd1                                                        
     shd2                                                        
     
@@ -1058,8 +1095,8 @@ The following steps need to do in all the shard database side. We only provide s
     ```
     GDSCTL> add invitednode 127.0.0.1
     GDSCTL> add invitednode cata
-    GDSCTL> add invitednode 10.0.0.3
-    GDSCTL> add invitednode 10.0.0.4
+    GDSCTL> add invitednode 10.0.1.2
+    GDSCTL> add invitednode 10.0.1.4
     GDSCTL> 
     ```
 
@@ -1071,9 +1108,9 @@ The following steps need to do in all the shard database side. We only provide s
     GDSCTL> config vncr
     Name                          Group ID                      
     ----                          --------                      
-    10.0.0.2                                                    
-    10.0.0.3                                                    
-    10.0.0.4                                                    
+    10.0.1.2                                                    
+    10.0.1.4                                                    
+    10.0.1.5                                                    
     127.0.0.1                                                   
     cata                                                        
     shd1                                                        
@@ -1161,6 +1198,55 @@ The following steps need to do in all the shard database side. We only provide s
    GDSCTL> 
    ```
 
+6. Exit the GDSCTL.
+
+   ```
+   GDSCTL> exit
+   [oracle@cata ~]$
+   ```
+
    
+
+7. Check the shard director listener status. You can see listening on 1522 port there is a service named `oltp_rw_srvc.orasdb.oradbcloud` which we create previously and a service named `GDS$CATALOG.oradbcloud` which connect to the catalog instance.
+
+   ```
+   [oracle@cata ~]$ <copy>lsnrctl status SHARDDIRECTOR1</copy>
+   
+   LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 30-NOV-2020 03:34:25
+   
+   Copyright (c) 1991, 2019, Oracle.  All rights reserved.
+   
+   Connecting to (DESCRIPTION=(ADDRESS=(HOST=cata)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=GDS$CATALOG.oradbcloud)))
+   STATUS of the LISTENER
+   ------------------------
+   Alias                     SHARDDIRECTOR1
+   Version                   TNSLSNR for Linux: Version 19.0.0.0.0 - Production
+   Start Date                29-NOV-2020 04:26:16
+   Uptime                    0 days 23 hr. 8 min. 8 sec
+   Trace Level               off
+   Security                  ON: Local OS Authentication
+   SNMP                      OFF
+   Listener Parameter File   /u01/app/oracle/product/19c/gsmhome_1/network/admin/gsm.ora
+   Listener Log File         /u01/app/oracle/diag/gsm/cata/sharddirector1/alert/log.xml
+   Listening Endpoints Summary...
+     (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=cata)(PORT=1522)))
+   Services Summary...
+   Service "GDS$CATALOG.oradbcloud" has 1 instance(s).
+     Instance "cata", status READY, has 1 handler(s) for this service...
+   Service "GDS$COORDINATOR.oradbcloud" has 1 instance(s).
+     Instance "cata", status READY, has 1 handler(s) for this service...
+   Service "_MONITOR" has 1 instance(s).
+     Instance "SHARDDIRECTOR1", status READY, has 1 handler(s) for this service...
+   Service "_PINGER" has 1 instance(s).
+     Instance "SHARDDIRECTOR1", status READY, has 1 handler(s) for this service...
+   Service "oltp_rw_srvc.orasdb.oradbcloud" has 2 instance(s).
+     Instance "orasdb%1", status READY, has 1 handler(s) for this service...
+     Instance "orasdb%11", status READY, has 1 handler(s) for this service...
+   The command completed successfully
+   [oracle@cata ~]$ 
+   ```
+
+   
+
 You may proceed to the next lab.
-   
+
