@@ -3,7 +3,7 @@
 
 ## About this Workshop
 
-In this workshop, you will learn how deploy the oracle sharded database, working with the sharded database and scale the shard database.
+In this workshop, you will learn how to deploy the oracle sharded database, working with the sharded database and scale the shard database. You will also learn how to migrate application from a non-shard database to sharded database.
 
 ### About Oracle Sharding
 
@@ -48,8 +48,9 @@ The differences between the `ADD SHARD` and `CREATE SHARD` methods are explained
 
 In this workshop, you will
 
-- Deploy a shard database with 2 shard using system managed sharding.
-- Working with the shard database
+- Deploy sharded database with 2 shard using system managed sharding.
+- Migrate application to the sharded database
+- Working with the shard database.
 - Extent the shard database with the third shard.
 
 

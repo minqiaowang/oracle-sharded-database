@@ -144,7 +144,24 @@ This lab assumes you have already completed the following:
 1. Still in the shard3 host with oracle user. Download the SQL script `nonshard-app-schema.sql`.
 
    ```
+   [oracle@shd3 ~]$ <copy>wget https://github.com/minqiaowang/oracle-sharded-database/raw/main/setup-nonshard-app/nonshard-app-schema.sql</copy>
+   --2020-12-06 10:45:06--  https://github.com/minqiaowang/oracle-sharded-database/raw/main/setup-nonshard-app/nonshard-app-schema.sql
+   Resolving github.com (github.com)... 140.82.112.3
+   Connecting to github.com (github.com)|140.82.112.3|:443... connected.
+   HTTP request sent, awaiting response... 302 Found
+   Location: https://raw.githubusercontent.com/minqiaowang/oracle-sharded-database/main/setup-nonshard-app/nonshard-app-schema.sql [following]
+   --2020-12-06 10:45:08--  https://raw.githubusercontent.com/minqiaowang/oracle-sharded-database/main/setup-nonshard-app/nonshard-app-schema.sql
+   Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.76.133
+   Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.76.133|:443... connected.
+   HTTP request sent, awaiting response... 200 OK
+   Length: 2938 (2.9K) [text/plain]
+   Saving to: ‘nonshard-app-schema.sql’
    
+   100%[======================================>] 2,938       --.-K/s   in 0s      
+   
+   2020-12-06 10:45:08 (15.2 MB/s) - ‘nonshard-app-schema.sql’ saved [2938/2938]
+   
+   [oracle@shd3 ~]$ 
    ```
 
    
@@ -152,7 +169,7 @@ This lab assumes you have already completed the following:
 2. Review the content in the sql scripts file.
 
    ```
-   [oracle@shd3 ~]$ cat nonshard-app-schema.sql 
+   [oracle@shd3 ~]$ <copy>cat nonshard-app-schema.sql</copy> 
    set echo on 
    set termout on
    set time on
@@ -446,7 +463,7 @@ This lab assumes you have already completed the following:
 1. Connect to the catalog host, switch to the oracle user.
 
    ```
-   $ ssh -i labkey opc@152.67.196.50
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    Last login: Fri Dec  4 06:48:49 2020 from 202.45.129.206
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    [opc@cata ~]$ sudo su - oracle
@@ -459,7 +476,24 @@ This lab assumes you have already completed the following:
 2. Download the `sdb_demo_app.zip`  file.
 
    ```
+   [oracle@cata ~]$ <copy>wget https://github.com/minqiaowang/oracle-sharded-database/raw/main/setup-nonshard-app/sdb_demo_app.zip</copy>
+   --2020-12-06 10:50:35--  https://github.com/minqiaowang/oracle-sharded-database/raw/main/setup-nonshard-app/sdb_demo_app.zip
+   Resolving github.com (github.com)... 140.82.113.3
+   Connecting to github.com (github.com)|140.82.113.3|:443... connected.
+   HTTP request sent, awaiting response... 302 Found
+   Location: https://raw.githubusercontent.com/minqiaowang/oracle-sharded-database/main/setup-nonshard-app/sdb_demo_app.zip [following]
+   --2020-12-06 10:50:37--  https://raw.githubusercontent.com/minqiaowang/oracle-sharded-database/main/setup-nonshard-app/sdb_demo_app.zip
+   Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 151.101.88.133
+   Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|151.101.88.133|:443... connected.
+   HTTP request sent, awaiting response... 200 OK
+   Length: 5897406 (5.6M) [application/zip]
+   Saving to: ‘sdb_demo_app.zip’
    
+   100%[===============================================================>] 5,897,406   6.92MB/s   in 0.8s   
+   
+   2020-12-06 10:50:38 (6.92 MB/s) - ‘sdb_demo_app.zip’ saved [5897406/5897406]
+   
+   [oracle@cata ~]$ 
    ```
 
    
@@ -644,10 +678,10 @@ This lab assumes you have already completed the following:
    ```
    [oracle@cata sql]$ cat nonshard_demo_app_ext.sql 
    -- Create catalog monitor packages
-   connect sys/Ora_DB4U@shd3:1521/sipdb as sysdba;
+   connect sys/Ora_DB4U@shd3:1521/nspdb as sysdba;
    @catalog_monitor.sql
    
-   connect app_schema/app_schema@shd3:1521/sipdb;
+   connect app_schema/app_schema@shd3:1521/nspdb;
    
    alter session enable shard ddl;
    
@@ -659,7 +693,7 @@ This lab assumes you have already completed the following:
    alter session disable shard ddl;
    
    -- Allow a special query for dbaview
-   connect sys/Ora_DB4U@shd3:1521/sipdb as sysdba;
+   connect sys/Ora_DB4U@shd3:1521/nspdb as sysdba;
    
    -- For demo app purposes
    grant shard_monitor_role, gsmadmin_role to app_schema;
@@ -691,7 +725,7 @@ This lab assumes you have already completed the following:
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
-   SQL> @single_demo_app_ext.sql
+   SQL> @nonshard_demo_app_ext.sql
    ```
 
    
@@ -834,8 +868,8 @@ This lab assumes you have already completed the following:
    connect_string=(ADDRESS_LIST=(LOAD_BALANCE=off)(FAILOVER=on)(ADDRESS=(HOST=shd3)(PORT=1521)(PROTOCOL=tcp)))
    monitor.user=dbmonuser
    monitor.pass=TEZiPP4MsLLL
-   app.service.write=sipdb
-   app.service.readonly=sipdb
+   app.service.write=nspdb
+   app.service.readonly=nspdb
    app.user=app_schema
    app.pass=app_schema
    app.threads=7
@@ -879,35 +913,35 @@ This lab assumes you have already completed the following:
           37305         6030            0            0          965
           40308         6541            0            0         1031
           43059         7012            0            0          948
-     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-          45949         7463            0            0          989
-          48781         7892            0            0          968
-          51623         8379            0            0          970
-          54354         8842            0            0          927
-          57469         9335            0            0         1059
-          60949         9895            0            0         1191
-          63983        10394            0            0         1032
-          67194        10857            0            0         1116
-          69907        11308            0            0          932
-          72584        11802            0            0          928
-          75207        12272            0            0          905
-          78075        12713            0            0          999
     ```
-
     
-
-12. Wait the application run some times and press `Ctrl-C` to exit the application. Remember the values of the APS.
+    
+    
+12. Wait the application run some times and press `Ctrl-C` to exit the application. 
 
     ```
-         122102        20078            0            0          891
-         124764        20536            0            0          931
-         127037        20950            0            0          801
-         129717        21401            0            0          930
-         132596        21818            0            0         1002
-         135125        22227            0            0          882
-         137690        22682            0            0          895
-         140398        23127            0            0          946
-    ^C[oracle@cata sdb_demo_app]$ 
+     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
+          45193         7663            0            0          818
+          47360         7994            0            0          819
+          49644         8390            0            0          849
+          52293         8861            0            0          993
+          55031         9317            0            0         1043
+          57539         9727            0            0          952
+          60063        10133            0            0          933
+          62500        10588            0            0          910
+          65015        10998            0            0          952
+          67397        11420            0            0          883
+          69927        11826            0            0          966
+          72467        12279            0            0          935
+          75249        12695            0            0         1045
+          78081        13145            0            0         1074
+          80855        13635            0            0         1047
+          83550        14089            0            0         1015
+          86727        14592            0            0         1173
+          89301        15020            0            0          958
+          91735        15434            0            0          918
+          94553        15924            0            0         1047
+    ^C[oracle@cata sdb_demo_app]$
     ```
 
 
@@ -915,12 +949,12 @@ This lab assumes you have already completed the following:
 
 ## **Step 4:** Export the Demo Data and Copy DMP File
 
-In this step, you will export the demo application data. You will import the data to the shard database in the next lab.
+In this step, you will export the demo application data and copy the dmp file to the catalog and each of the shard hosts. You will import the data to the shard database in the next lab.
 
 1. Connect to the shard3 host, switch to the oracle user.
 
    ```
-   $ ssh -i labkey opc@152.67.196.227
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    Last login: Mon Nov 30 11:24:36 2020 from 59.66.120.23
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
@@ -934,7 +968,7 @@ In this step, you will export the demo application data. You will import the dat
 2. Connect to the non-sharded database as `app_schema` user with SQLPLUS.
 
    ```
-   [oracle@shd3 ~]$ sqlplus app_schema/app_schema@shd3:1521/sipdb
+   [oracle@shd3 ~]$ sqlplus app_schema/app_schema@shd3:1521/nspdb
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sat Dec 5 07:43:15 2020
    Version 19.7.0.0.0
@@ -969,12 +1003,12 @@ In this step, you will export the demo application data. You will import the dat
 
 4. Run the following command to export the demo data.
 
-   - `data_option= GROUP_PARTITION_TABLE_DATA `: Unloads all partitions as a single operation producing a single partition of data in the dump file. Subsequent imports will not know this was originally made up of multiple partitions.
+   - `GROUP_PARTITION_TABLE_DATA `: Unloads all partitions as a single operation producing a single partition of data in the dump file. Subsequent imports will not know this was originally made up of multiple partitions.
 
    ```
-   [oracle@shd3 ~]$ expdp app_schema/app_schema@shd3:1521/sipdb directory=demo_pump_dir \
+   [oracle@shd3 ~]$ <copy>expdp app_schema/app_schema@shd3:1521/nspdb directory=demo_pump_dir \
      dumpfile=original.dmp logfile=original.log \
-     schemas=app_schema data_options=group_partition_table_data
+     schemas=app_schema data_options=group_partition_table_data</copy>
    ```
 
    
@@ -982,13 +1016,13 @@ In this step, you will export the demo application data. You will import the dat
 5. The result screen like the following.
 
    ```
-   Export: Release 19.0.0.0.0 - Production on Sat Dec 5 09:48:25 2020
+   Export: Release 19.0.0.0.0 - Production on Mon Dec 7 01:35:33 2020
    Version 19.7.0.0.0
    
    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
    
    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Starting "APP_SCHEMA"."SYS_EXPORT_SCHEMA_01":  app_schema/********@shd3:1521/sipdb directory=demo_pump_dir dumpfile=original.dmp logfile=original.log schemas=app_schema data_options=group_partition_table_data 
+   Starting "APP_SCHEMA"."SYS_EXPORT_SCHEMA_01":  app_schema/********@shd3:1521/nspdb directory=demo_pump_dir dumpfile=original.dmp logfile=original.log schemas=app_schema data_options=group_partition_table_data 
    Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
    Processing object type SCHEMA_EXPORT/TABLE/INDEX/STATISTICS/INDEX_STATISTICS
    Processing object type SCHEMA_EXPORT/TABLE/STATISTICS/TABLE_STATISTICS
@@ -1010,25 +1044,16 @@ In this step, you will export the demo application data. You will import the dat
    Processing object type SCHEMA_EXPORT/TABLE/INDEX/INDEX
    Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/CONSTRAINT
    Processing object type SCHEMA_EXPORT/TABLE/CONSTRAINT/REF_CONSTRAINT
-   . . exported "APP_SCHEMA"."CUSTOMERS"                    3.313 MB   14707 rows
-   . . exported "APP_SCHEMA"."PRODUCTS"                     27.26 KB     480 rows
-   . . exported "APP_SCHEMA"."ORDERS"                       1.099 MB   22021 rows
-   . . exported "APP_SCHEMA"."LINEITEMS"                    1.558 MB   39195 rows
+   . . exported "APP_SCHEMA"."CUSTOMERS"                    5.475 MB   24343 rows
+   . . exported "APP_SCHEMA"."PRODUCTS"                     27.25 KB     480 rows
+   . . exported "APP_SCHEMA"."ORDERS"                       1.864 MB   37280 rows
+   . . exported "APP_SCHEMA"."LINEITEMS"                    2.651 MB   66524 rows
    Master table "APP_SCHEMA"."SYS_EXPORT_SCHEMA_01" successfully loaded/unloaded
    ******************************************************************************
    Dump file set for APP_SCHEMA.SYS_EXPORT_SCHEMA_01 is:
      /home/oracle/original.dmp
-   Job "APP_SCHEMA"."SYS_EXPORT_SCHEMA_01" successfully completed at Sat Dec 5 09:49:47 2020 elapsed 0 00:01:22
+   Job "APP_SCHEMA"."SYS_EXPORT_SCHEMA_01" successfully completed at Mon Dec 7 01:37:06 2020 elapsed 0 00:01:29
    
-   [oracle@shd3 ~]$ ls -l
-   total 13924
-   -rw-r-----.  1 oracle dba      7028736 Dec  5 09:49 original.dmp
-   -rw-r--r--.  1 oracle dba         2357 Dec  5 09:49 original.log
-   -rw-r--r--.  1 oracle dba         4680 Dec  5 07:45 original_table.log
-   -rw-r-----.  1 oracle dba      7192576 Dec  5 07:45 original_tables.dmp
-   -rw-r--r--.  1 oracle oinstall    5213 Dec  4 12:07 single_app_schema.lst
-   -rw-r--r--.  1 oracle oinstall    2939 Dec  4 11:49 single-app-schema.sql
-   drwx------. 12 root   root        4096 Oct 23  2018 swingbench
    [oracle@shd3 ~]$ 
    ```
 
@@ -1037,7 +1062,7 @@ In this step, you will export the demo application data. You will import the dat
 6. From the shard3 host, create a ssh key pair. Press **Enter** to accept all the default values.
 
    ```
-   [oracle@shd3 ~]$ ssh-keygen -t rsa
+   [oracle@shd3 ~]$ <copy>ssh-keygen -t rsa</copy>
    Generating public/private rsa key pair.
    Enter file in which to save the key (/home/oracle/.ssh/id_rsa): 
    Created directory '/home/oracle/.ssh'.
@@ -1067,7 +1092,7 @@ In this step, you will export the demo application data. You will import the dat
 7. View the content of the public key.
 
    ```
-   [oracle@shd3 ~]$ cat .ssh/id_rsa.pub
+   [oracle@shd3 ~]$ <copy>cat .ssh/id_rsa.pub</copy>
    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC5MxF+Vt+SILTrw+iXxzpPo277RL1KAOT9YQW3ZfbFY5f08THsbzeyt1ecRZjeSUfG+V2iTOWii+GHtBg4yylzYkzBoTinZ72MkW62t1XcV7w1GIOnDbIX0AG7JD6OURDm8br6+4bjNNKkRjmEZPuJ/KiB4FVcfk3heNG0K6s99OUh7EQsEb2guvalp2KTP9gL6UJRcVeY6omzk5+VeEP0Sm285ev9nQ2/SWgqb1qz7241WP89REIZMEuIJ/g2h8yhXvoCoK59WiZYJuzGWV4AX57t/8viH948suHN4sfabQT9DWuAAJAYryAZPqVwvTgRNMaQRuhUxQB2lwKcMY5N oracle@shd3
    [oracle@shd3 ~]$ 
    ```
@@ -1077,9 +1102,10 @@ In this step, you will export the demo application data. You will import the dat
 8. Open another terminal to connect to the cata host. Switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@152.67.196.240
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    Last login: Mon Nov 30 11:22:42 2020 from 59.66.120.23
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
+   
    [opc@shd1 ~]$ sudo su - oracle
    Last login: Sun Nov 29 03:15:53 GMT 2020 on pts/0
    [oracle@cata ~]$ 
@@ -1099,15 +1125,15 @@ In this step, you will export the demo application data. You will import the dat
 10. Copy all the content of the SSH public key from Shard3 host. Save the file and chmod the file.
 
    ```
-   [oracle@shd1 ~]$ chmod 600 .ssh/authorized_keys 
+   [oracle@shd1 ~]$ <copy>chmod 600 .ssh/authorized_keys</copy> 
    [oracle@shd1 ~]$
    ```
 
    
 
-11. **Repeat do the same steps**  from previous steps 8 - 10. This time connect to the Shard1 and Shard2 host.
+11. **Repeat do the same steps**  from previous steps 8 - 10. This time connect to the shard1 and shard2 host. Create `authorized_keys` in each of the shard hosts.
 
-12. From Shard3 host side. Copy the dmp file to the catalog, shard1 and shard2 host. Press yes when prompt ask if you want to  continue.
+12. From shard3 host side. Copy the dmp file to the catalog, shard1 and shard2 host. Press yes when prompt ask if you want to  continue.
 
     ```
     [oracle@shd3 ~]$ scp original.dmp oracle@cata:~

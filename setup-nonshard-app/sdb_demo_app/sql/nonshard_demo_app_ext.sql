@@ -3,7 +3,7 @@ connect sys/Ora_DB4U@shd3:1521/nspdb as sysdba;
 
 @catalog_monitor.sql
 
-connect app_schema/app_schema@@shd3:1521/nspdb;
+connect app_schema/app_schema@shd3:1521/nspdb;
 
 alter session enable shard ddl;
 
@@ -15,8 +15,7 @@ CREATE OR REPLACE VIEW SAMPLE_ORDERS AS
 alter session disable shard ddl;
 
 -- Allow a special query for dbaview
-connect / as sysdba
-alter session set container=nspdb;
+connect sys/Ora_DB4U@shd3:1521/nspdb as sysdba;
 
 -- For demo app purposes
 grant shard_monitor_role, gsmadmin_role to app_schema;

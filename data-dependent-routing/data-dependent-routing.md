@@ -3,7 +3,7 @@
 ## Introduction
 In this lab you will understand how the routing works when a `sharding_key` is specified using SQL*Plus. For production application scenario, you would be using Oracle Integrated Connection pools – UCP, OCI, ODP.NET, JDBC etc which will allow direct routing based on the `sharding_key`. 
 
-Estimated Lab Time: 10 minutes.
+Estimated Lab Time: 30 minutes.
 
 ### Objectives
 
@@ -19,62 +19,20 @@ This lab assumes you have already completed the following:
 
 ## **Step 1:** Connect to a Shard by a Sharding key
 
-1. Login to the catalog host, switch to oracle user, and change to the GSM environment.
+1. Login to the catalog host, switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@152.67.196.50
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    Last login: Mon Nov 30 03:06:29 2020 from 202.45.129.206
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    [opc@cata ~]$ sudo su - oracle
    Last login: Mon Nov 30 03:06:34 GMT 2020 on pts/0
-   [oracle@cata ~]$ . ./gsm.sh
    [oracle@cata ~]$ 
    ```
-
    
 
-2. Check the shard director listener status. You can see a service named `oltp_rw_srvc.orasdb.oradbcloud` and a service named `GDS$CATALOG.oradbcloud` listening on 1522 port.
-
-   ```
-   [oracle@cata ~]$ <copy>lsnrctl status SHARDDIRECTOR1</copy>
    
-   LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 30-NOV-2020 03:34:25
-   
-   Copyright (c) 1991, 2019, Oracle.  All rights reserved.
-   
-   Connecting to (DESCRIPTION=(ADDRESS=(HOST=cata)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=GDS$CATALOG.oradbcloud)))
-   STATUS of the LISTENER
-   ------------------------
-   Alias                     SHARDDIRECTOR1
-   Version                   TNSLSNR for Linux: Version 19.0.0.0.0 - Production
-   Start Date                29-NOV-2020 04:26:16
-   Uptime                    0 days 23 hr. 8 min. 8 sec
-   Trace Level               off
-   Security                  ON: Local OS Authentication
-   SNMP                      OFF
-   Listener Parameter File   /u01/app/oracle/product/19c/gsmhome_1/network/admin/gsm.ora
-   Listener Log File         /u01/app/oracle/diag/gsm/cata/sharddirector1/alert/log.xml
-   Listening Endpoints Summary...
-     (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=cata)(PORT=1522)))
-   Services Summary...
-   Service "GDS$CATALOG.oradbcloud" has 1 instance(s).
-     Instance "cata", status READY, has 1 handler(s) for this service...
-   Service "GDS$COORDINATOR.oradbcloud" has 1 instance(s).
-     Instance "cata", status READY, has 1 handler(s) for this service...
-   Service "_MONITOR" has 1 instance(s).
-     Instance "SHARDDIRECTOR1", status READY, has 1 handler(s) for this service...
-   Service "_PINGER" has 1 instance(s).
-     Instance "SHARDDIRECTOR1", status READY, has 1 handler(s) for this service...
-   Service "oltp_rw_srvc.orasdb.oradbcloud" has 2 instance(s).
-     Instance "orasdb%1", status READY, has 1 handler(s) for this service...
-     Instance "orasdb%11", status READY, has 1 handler(s) for this service...
-   The command completed successfully
-   [oracle@cata ~]$ 
-   ```
-
-   
-
-3. For single-shard queries, connect to a shard with a given sharding_key using GSM.
+3. For single-shard queries, direct routing to a shard with a given sharding_key.
 
    ```
    [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@'(description=(address=(protocol=tcp)(host=cata)(port=1522))(connect_data=(service_name=oltp_rw_srvc.orasdb.oradbcloud)(region=region1)(SHARDING_KEY=james.parker@x.bogus)))'</copy>
@@ -128,7 +86,7 @@ This lab assumes you have already completed the following:
 6. Select from the customer table. You can see there is one record which you just insert in the table.
 
    ```
-   SQL> <copy>select * from customers;</copy>
+   SQL> <copy>select * from customers where custid in('james.parker@x.bogus','tom.edwards');</copy>
    
    CUSTID
    ------------------------------------------------------------
@@ -228,7 +186,7 @@ This lab assumes you have already completed the following:
 11. Select from the table. You can see there is only one record in the shard2 database.
 
     ```
-    SQL> <copy>select * from customers;</copy>
+    SQL> <copy>select * from customers where custid in('james.parker@x.bogus','tom.edwards');</copy>
     
     CUSTID
     ------------------------------------------------------------
@@ -300,7 +258,7 @@ This lab assumes you have already completed the following:
 2. Select records from customers table. You can see all the records are selected.
 
    ```
-   SQL> <copy>select custid from customers;</copy>
+   SQL> <copy>select custid from customers where custid in('james.parker@x.bogus','tom.edwards');</copy>
    
    CUSTID
    ------------------------------------------------------------
@@ -337,4 +295,5 @@ This lab assumes you have already completed the following:
    ```
 
    
+
 You may proceed to the next lab.

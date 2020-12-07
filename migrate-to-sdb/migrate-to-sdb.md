@@ -2,16 +2,16 @@
 
 ## Introduction
 
-In this lab, you will migrate the demo application from the non-shard database to the sharded database. You need re-design the schema, migrate the data and modify the applications.
+When you want to migrate the application from the non-shard database to the sharded database, you need re-design the schema, migrate the data and modify the applications.
 
-Estimated Lab Time: 20 minutes.
+Estimated Lab Time: 60 minutes.
 
 ### Objectives
 
 In this lab, you will perform the following steps:
 
-- Re-Design and create the demo Schema.
-- Verify the shard demo schema
+- Re-Design and create the demo schema.
+- Verify the shard demo schema.
 
 - Migrate data to the sharded database.
 - Setup and Run the demo applications
@@ -34,7 +34,7 @@ Before the existing database can be migrated to the sharded database, you must d
 1. Login to the catalog database host, switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@152.67.196.50
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxxx
    Last login: Sun Nov 29 01:26:28 2020 from 59.66.120.23
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
@@ -49,12 +49,12 @@ Before the existing database can be migrated to the sharded database, you must d
 2. Download the sharded demo schema SQL scripts `sdb-app-schema.sql`.
 
    ```
-   [oracle@cata ~]$ <copy></copy>
+   [oracle@cata ~]$ <copy>wget https://github.com/minqiaowang/oracle-sharded-database/raw/main/migrate-to-sdb/sdb-app-schema.sql</copy>
    ```
 
    
 
-3. Review the content in the sql scripts file.
+3. Review the content in the sql scripts file. Make sure the connect string is correct.
 
    ```
    [oracle@cata ~]$ <copy>cat sdb-app-schema.sql</copy> 
@@ -437,54 +437,12 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
    ```
    [oracle@cata ~]$ . ./gsm.sh 
-   
    [oracle@cata ~]$ 
    ```
    
    
    
-2. Check the shard director listener status. You can see a service named `oltp_rw_srvc.orasdb.oradbcloud` and a service named `GDS$CATALOG.oradbcloud` listening on 1522 port.
-
-   ```
-   [oracle@cata ~]$ <copy>lsnrctl status SHARDDIRECTOR1</copy>
-   
-   LSNRCTL for Linux: Version 19.0.0.0.0 - Production on 30-NOV-2020 03:34:25
-   
-   Copyright (c) 1991, 2019, Oracle.  All rights reserved.
-   
-   Connecting to (DESCRIPTION=(ADDRESS=(HOST=cata)(PORT=1522)(PROTOCOL=tcp))(CONNECT_DATA=(SERVICE_NAME=GDS$CATALOG.oradbcloud)))
-   STATUS of the LISTENER
-   ------------------------
-   Alias                     SHARDDIRECTOR1
-   Version                   TNSLSNR for Linux: Version 19.0.0.0.0 - Production
-   Start Date                29-NOV-2020 04:26:16
-   Uptime                    0 days 23 hr. 8 min. 8 sec
-   Trace Level               off
-   Security                  ON: Local OS Authentication
-   SNMP                      OFF
-   Listener Parameter File   /u01/app/oracle/product/19c/gsmhome_1/network/admin/gsm.ora
-   Listener Log File         /u01/app/oracle/diag/gsm/cata/sharddirector1/alert/log.xml
-   Listening Endpoints Summary...
-     (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=cata)(PORT=1522)))
-   Services Summary...
-   Service "GDS$CATALOG.oradbcloud" has 1 instance(s).
-     Instance "cata", status READY, has 1 handler(s) for this service...
-   Service "GDS$COORDINATOR.oradbcloud" has 1 instance(s).
-     Instance "cata", status READY, has 1 handler(s) for this service...
-   Service "_MONITOR" has 1 instance(s).
-     Instance "SHARDDIRECTOR1", status READY, has 1 handler(s) for this service...
-   Service "_PINGER" has 1 instance(s).
-     Instance "SHARDDIRECTOR1", status READY, has 1 handler(s) for this service...
-   Service "oltp_rw_srvc.orasdb.oradbcloud" has 2 instance(s).
-     Instance "orasdb%1", status READY, has 1 handler(s) for this service...
-     Instance "orasdb%11", status READY, has 1 handler(s) for this service...
-   The command completed successfully
-   [oracle@cata ~]$ 
-   ```
-
-   
-
-3. Launch GDSCTL.
+2. Launch GDSCTL.
 
    ```
    [oracle@cata ~]$ gdsctl
@@ -500,7 +458,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
    
 
-4. Run the following commands to observe that there are no failures during the creation of tablespaces.
+3. Run the following commands to observe that there are no failures during the creation of tablespaces.
 
    ```
    GDSCTL> show ddl
@@ -523,7 +481,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
    
 
-5. Run the config commands as shown below for each of the shards and verify if there are any DDL error.
+4. Run the config commands as shown below for each of the shards and verify if there are any DDL error.
 
    ```
    GDSCTL> config shard -shard shd1_shdpdb1
@@ -581,7 +539,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
    
 
-6. Show the created chunks.
+5. Show the created chunks.
 
    ```
    GDSCTL> config chunks
@@ -597,7 +555,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
    
 
-7. Exit GDSCTL.
+6. Exit GDSCTL.
 
    ```
    GDSCTL> exit
@@ -606,7 +564,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
    
 
-8. Connect to the shard pdb1.
+7. Connect to the shard pdb1.
 
    ```
    [oracle@cata ~]$ <copy>sqlplus sys/Ora_DB4U@shd1:1521/shdpdb1 as sysdba</copy>
@@ -626,7 +584,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
    
 
-9. Check the created tablespace set.
+8. Check the created tablespace set.
 
    ```
    SQL> <copy>select TABLESPACE_NAME, BYTES/1024/1024 MB from sys.dba_data_files order by tablespace_name;</copy>
@@ -656,7 +614,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
    
 
-10. Verify that the chunks and chunk tablespaces are created.
+9. Verify that the chunks and chunk tablespaces are created.
 
    ```
    SQL> set linesize 140
@@ -696,17 +654,17 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
    
 
-11. Connect to the shard pdb2.
+10. Connect to the shard pdb2.
 
-    ```
-    SQL> <copy>connect sys/Ora_DB4U@shd2:1521/shdpdb2 as sysdba</copy>
-    Connected.
-    SQL>
-    ```
+   ```
+   SQL> <copy>connect sys/Ora_DB4U@shd2:1521/shdpdb2 as sysdba</copy>
+   Connected.
+   SQL>
+   ```
 
-    
+   
 
-12. Check the created tablespace set.
+11. Check the created tablespace set.
 
     ```
     SQL> <copy>select TABLESPACE_NAME, BYTES/1024/1024 MB from sys.dba_data_files order by tablespace_name;</copy>
@@ -736,7 +694,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
     
 
-13. Verify that the chunks and chunk tablespaces are created.
+12. Verify that the chunks and chunk tablespaces are created.
 
     ```
     SQL> set linesize 140
@@ -776,7 +734,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
     
 
-14. Connect to the shardcatalog.
+13. Connect to the shardcatalog.
 
     ```
     SQL> <copy>connect sys/Ora_DB4U@cata:1521/catapdb as sysdba</copy>
@@ -786,7 +744,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
     
 
-15. Query the `gsmadmin_internal.chunk_loc` table to observe that the chunks are uniformly distributed.
+14. Query the `gsmadmin_internal.chunk_loc` table to observe that the chunks are uniformly distributed.
 
     ```
     SQL> column shard format a40
@@ -802,7 +760,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
     
 
-16. Connect into the app_schema/app_schema on the catadb, shard1, shard2 databases and verify that the sharded and duplicated tables are created.
+15. Connect into the app_schema/app_schema on the catadb, shard1, shard2 databases and verify that the sharded and duplicated tables are created.
 
     ```
     SQL> connect app_schema/app_schema@cata:1521/catapdb
@@ -849,7 +807,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
     
 
-17. Exit the sqlplus.
+16. Exit the sqlplus.
 
     ```
     SQL> exit
@@ -863,7 +821,9 @@ Now, we can verify the sharded demo schema which created in the previous step.
 
 ## **Step 3:** Migrate Data to the Sharded Tables
 
-Duplicated tables reside in the shard catalog, they are always loaded into the shard catalog database using any of available data loading utilities, or plain SQL. 
+Now, we will load data into sharded database using the dump file which created in the previous lab. 
+
+The duplicated tables reside in the shard catalog, they are always loaded into the shard catalog database using any of available data loading utilities, or plain SQL. 
 
 For the sharded tables, you have two options. 
 
@@ -877,7 +837,7 @@ In this lab, we will load the public table to the catalog database and load shar
 1. Use SQLPLUS, connect to the catalog pdb with `app_schema` user.
 
    ```
-   [oracle@cata ~]$ sqlplus app_schema/app_schema@cata:1521/catapdb
+   [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@cata:1521/catapdb</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sat Dec 5 03:21:31 2020
    Version 19.7.0.0.0
@@ -894,7 +854,7 @@ In this lab, we will load the public table to the catalog database and load shar
    
    
    
-2. Create a data pump directory. Exit the SQLPLUS.
+2. Create a data pump directory. When shard ddl enabled, it will be created in catalog db and each of the sharded db. Exit the SQLPLUS.
 
    ```
    SQL> alter session enable shard ddl;
@@ -912,114 +872,111 @@ In this lab, we will load the public table to the catalog database and load shar
 
    
 
-3. Connect to the catalog host, switch to oracle user.
+3. From the catalog host, run the following command to import the public table data.
 
    ```
-   
-   ```
-
-   
-
-4. Run the following command to import the public table data.
-
-   ```
-   
-   ```
-
-   
-
-5. The result screen like the following.
-
-   ```
-   
-   ```
-
-   
-
-6. Connect to the Shard1 host, switch to oracle user.
-
-   ```
-   $ ssh -i labkey opc@152.67.196.240
-   Last login: Sat Dec  5 09:56:58 2020 from 59.66.120.23
-   -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-   [opc@shd1 ~]$ sudo su - oracle
-   Last login: Sat Dec  5 09:57:04 GMT 2020 on pts/0
-   [oracle@shd1 ~]$ 
-   ```
-
-   
-
-7. Run the following command to import data into the shard1 tables.
-
-   ```
-   [oracle@shd1 ~]$ impdp app_schema/app_schema@shd1:1521/shdpdb1 directory=demo_pump_dir \
+   [oracle@cata ~]$ <copy>impdp app_schema/app_schema@cata:1521/catapdb directory=demo_pump_dir \
          dumpfile=original.dmp logfile=imp.log \
-         table_exists_action=append \
-         content=DATA_ONLY
+         tables=Products \
+         content=DATA_ONLY</copy>
    ```
 
    
 
-8. The result likes the following.
+4. The result screen like the following.
 
    ```
-   Import: Release 19.0.0.0.0 - Production on Sat Dec 5 11:16:18 2020
+   Import: Release 19.0.0.0.0 - Production on Mon Dec 7 02:14:07 2020
    Version 19.7.0.0.0
    
    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
    
    Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Master table "APP_SCHEMA"."SYS_IMPORT_FULL_01" successfully loaded/unloaded
-   Starting "APP_SCHEMA"."SYS_IMPORT_FULL_01":  app_schema/********@shd1:1521/shdpdb1 directory=demo_pump_dir dumpfile=original.dmp logfile=imp.log table_exists_action=append content=DATA_ONLY 
+   Master table "APP_SCHEMA"."SYS_IMPORT_TABLE_01" successfully loaded/unloaded
+   Starting "APP_SCHEMA"."SYS_IMPORT_TABLE_01":  app_schema/********@cata:1521/catapdb directory=demo_pump_dir dumpfile=original.dmp logfile=imp.log tables=Products content=DATA_ONLY 
    Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
-   . . imported "APP_SCHEMA"."CUSTOMERS"                    3.313 MB    4922 out of 14707 rows
-   . . imported "APP_SCHEMA"."PRODUCTS"                     27.26 KB     480 rows
-   . . imported "APP_SCHEMA"."ORDERS"                       1.099 MB    7387 out of 22021 rows
-   . . imported "APP_SCHEMA"."LINEITEMS"                    1.558 MB   13188 out of 39195 rows
-   Job "APP_SCHEMA"."SYS_IMPORT_FULL_01" successfully completed at Sat Dec 5 11:17:04 2020 elapsed 0 00:00:46
+   . . imported "APP_SCHEMA"."PRODUCTS"                     27.25 KB     480 rows
+   Job "APP_SCHEMA"."SYS_IMPORT_TABLE_01" successfully completed at Mon Dec 7 02:14:22 2020 elapsed 0 00:00:10
    
-   [oracle@shd1 ~]$
+   [oracle@cata ~]$ 
    ```
 
    
 
-9. Connect to the Shard2 host, switch to oracle user.
+5. Run the following command to import data into the shard1 tables.
 
    ```
-   
-   ```
-
-   
-
-10. Run the following command to load data into shard2 tables.
-
-   ```
-   [oracle@shd2 ~]$ impdp app_schema/app_schema@shd2:1521/shdpdb2 directory=demo_pump_dir \
-          dumpfile=original.dmp logfile=imp.log \
-          table_exists_action=append \
-          content=DATA_ONLY
+   [oracle@cata ~]$ <copy>impdp app_schema/app_schema@shd1:1521/shdpdb1 directory=demo_pump_dir \
+         dumpfile=original.dmp logfile=imp.log \
+         tables=Customers, Orders, LineItems \
+         content=DATA_ONLY</copy>
    ```
 
    
 
-11. The result like the following.
+6. The result likes the following. You may notes the only part of the rows are imported into the sharded tables.
 
-    ```
-    
-    ```
+   ```
+   Import: Release 19.0.0.0.0 - Production on Mon Dec 7 02:15:32 2020
+   Version 19.7.0.0.0
+   
+   Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+   
+   Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+   Master table "APP_SCHEMA"."SYS_IMPORT_TABLE_01" successfully loaded/unloaded
+   Starting "APP_SCHEMA"."SYS_IMPORT_TABLE_01":  app_schema/********@shd1:1521/shdpdb1 directory=demo_pump_dir dumpfile=original.dmp logfile=imp.log tables=Customers, Orders, LineItems content=DATA_ONLY 
+   Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+   . . imported "APP_SCHEMA"."CUSTOMERS"                    5.475 MB   11995 out of 24343 rows
+   . . imported "APP_SCHEMA"."ORDERS"                       1.864 MB   18390 out of 37280 rows
+   . . imported "APP_SCHEMA"."LINEITEMS"                    2.651 MB   32662 out of 66524 rows
+   Job "APP_SCHEMA"."SYS_IMPORT_TABLE_01" successfully completed at Mon Dec 7 02:16:03 2020 elapsed 0 00:00:26
+   
+   [oracle@cata ~]$
+   ```
 
-    
+   
+
+7. Run the following command to load data into shard2 tables.
+
+   ```
+   [oracle@cata ~]$ <copy>impdp app_schema/app_schema@shd2:1521/shdpdb2 directory=demo_pump_dir \
+         dumpfile=original.dmp logfile=imp.log \
+         tables=Customers, Orders, LineItems \
+         content=DATA_ONLY</copy>
+   ```
+
+   
+
+8. The result like the following.
+
+   ```
+   Import: Release 19.0.0.0.0 - Production on Mon Dec 7 02:18:56 2020
+   Version 19.7.0.0.0
+   
+   Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
+   
+   Connected to: Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+   Master table "APP_SCHEMA"."SYS_IMPORT_TABLE_01" successfully loaded/unloaded
+   Starting "APP_SCHEMA"."SYS_IMPORT_TABLE_01":  app_schema/********@shd2:1521/shdpdb2 directory=demo_pump_dir dumpfile=original.dmp logfile=imp.log tables=Customers, Orders, LineItems content=DATA_ONLY 
+   Processing object type SCHEMA_EXPORT/TABLE/TABLE_DATA
+   . . imported "APP_SCHEMA"."CUSTOMERS"                    5.475 MB   12348 out of 24343 rows
+   . . imported "APP_SCHEMA"."ORDERS"                       1.864 MB   18890 out of 37280 rows
+   . . imported "APP_SCHEMA"."LINEITEMS"                    2.651 MB   33862 out of 66524 rows
+   Job "APP_SCHEMA"."SYS_IMPORT_TABLE_01" successfully completed at Mon Dec 7 02:19:28 2020 elapsed 0 00:00:28
+   
+   [oracle@cata ~]$ 
+   ```
+
+   
 
 ## **Step 4:** Setup and Run the Demo Application
 
-1. Login to the catalog host, switch to oracle user. 
+Migrate application to the sharded database a slight change to the application code.  In this workshop, the demo application is designed for sharded database. You need to create additional objects needed by the demo application.
+
+1. From the catalog host, make sure your are in the catalog environment.
 
    ```
-   $ ssh -i labkey opc@152.67.196.50
-   Last login: Mon Nov 30 03:06:29 2020 from 202.45.129.206
-   -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-   [opc@cata ~]$ sudo su - oracle
-   Last login: Mon Nov 30 03:06:34 GMT 2020 on pts/0
+   [oracle@cata ~]$ <copy>. ./cata.sh</copy>
    [oracle@cata ~]$
    ```
 
@@ -1225,31 +1182,34 @@ In this lab, we will load the public table to the catalog database and load shar
 6. Exit the sqlplus. Change directory to the `sdb_demo_app`.
 
    ```
-   [oracle@cata ~]$ cd ~/sdb_demo_app
+   [oracle@cata ~]$ <copy>cd ~/sdb_demo_app</copy>
    [oracle@cata sdb_demo_app]$ 
    ```
 
    
 
-7. Modify the `sdbdemo.properties` file like the following. Because we have no data guard standby database setup in this lab, we also use the `oltp_rw_srvc.orasdb.oradbcloud` for the readonly service.
+7. Review the `sdbdemo.properties` file. Because we have no data guard standby database setup in this lab, we also use the `oltp_rw_srvc.orasdb.oradbcloud` for the readonly service.
 
    ```
+   [oracle@cata sdb_demo_app]$ <copy>cat sdbdemo.properties</copy>
    name=demo
    connect_string=(ADDRESS_LIST=(LOAD_BALANCE=off)(FAILOVER=on)(ADDRESS=(HOST=localhost)(PORT=1522)(PROTOCOL=tcp)))
    monitor.user=dbmonuser
    monitor.pass=TEZiPP4MsLLL
    #app.service.write=oltp_rw_srvc.cust_sdb.oradbcloud
    app.service.write=oltp_rw_srvc.orasdb.oradbcloud
-   #app.service.readonly=oltp_ro_srvc.cust_sdb.oradbcloud
-   app.service.readonly=oltp_rw_srvc.orasdb.oradbcloud
+   #app.service.readonly=oltp_rw_srvc.cust_sdb.oradbcloud
+   app.service.readonly=oltp_ro_srvc.orasdb.oradbcloud
    app.user=app_schema
    app.pass=app_schema
    app.threads=7
+   
+   [oracle@cata sdb_demo_app]$ 
    ```
 
    
 
-8. Start the workload by executing command: `./run.sh demo sdbdemo.properties`.
+8. Start the workload by executing the command.
 
    ```
    [oracle@cata sdb_demo_app]$ <copy>./run.sh demo sdbdemo.properties</copy>
@@ -1260,36 +1220,27 @@ In this lab, we will load the public table to the catalog database and load shar
 9. The result likes the following.
 
    ```
-   Performing initial fill of the products table...
-   Syncing shards...
     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-             0            0            0            0            1
-             0            0            0            0            0
-            85            4            0            0           25
-           639          109            0            0          191
-          2508          451            0            0          636
-          4731          783            0            0          746
-          7212         1174            0            0          838
-          9763         1543            0            0          871
-         12269         1905            0            0          854
-         14337         2265            0            0          701
-         16250         2657            0            0          652
-         18242         3020            0            0          674
-         20548         3366            0            0          779
-         22710         3697            0            0          742
-         24959         4058            0            0          768
-         26933         4405            1            0          675
-         29219         4818            1            0          775
-         31483         5202            1            0          758
-         33654         5608            1            0          740
-         36274         6092            1            0          891
-    RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-         38778         6546            1            0          845
-         41267         6934            1            0          836
-         43384         7299            1            0          727
-         45840         7694            1            0          839
-         48209         8066            1            0          820
-         50467         8425            1            0          765
+             0            0            0            0            2
+            85            0            0            0           29
+           924          152            0            0          316
+          2371          382            0            0          548
+          4287          728            0            0          725
+          6626         1089            0            0          884
+          8779         1444            0            0          804
+         11114         1828            0            0          904
+         13753         2235            0            0         1000
+         16088         2626            0            0          884
+         18636         3015            0            0          963
+         21333         3457            0            0         1026
+         23997         3918            0            0         1009
+         26968         4446            0            0         1129
+         29888         4947            0            0         1122
+         32959         5546            0            0         1163
+         36687         6087            0            0         1418
+         40123         6683            0            0         1309
+         43843         7292            0            0         1424
+         47571         7887            0            0         1436
    ```
 
    
@@ -1297,7 +1248,7 @@ In this lab, we will load the public table to the catalog database and load shar
 10. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
 
     ```
-    $ ssh -i labkey opc@152.67.196.50
+    $ ssh -i labkey opc@xxx.xxx.xxx.xxx
     Last login: Mon Nov 30 06:07:40 2020 from 202.45.129.206
     -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
     
@@ -1348,10 +1299,6 @@ In this lab, we will load the public table to the catalog database and load shar
 14. Press `Ctrl+C` to cancel the demo in both of the terminal.
 
      
-
-15. sadf
-
-    
 
 You may proceed to the next lab.
 

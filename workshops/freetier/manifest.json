@@ -16,23 +16,19 @@
             "filename": "../../shard-db-deployment/shard-db-deployment.md"
         },
         {
-            "title": "Lab 3: Create Demo App Schema",
-            "filename": "../../create-app-schema/create-app-schema.md"
+            "title": "Lab 3: Setup a Non-Shard Database Application",
+            "filename": "../../setup-nonshard-app/setup-nonshard-app.md"
         },
         {
-            "title": "Lab 4: Data Dependent Routing",
-            "filename": "../../data-dependent-routing/data-dependent-routing.md"
+            "title": "Lab 4: Migrate to Sharded Database",
+            "filename": "../../migrate-to-sdb/migrate-to-sdb.md"
         },
         {
-            "title": "Lab 5: Custom Data Loading",
-            "filename": "../../custom-data-loading/custom-data-loading.md"
+            "title": "Lab 5: Database Request Rout to Shard",
+            "filename": "../../db-request-rout/db-request-rout.md"
         },
         {
-            "title": "Lab 6: Cross Sharding Query",
-            "filename": "../../cross-shard-query/cross-shard-query.md"
-        },
-        {
-            "title": "Lab 7: Sharded Database Elastic Scaling",
+            "title": "Lab 6: Sharded Database Elastic Scaling",
             "filename": "../../elastic-scaling/elastic-scaling.md"
         }
     ]

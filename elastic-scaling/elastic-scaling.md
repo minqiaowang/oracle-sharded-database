@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, we will add the shard (on shd3) to the Shard Database and thus elastically scale the SDB. Make sure you have done all steps in the shard3 host according to the lab 2 "Shard Database Deployment" to configure the shard host and setup shard database.
+Now, we will add the shard (on shd3) to the Shard Database and thus elastically scale the SDB. Make sure you have done all steps in the shard3 host according to the lab 2 "Shard Database Deployment" to configure the shard host and setup shard database.
 
 Estimated Lab Time: 20 minutes.
 
@@ -11,7 +11,7 @@ Estimated Lab Time: 20 minutes.
 In this lab, you will perform the following steps:
 - Add the New Shard
 - Deploy and Verify the New Shard
-- Run the custom data loading again on 3 sharded database
+- Run the demo application again on 3 sharded database
 
 ### Prerequisites
 
@@ -25,9 +25,10 @@ This lab assumes you have already completed the following:
 1. Connect to the catalog database host. Switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@152.67.196.50
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    Last login: Tue Dec  1 01:01:30 2020 from 202.45.129.206
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
+   
    [opc@cata ~]$ sudo su - oracle
    Last login: Tue Dec  1 01:01:32 GMT 2020 on pts/0
    [oracle@cata ~]$ 
@@ -154,9 +155,9 @@ This lab assumes you have already completed the following:
    GDSCTL> <copy>config vncr</copy>
    Name                          Group ID                      
    ----                          --------                      
-   10.0.0.2                                                    
-   10.0.0.3                                                    
-   10.0.0.4                                                    
+   10.0.1.2                                                    
+   10.0.1.4                                                    
+   10.0.1.5                                                    
    127.0.0.1                                                   
    cata                                                        
    shd1                                                        
@@ -171,7 +172,7 @@ This lab assumes you have already completed the following:
 10. The host name of shard3 is already there. Manually add shard3 IP addresses to the shard catalog metadata.
 
     ```
-    GDSCTL> add invitednode 10.0.0.5
+    GDSCTL> add invitednode 10.0.1.3
     GDSCTL>
     ```
 
@@ -183,10 +184,10 @@ This lab assumes you have already completed the following:
     GDSCTL> <copy>config vncr</copy>
     Name                          Group ID                      
     ----                          --------                      
-    10.0.0.2                                                    
-    10.0.0.3                                                    
-    10.0.0.4                                                    
-    10.0.0.5                                                    
+    10.0.1.2                                                    
+    10.0.1.3                                                    
+    10.0.1.4                                                    
+    10.0.1.5                                                    
     127.0.0.1                                                   
     cata                                                        
     shd1                                                        
@@ -195,6 +196,8 @@ This lab assumes you have already completed the following:
     
     GDSCTL> 
     ```
+    
+    
 
 
 
@@ -316,18 +319,19 @@ This lab assumes you have already completed the following:
 
    
 
-## **Step 3:** Run the Demo App Again
+## **Step 3:** Run the Demo Application Again
 
-1. Connect to the catalog host, switch to oracle user, change directory to `sdb_demo_app`.
+1. Connect to the catalog host, switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@152.67.196.50
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    Last login: Tue Dec  1 01:55:09 2020 from 202.45.129.206
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
    [opc@cata ~]$ sudo su - oracle
    Last login: Tue Dec  1 01:55:17 GMT 2020 on pts/0
-   [oracle@cata ~]$ 
+   
+   [oracle@cata ~]$  
    ```
 
    
@@ -371,70 +375,67 @@ This lab assumes you have already completed the following:
 
    
 
-4. Change the directory to `sdb_demo_app`. Start the workload by executing command: `./run.sh demo`.
+4. Change the directory to `sdb_demo_app`. 
 
    ```
    [oracle@cata ~]$ cd sdb_demo_app
-   [oracle@cata sdb_demo_app]$ ./run.sh demo
+   [oracle@cata sdb_demo_app]$ 
    ```
 
    
 
-5. The result likes the following.
+5. Start the workload by executing command:
 
    ```
-   Performing initial fill of the products table...
-   Syncing shards...
+   [oracle@cata sdb_demo_app]$ <copy>./run.sh demo sdbdemo.properties</copy>
+   ```
+   
+   
+   
+6. The result likes the following.
+
+   ```
     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-             0            0            0            0            1
-             0            0            0            0            0
-            85            4            0            0           25
-           639          109            0            0          191
-          2508          451            0            0          636
-          4731          783            0            0          746
-          7212         1174            0            0          838
-          9763         1543            0            0          871
-         12269         1905            0            0          854
-         14337         2265            0            0          701
-         16250         2657            0            0          652
-         18242         3020            0            0          674
-         20548         3366            0            0          779
-         22710         3697            0            0          742
-         24959         4058            0            0          768
-         26933         4405            1            0          675
-         29219         4818            1            0          775
-         31483         5202            1            0          758
-         33654         5608            1            0          740
-         36274         6092            1            0          891
-    RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-         38778         6546            1            0          845
-         41267         6934            1            0          836
-         43384         7299            1            0          727
-         45840         7694            1            0          839
-         48209         8066            1            0          820
-         50467         8425            1            0          765
+        814694       136431            0            0         1405
+        818470       137062            0            0         1450
+        821276       137571            0            0         1074
+        823981       137973            0            0         1031
+        826375       138384            0            0          918
+        828675       138712            0            0          890
+        831511       139205            0            0         1079
+        834040       139657            0            0          964
+        837624       140260            0            0         1352
+        841233       140827            0            0         1386
+        844762       141488            0            0         1350
+        847505       141952            0            0         1054
+        850696       142440            0            0         1211
+        853139       142853            0            0          915
+        855489       143256            0            0          882
+        858453       143699            0            0         1131
    ```
 
    
 
-6. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
+7. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
 
    ```
-   $ ssh -i labkey opc@152.67.196.50
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    Last login: Mon Nov 30 06:07:40 2020 from 202.45.129.206
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
+   
    [opc@cata ~]$ sudo su - oracle
    Last login: Mon Nov 30 06:08:03 GMT 2020 on pts/0
+   
    [oracle@cata ~]$ cd ~/sdb_demo_app
    [oracle@cata sdb_demo_app]$
    ```
 
    
 
-7. Start the monitoring tool via the following command. 
+8. Start the monitoring tool via the following command. 
 
    ```
-   [oracle@cata sdb_demo_app]$ <copy>./run.sh monitor</copy>
+   [oracle@cata sdb_demo_app]$ <copy>./run.sh monitor sdbdemo.properties</copy>
    @oracle.monitor.Main.registerDatabase : INFO 2020-12-01T03:30:41.501 : Context : /db/demo/info
    @oracle.monitor.DatabaseMonitor$BackgroundStatusCheck.run : java.lang.ArrayIndexOutOfBoundsException : 3
    @oracle.monitor.DatabaseMonitor$BackgroundStatusCheck.run : java.lang.ArrayIndexOutOfBoundsException : 4
@@ -443,17 +444,17 @@ This lab assumes you have already completed the following:
 
    
 
-8. From you laptop, launch a browser and use the URL: `http://xxx.xxx.xxx.xxx/8081`. Using the public ip address of the catalog host and the port number is 8081.
+9. From you laptop, launch a browser and use the URL: `http://xxx.xxx.xxx.xxx/8081`. Using the public ip address of the catalog host and the port number is 8081.
 
    ![image-20201201113506583](images/image-20201201113506583.png)
 
    
 
-9. Scroll down the screen, you can see the Last inserted orders:
+10. Scroll down the screen, you can see the Last inserted orders:
 
    ![image-20201201113534722](images/image-20201201113534722.png)
 
    
 
-10. Press `Ctrl+C` to cancel the demo in both of the terminal.
+11. Press `Ctrl+C` to cancel the demo in both of the terminal.
 
