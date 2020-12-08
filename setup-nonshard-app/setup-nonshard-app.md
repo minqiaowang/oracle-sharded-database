@@ -4,7 +4,7 @@
 
 In this lab, you will setup a non-sharded database application. You will migrate the schema and data to the sharded database in the next lab. The demo java application is designed for sharded database, but also can work with the non-sharded database with a little modified. In order to save the resource, we will use a PDB in the shard3 host to simulate a non-sharded instance.
 
-Estimated Lab Time: 20 minutes.
+Estimated Lab Time: 40 minutes.
 
 ### Objectives
 
@@ -100,7 +100,7 @@ This lab assumes you have already completed the following:
 
    
 
-6. Create a service named `GDS$CATALOG.ORADBCLOUD` and start it in order to run the demo application correctly (The service name is hard code in the demo application).
+6. Create a service named `GDS$CATALOG.ORADBCLOUD` and start it in order to run the demo application correctly.  (The demo application is designed for sharded database, it's need connect to the shard catalog. The service name is hard code in the demo application).
 
    ```
    SQL> BEGIN
@@ -917,30 +917,20 @@ This lab assumes you have already completed the following:
     
     
     
-12. Wait the application run some times and press `Ctrl-C` to exit the application. 
+12. Wait the application run several minutes and press `Ctrl-C` to exit the application. 
 
     ```
      RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-          45193         7663            0            0          818
-          47360         7994            0            0          819
-          49644         8390            0            0          849
-          52293         8861            0            0          993
-          55031         9317            0            0         1043
-          57539         9727            0            0          952
-          60063        10133            0            0          933
-          62500        10588            0            0          910
-          65015        10998            0            0          952
-          67397        11420            0            0          883
-          69927        11826            0            0          966
-          72467        12279            0            0          935
-          75249        12695            0            0         1045
-          78081        13145            0            0         1074
-          80855        13635            0            0         1047
-          83550        14089            0            0         1015
-          86727        14592            0            0         1173
-          89301        15020            0            0          958
-          91735        15434            0            0          918
-          94553        15924            0            0         1047
+          87720        14883            0            0          865
+          89834        15210            0            0          809
+          91833        15499            0            0          758
+          93456        15753            0            0          623
+          95271        16068            0            0          692
+          97243        16409            0            0          757
+          99313        16770            0            0          797
+         101259        17117            0            0          750
+         103010        17410            0            0          667
+         104982        17700            0            0          763
     ^C[oracle@cata sdb_demo_app]$
     ```
 
@@ -1059,7 +1049,34 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-6. From the shard3 host, create a ssh key pair. Press **Enter** to accept all the default values.
+6. Close the non-shard database.
+
+   ```
+   [oracle@shd3 ~]$ sqlplus / as sysdba
+   
+   SQL*Plus: Release 19.0.0.0.0 - Production on Tue Dec 8 01:35:52 2020
+   Version 19.7.0.0.0
+   
+   Copyright (c) 1982, 2020, Oracle.  All rights reserved.
+   
+   
+   Connected to:
+   Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+   Version 19.7.0.0.0
+   
+   SQL> alter pluggable database nspdb close;
+   
+   Pluggable database altered.
+   
+   SQL> exit
+   Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
+   Version 19.7.0.0.0
+   [oracle@shd3 ~]$ 
+   ```
+
+   
+
+7. From the shard3 host, create a ssh key pair. Press **Enter** to accept all the default values.
 
    ```
    [oracle@shd3 ~]$ <copy>ssh-keygen -t rsa</copy>
@@ -1089,7 +1106,7 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-7. View the content of the public key.
+8. View the content of the public key.
 
    ```
    [oracle@shd3 ~]$ <copy>cat .ssh/id_rsa.pub</copy>
@@ -1099,7 +1116,7 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-8. Open another terminal to connect to the cata host. Switch to oracle user.
+9. Open another terminal to connect to the cata host. Switch to oracle user.
 
    ```
    $ ssh -i labkey opc@xxx.xxx.xxx.xxx
@@ -1113,7 +1130,7 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-9. Make a `.ssh` directory and edit the authorized_keys file.
+10. Make a `.ssh` directory and edit the authorized_keys file.
 
    ```
    [oracle@cata ~]$ mkdir .ssh
@@ -1122,18 +1139,18 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-10. Copy all the content of the SSH public key from Shard3 host. Save the file and chmod the file.
+11. Copy all the content of the SSH public key from Shard3 host. Save the file and chmod the file.
 
-   ```
-   [oracle@shd1 ~]$ <copy>chmod 600 .ssh/authorized_keys</copy> 
-   [oracle@shd1 ~]$
-   ```
+    ```
+    [oracle@shd1 ~]$ <copy>chmod 600 .ssh/authorized_keys</copy> 
+    [oracle@shd1 ~]$
+    ```
 
-   
+    
 
-11. **Repeat do the same steps**  from previous steps 8 - 10. This time connect to the shard1 and shard2 host. Create `authorized_keys` in each of the shard hosts.
+12. **Repeat do the same steps**  from previous steps 8 - 10. This time connect to the shard1 and shard2 host. Create `authorized_keys` in each of the shard hosts.
 
-12. From shard3 host side. Copy the dmp file to the catalog, shard1 and shard2 host. Press yes when prompt ask if you want to  continue.
+13. From shard3 host side. Copy the dmp file to the catalog, shard1 and shard2 host. Press yes when prompt ask if you want to  continue.
 
     ```
     [oracle@shd3 ~]$ scp original.dmp oracle@cata:~

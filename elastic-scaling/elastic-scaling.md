@@ -2,23 +2,22 @@
 
 ## Introduction
 
-Now, we will add the shard (on shd3) to the Shard Database and thus elastically scale the SDB. Make sure you have done all steps in the shard3 host according to the lab 2 "Shard Database Deployment" to configure the shard host and setup shard database.
+Now, we will add the shard (on shd3) to the Shard Database and thus elastically scale the SDB. Make sure you have done all steps in the shard3 host according to the lab 2 "Shard Database Deployment" to configure the shard host, setup shard database and validate without any error.
 
-Estimated Lab Time: 20 minutes.
+Estimated Lab Time: 40 minutes.
 
 ### Objectives
 
 In this lab, you will perform the following steps:
-- Add the New Shard
-- Deploy and Verify the New Shard
-- Run the demo application again on 3 sharded database
+- Add the New Shard.
+- Deploy and Verify the New Shard.
+- Run the demo application again with 3 shards.
 
 ### Prerequisites
 
 This lab assumes you have already completed the following:
 - Sharded database deployment
-- Create demo app schema
-- Custom data loading
+- Migrate application to sharded database
 
 ## **Step 1:** Add the New Shard
 
@@ -231,7 +230,7 @@ This lab assumes you have already completed the following:
 
    
 
-3. Run the following command every minute or two to see the progress of automatic rebalancing of chunks.
+3. Run the following command every minute or two to see the progress of automatic rebalancing of chunks. You can see there are 4 chunks need to move to the third shard.
 
    ```
    GDSCTL> <copy>config chunks -show_reshard</copy>
@@ -317,21 +316,22 @@ This lab assumes you have already completed the following:
    GDSCTL> 
    ```
 
+7. Exit GDSCTL.
+
+   ```
+   GDSCTL> exit
+   [oracle@cata ~]$
+   ```
+
    
 
 ## **Step 3:** Run the Demo Application Again
 
-1. Connect to the catalog host, switch to oracle user.
+1. Switch to catalog environment.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
-   Last login: Tue Dec  1 01:55:09 2020 from 202.45.129.206
-   -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-   
-   [opc@cata ~]$ sudo su - oracle
-   Last login: Tue Dec  1 01:55:17 GMT 2020 on pts/0
-   
-   [oracle@cata ~]$  
+   [oracle@cata ~]$ <copy>. ./cata.sh</copy>
+   [oracle@cata ~]$
    ```
 
    
@@ -360,7 +360,7 @@ This lab assumes you have already completed the following:
 
    
 
-3. Manually update the monitored shard list.
+3. Manually update the monitored shard list. Exit SQLPLUS.
 
    ```
    SQL> <copy>exec dbms_global_views.create_all_database_links();</copy>
@@ -396,22 +396,19 @@ This lab assumes you have already completed the following:
 
    ```
     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-        814694       136431            0            0         1405
-        818470       137062            0            0         1450
-        821276       137571            0            0         1074
-        823981       137973            0            0         1031
-        826375       138384            0            0          918
-        828675       138712            0            0          890
-        831511       139205            0            0         1079
-        834040       139657            0            0          964
-        837624       140260            0            0         1352
-        841233       140827            0            0         1386
-        844762       141488            0            0         1350
-        847505       141952            0            0         1054
-        850696       142440            0            0         1211
-        853139       142853            0            0          915
-        855489       143256            0            0          882
-        858453       143699            0            0         1131
+        332927        59106            0            1         1258
+        336320        59649            0            1         1424
+        339514        60192            0            1         1366
+        342815        60728            0            1         1418
+        345867        61283            0            1         1308
+        348876        61829            0            1         1289
+        352124        62314            0            1         1388
+        355215        62892            0            1         1350
+        358382        63434            0            1         1351
+        361416        64007            0            1         1285
+        364549        64528            0            1         1340
+        367925        65124            0            1         1429
+        370596        65589            0            1         1130
    ```
 
    

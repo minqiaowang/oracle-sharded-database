@@ -40,7 +40,7 @@ This lab assumes you have already completed the following:
 3. For single-shard queries, direct routing to a shard with a given sharding_key.
 
    ```
-   [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@'(description=(address=(protocol=tcp)(host=cata)(port=1522))(connect_data=(service_name=oltp_rw_srvc.orasdb.oradbcloud)(region=region1)(SHARDING_KEY=james.parker@x.bogus)))'</copy>
+   [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@'(description=(address=(protocol=tcp)(host=cata)(port=1522))(connect_data=(service_name=oltp_rw_srvc.orasdb.oradbcloud)(region=region1)(SHARDING_KEY=tom.edwards@y.bogus)))'</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 04:24:10 2020
    Version 19.3.0.0.0
@@ -61,7 +61,7 @@ This lab assumes you have already completed the following:
 4. Insert a record and commit.
 
    ```
-   SQL> <copy>INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('james.parker@x.bogus', 'James', 'Parker', NULL, 'Gold', 'east', hextoraw('8d1c00e'));</copy>
+   SQL> <copy>INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('tom.edwards@y.bogus', 'Tom', 'Edwards', NULL, 'Gold', 'east', hextoraw('8d1c00e'));</copy>
    
    1 row created.
    
@@ -91,7 +91,7 @@ This lab assumes you have already completed the following:
 6. Select from the customer table. You can see there is one record which you just insert in the table.
 
    ```
-   SQL> <copy>select * from customers where custid in('james.parker@x.bogus','tom.edwards');</copy>
+   SQL> <copy>select * from customers where custid like '%y.bogus';</copy>
    
    CUSTID
    ------------------------------------------------------------
@@ -103,9 +103,9 @@ This lab assumes you have already completed the following:
    --------------------------------------------------------------------------------
    PASSWD
    --------------------------------------------------------------------------------
-   james.parker@x.bogus
-   James
-   Parker							     Gold	east
+   tom.edwards@y.bogus
+   Tom
+   Edwards 						     Gold	east
    
    CUSTID
    ------------------------------------------------------------
@@ -140,7 +140,7 @@ This lab assumes you have already completed the following:
 8. Connect to a shard with another shard key.
 
    ```
-   [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@'(description=(address=(protocol=tcp)(host=cata)(port=1522))(connect_data=(service_name=oltp_rw_srvc.orasdb.oradbcloud)(region=region1)(SHARDING_KEY=tom.edwards@x.bogus)))'</copy>
+   [oracle@cata ~]$ <copy>sqlplus app_schema/app_schema@'(description=(address=(protocol=tcp)(host=cata)(port=1522))(connect_data=(service_name=oltp_rw_srvc.orasdb.oradbcloud)(region=region1)(SHARDING_KEY=james.parker@y.bogus)))'</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 04:36:45 2020
    Version 19.3.0.0.0
@@ -161,7 +161,7 @@ This lab assumes you have already completed the following:
 9. Insert another record and commit.
 
    ```
-   SQL> <copy>INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('tom.edwards@x.bogus', 'Tom', 'Edwards', NULL, 'Gold', 'west', hextoraw('9a3b00c'));</copy>
+   SQL> <copy>INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('james.parker@y.bogus', 'James', 'Parker', NULL, 'Gold', 'west', hextoraw('9a3b00c'));</copy>
    
    1 row created.
    
@@ -191,7 +191,7 @@ This lab assumes you have already completed the following:
 11. Select from the table. You can see there is only one record in the shard2 database.
 
     ```
-    SQL> <copy>select * from customers where custid in('james.parker@x.bogus','tom.edwards');</copy>
+    SQL> <copy>select * from customers where custid like '%y.bogus';</copy>
     
     CUSTID
     ------------------------------------------------------------
@@ -203,9 +203,9 @@ This lab assumes you have already completed the following:
     --------------------------------------------------------------------------------
     PASSWD
     --------------------------------------------------------------------------------
-    tom.edwards@x.bogus
-    Tom
-    Edwards							     Gold	west
+    james.parker@y.bogus
+    James
+    Parker							     Gold	west
     
     CUSTID
     ------------------------------------------------------------
@@ -263,12 +263,12 @@ This lab assumes you have already completed the following:
 2. Select records from customers table. You can see all the records are selected.
 
    ```
-   SQL> <copy>select custid from customers where custid in('james.parker@x.bogus','tom.edwards');</copy>
+   SQL> <copy>select custid from customers where custid like '%y.bogus';</copy>
    
    CUSTID
    ------------------------------------------------------------
-   james.parker@x.bogus
-   tom.edwards@x.bogus
+   tom.edwards@y.bogus
+   james.parker@y.bogus
    
    SQL> 
    ```
