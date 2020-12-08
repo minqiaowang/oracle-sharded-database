@@ -1217,7 +1217,7 @@ Migrate application to the sharded database a slight change to the application c
 
    
 
-9. The result likes the following. 
+9. The result likes the following. Wait several minutes and compare the values of the APS with non-shard database. You may note the performance is improved.  
 
    ```
     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
@@ -1257,7 +1257,7 @@ Migrate application to the sharded database a slight change to the application c
 
     
 
-11. Start the monitoring tool via the following command. Ignore the FileNotFoundException message.
+11. Start the monitoring tool via the following command. Ignore the FileNotFoundException message. (Note: due to the resource limit, start monitor may impact the application performance).
 
     ```
      [oracle@cata sdb_demo_app]$ <copy>./run.sh monitor sdbdemo.properties</copy>

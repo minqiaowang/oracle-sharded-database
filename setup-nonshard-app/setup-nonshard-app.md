@@ -917,7 +917,7 @@ This lab assumes you have already completed the following:
     
     
     
-12. Wait the application run several minutes and press `Ctrl-C` to exit the application. 
+12. Wait the application run several minutes and press `Ctrl-C` to exit the application. Remember the values of the APS(transaction per second).
 
     ```
      RO Queries | RW Queries | RO Failed  | RW Failed  | APS 

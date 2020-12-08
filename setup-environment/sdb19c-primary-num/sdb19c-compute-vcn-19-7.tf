@@ -129,8 +129,7 @@ resource "oci_core_instance" "cata_instance" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "cata"
-  shape               = "${var.instance_shape}"
-
+  shape               = "VM.Standard2.4"
   create_vnic_details {
     subnet_id = "${oci_core_subnet.example-public-subnet1.id}"
     display_name     = "cata"

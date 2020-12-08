@@ -256,7 +256,15 @@ This lab assumes you have already completed the following:
 
    
 
-4. Observe that the chunks are automatically rebalanced upon the addition of new shard.
+4. If you encounter some issues, the chunk movement status is **Suspended**. You can run the following command to resume the chunk movement.
+
+   ```
+   GDSCTL> alter move -resume -chunk all -shard shd1_shdpdb1,shd2_shdpdb2,shd3_shdpdb3
+   ```
+   
+   
+   
+5. Observe that the chunks are automatically rebalanced upon the addition of new shard.
 
    ```
    GDSCTL> config chunks -show_reshard
@@ -279,7 +287,7 @@ This lab assumes you have already completed the following:
 
    
 
-5. Observe that the “databases” are automatically registered.
+6. Observe that the “databases” are automatically registered.
 
    ```
    GDSCTL> <copy>databases</copy>
@@ -304,7 +312,7 @@ This lab assumes you have already completed the following:
 
    
 
-6. Observe that the “services” are automatically brought up on the newly added shard.
+7. Observe that the “services” are automatically brought up on the newly added shard.
 
    ```
    GDSCTL> <copy>services</copy>
@@ -316,7 +324,7 @@ This lab assumes you have already completed the following:
    GDSCTL> 
    ```
 
-7. Exit GDSCTL.
+8. Exit GDSCTL.
 
    ```
    GDSCTL> exit
@@ -392,23 +400,30 @@ This lab assumes you have already completed the following:
    
    
    
-6. The result likes the following.
+6. The result likes the following. Wait several minutes, compare the APS values with non-shard database and 2 sharded database.
 
    ```
     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-        332927        59106            0            1         1258
-        336320        59649            0            1         1424
-        339514        60192            0            1         1366
-        342815        60728            0            1         1418
-        345867        61283            0            1         1308
-        348876        61829            0            1         1289
-        352124        62314            0            1         1388
-        355215        62892            0            1         1350
-        358382        63434            0            1         1351
-        361416        64007            0            1         1285
-        364549        64528            0            1         1340
-        367925        65124            0            1         1429
-        370596        65589            0            1         1130
+        944427       174892            0            0         1819
+        948317       175576            0            0         1858
+        952106       176314            0            0         1799
+        956202       177039            0            0         1923
+        960119       177726            0            0         1912
+        963701       178439            0            0         1745
+        967530       179195            0            0         1831
+        971309       179878            0            0         1845
+        974985       180598            0            0         1776
+        978481       181282            0            0         1703
+        982318       182010            0            0         1850
+        986015       182737            0            0         1767
+        989832       183410            0            0         1823
+        993659       184080            0            0         1862
+        997494       184795            0            0         1860
+       1001494       185500            0            0         1896
+       1005268       186225            0            0         1825
+       1009063       186908            0            0         1811
+       1012655       187634            0            0         1726
+       1016654       188337            0            0         1930
    ```
 
    
@@ -429,7 +444,7 @@ This lab assumes you have already completed the following:
 
    
 
-8. Start the monitoring tool via the following command. 
+8. Start the monitoring tool via the following command. (Note: due to the resource limit, start monitor may impact the application performance).
 
    ```
    [oracle@cata sdb_demo_app]$ <copy>./run.sh monitor sdbdemo.properties</copy>
@@ -443,13 +458,13 @@ This lab assumes you have already completed the following:
 
 9. From you laptop, launch a browser and use the URL: `http://xxx.xxx.xxx.xxx/8081`. Using the public ip address of the catalog host and the port number is 8081.
 
-   ![image-20201201113506583](images/image-20201201113506583.png)
+   ![image-20201208164029240](images/image-20201208164029240.png)
 
    
 
 10. Scroll down the screen, you can see the Last inserted orders:
 
-   ![image-20201201113534722](images/image-20201201113534722.png)
+   ![image-20201208164117229](images/image-20201208164117229.png)
 
    
 
