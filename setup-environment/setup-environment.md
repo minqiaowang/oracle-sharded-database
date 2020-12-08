@@ -41,9 +41,9 @@ Click on the link below to download the Resource Manager zip files you need to b
     Accept all the defaults and click **Next**.
 
 
-3. Accept the default value of the `Instance_Shape`. Paste the content of the public key you create before to the `SSH_PUBLIC_KEY`,  and click **Next**. 
+3. Accept the default value of the  `CataDB_Shape` and `Shard_Shape`. Paste the content of the public key you create before to the `SSH_PUBLIC_KEY`,  and click **Next**. (Note: If you don't want to compare the performance in the following labs and want save the resource, you can change the catalog db shape to VM.Standard2.1).
 
-    ![](images/image-20201030094440068.png)
+    ![image-20201208184358963](images/image-20201208184358963.png)
 
     
 

@@ -29,7 +29,7 @@ This lab assumes you have already completed the following:
 
 ## **Step 1:** Re-Design and Create the Demo Schema
 
-Before the existing database can be migrated to the sharded database, you must decide how to organize the sharded database. You must decide which tables in the application are sharded and which tables are duplicated tables. In this lab, we have already created a scripts for the sharded demo schema. It's create a sharded table family: `Customers-->Orders-->LineItems`, and the `Products` is the duplicated table.
+Before the existing database can be migrated to the sharded database, you must decide how to organize the sharded database. You must decide which tables in the application are sharded and which tables are duplicated tables. In this lab, we have already created a scripts for the sharded demo schema. It's create a sharded table family: `Customers-->Orders-->LineItems` using the sharding key `CustId`, and the `Products` is the duplicated table.
 
 1. Login to the catalog database host, switch to oracle user.
 
@@ -1217,26 +1217,30 @@ Migrate application to the sharded database a slight change to the application c
 
    
 
-9. The result likes the following. Wait several minutes and compare the values of the APS with non-shard database. You may note the performance is improved.  
+9. The result likes the following.
 
    ```
     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-        266609        46212            0            0         1453
-        270478        46826            0            0         1511
-        273815        47386            0            0         1301
-        277414        47929            0            0         1411
-        281124        48567            0            0         1426
-        284863        49227            0            0         1448
-        288526        49861            0            0         1448
-        292415        50528            0            0         1538
-        295961        51224            0            0         1399
-        299714        51876            0            0         1456
-        303474        52533            0            0         1491
-        307050        53195            0            0         1394
-        310938        53852            0            0         1525
-        314697        54503            0            0         1473
-        318472        55116            0            0         1474
-        322174        55745            0            0         1450
+             0            0            0            0            2
+            85            0            0            0           29
+           924          152            0            0          316
+          2371          382            0            0          548
+          4287          728            0            0          725
+          6626         1089            0            0          884
+          8779         1444            0            0          804
+         11114         1828            0            0          904
+         13753         2235            0            0         1000
+         16088         2626            0            0          884
+         18636         3015            0            0          963
+         21333         3457            0            0         1026
+         23997         3918            0            0         1009
+         26968         4446            0            0         1129
+         29888         4947            0            0         1122
+         32959         5546            0            0         1163
+         36687         6087            0            0         1418
+         40123         6683            0            0         1309
+         43843         7292            0            0         1424
+         47571         7887            0            0         1436
    ```
 
    
@@ -1257,7 +1261,7 @@ Migrate application to the sharded database a slight change to the application c
 
     
 
-11. Start the monitoring tool via the following command. Ignore the FileNotFoundException message. (Note: due to the resource limit, start monitor may impact the application performance).
+11. Start the monitoring tool via the following command. Ignore the FileNotFoundException message.
 
     ```
      [oracle@cata sdb_demo_app]$ <copy>./run.sh monitor sdbdemo.properties</copy>

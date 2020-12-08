@@ -3,7 +3,10 @@ variable "region" {}
 // variable "display_name" { default = "workshop" }
 variable "AD" { default = 1 }
 variable "Image-Id" {default="ocid1.image.oc1..aaaaaaaafc323nq572bujhzwja7e6df532ioqq7qididhmnujpgbshm2zrzq"}
-variable "instance_shape" {
+variable "catadb_shape" {
+  default = "VM.Standard2.4"
+}
+variable "shard_shape" {
   default = "VM.Standard2.1"
 }
 variable "compartment_ocid" {}
@@ -129,7 +132,7 @@ resource "oci_core_instance" "cata_instance" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "cata"
-  shape               = "VM.Standard2.4"
+  shape               = "${var.catadb_shape}"
   create_vnic_details {
     subnet_id = "${oci_core_subnet.example-public-subnet1.id}"
     display_name     = "cata"
@@ -155,7 +158,7 @@ resource "oci_core_instance" "shd1_instance" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "shd1"
-  shape               = "${var.instance_shape}"
+  shape               = "${var.shard_shape}"
 
   create_vnic_details {
     subnet_id = "${oci_core_subnet.example-public-subnet1.id}"
@@ -182,7 +185,7 @@ resource "oci_core_instance" "shd2_instance" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "shd2"
-  shape               = "${var.instance_shape}"
+  shape               = "${var.shard_shape}"
 
   create_vnic_details {
     subnet_id = "${oci_core_subnet.example-public-subnet1.id}"
@@ -209,7 +212,7 @@ resource "oci_core_instance" "shd3_instance" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "shd3"
-  shape               = "${var.instance_shape}"
+  shape               = "${var.shard_shape}"
 
   create_vnic_details {
     subnet_id = "${oci_core_subnet.example-public-subnet1.id}"
