@@ -1217,34 +1217,28 @@ Migrate application to the sharded database a slight change to the application c
 
    
 
-9. The result likes the following.
+9. The result likes the following. Wait several minutes, compare the APS values with non-shard database. You may notes the performance improved.
 
    ```
     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-             0            0            0            0            2
-            85            0            0            0           29
-           924          152            0            0          316
-          2371          382            0            0          548
-          4287          728            0            0          725
-          6626         1089            0            0          884
-          8779         1444            0            0          804
-         11114         1828            0            0          904
-         13753         2235            0            0         1000
-         16088         2626            0            0          884
-         18636         3015            0            0          963
-         21333         3457            0            0         1026
-         23997         3918            0            0         1009
-         26968         4446            0            0         1129
-         29888         4947            0            0         1122
-         32959         5546            0            0         1163
-         36687         6087            0            0         1418
-         40123         6683            0            0         1309
-         43843         7292            0            0         1424
-         47571         7887            0            0         1436
+        111383        21511            0            0         1641
+        114385        22078            0            0         1640
+        117282        22634            0            0         1516
+        120478        23172            0            0         1760
+        123072        23710            0            0         1356
+        126264        24291            0            0         1708
+        129330        24913            0            0         1647
+        132306        25520            0            0         1541
+        135391        26063            0            0         1634
+        138543        26632            0            0         1682
+        141675        27184            0            0         1704
+        144703        27778            0            0         1589
+        147898        28354            0            0         1714
+        150991        28936            0            0         1675
    ```
-
    
-
+   
+   
 10. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
 
     ```
@@ -1261,7 +1255,7 @@ Migrate application to the sharded database a slight change to the application c
 
     
 
-11. Start the monitoring tool via the following command. Ignore the FileNotFoundException message.
+11. Start the monitoring tool via the following command. Ignore the FileNotFoundException message. (Note: due to the resource limit, start monitor may impact the demo application performance).
 
     ```
      [oracle@cata sdb_demo_app]$ <copy>./run.sh monitor sdbdemo.properties</copy>

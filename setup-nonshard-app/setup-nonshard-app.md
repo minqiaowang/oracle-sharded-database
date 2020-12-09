@@ -920,17 +920,22 @@ This lab assumes you have already completed the following:
 12. Wait the application run several minutes and press `Ctrl-C` to exit the application. Remember the values of the APS(transaction per second).
 
     ```
-     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
-          87720        14883            0            0          865
-          89834        15210            0            0          809
-          91833        15499            0            0          758
-          93456        15753            0            0          623
-          95271        16068            0            0          692
-          97243        16409            0            0          757
-          99313        16770            0            0          797
-         101259        17117            0            0          750
-         103010        17410            0            0          667
-         104982        17700            0            0          763
+    RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
+         242175        42520            0            0         1139
+         244596        42913            0            0          988
+         246916        43353            0            0          934
+         249190        43789            0            0          902
+         251554        44191            0            0          961
+         253981        44597            0            0          997
+         256287        45015            0            0          961
+         258686        45416            0            0          983
+         261068        45842            0            0          962
+         263311        46284            0            0          916
+         265602        46698            0            0          953
+         268014        47094            0            0          997
+         270388        47507            0            0          949
+         272708        47912            0            0          965
+         274992        48348            0            0          931
     ^C[oracle@cata sdb_demo_app]$
     ```
 
