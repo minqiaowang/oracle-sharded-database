@@ -20,7 +20,7 @@ In this lab, you will perform the following steps:
 
 This lab assumes you have already completed the following:
 - Sharded Database Deployment
-- Create Demo App Schema
+- Migrate application to sharded database
 
 ## **Step 1:** Routing Queries and DMLs Directly to Shards
 
