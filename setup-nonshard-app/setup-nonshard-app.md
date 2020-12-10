@@ -1054,34 +1054,7 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-6. Close the non-shard database.
-
-   ```
-   [oracle@shd3 ~]$ sqlplus / as sysdba
-   
-   SQL*Plus: Release 19.0.0.0.0 - Production on Tue Dec 8 01:35:52 2020
-   Version 19.7.0.0.0
-   
-   Copyright (c) 1982, 2020, Oracle.  All rights reserved.
-   
-   
-   Connected to:
-   Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
-   
-   SQL> alter pluggable database nspdb close;
-   
-   Pluggable database altered.
-   
-   SQL> exit
-   Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
-   [oracle@shd3 ~]$ 
-   ```
-
-   
-
-7. From the shard3 host, create a ssh key pair. Press **Enter** to accept all the default values.
+6. From the shard3 host, create a ssh key pair. Press **Enter** to accept all the default values.
 
    ```
    [oracle@shd3 ~]$ <copy>ssh-keygen -t rsa</copy>
@@ -1111,7 +1084,7 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-8. View the content of the public key.
+7. View the content of the public key.
 
    ```
    [oracle@shd3 ~]$ <copy>cat .ssh/id_rsa.pub</copy>
@@ -1121,7 +1094,7 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-9. Open another terminal to connect to the cata host. Switch to oracle user.
+8. Open another terminal to connect to the cata host. Switch to oracle user.
 
    ```
    $ ssh -i labkey opc@xxx.xxx.xxx.xxx
@@ -1135,7 +1108,7 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-10. Make a `.ssh` directory and edit the authorized_keys file.
+9. Make a `.ssh` directory and edit the authorized_keys file.
 
    ```
    [oracle@cata ~]$ mkdir .ssh
@@ -1144,18 +1117,18 @@ In this step, you will export the demo application data and copy the dmp file to
 
    
 
-11. Copy all the content of the SSH public key from Shard3 host. Save the file and chmod the file.
+10. Copy all the content of the SSH public key from Shard3 host. Save the file and chmod the file.
 
-    ```
-    [oracle@shd1 ~]$ <copy>chmod 600 .ssh/authorized_keys</copy> 
-    [oracle@shd1 ~]$
-    ```
+   ```
+   [oracle@shd1 ~]$ <copy>chmod 600 .ssh/authorized_keys</copy> 
+   [oracle@shd1 ~]$
+   ```
 
-    
+   
 
-12. **Repeat do the same steps**  from previous steps 8 - 10. This time connect to the shard1 and shard2 host. Create `authorized_keys` in each of the shard hosts.
+11. **Repeat do the same steps**  from previous steps 8 - 10. This time connect to the shard1 and shard2 host. Create `authorized_keys` in each of the shard hosts.
 
-13. From shard3 host side. Copy the dmp file to the catalog, shard1 and shard2 host. Press yes when prompt ask if you want to  continue.
+12. From shard3 host side. Copy the dmp file to the catalog, shard1 and shard2 host. Press yes when prompt ask if you want to  continue.
 
     ```
     [oracle@shd3 ~]$ scp original.dmp oracle@cata:~
