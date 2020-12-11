@@ -326,4 +326,23 @@ To review the sharding configurations and related information that is owned by t
       1 Y		3      12072	      1 	 5	    2	       0	  0	     2
    ```
 
+6.  Lists the query type and SQL ID.
+
+   ```
+   SQL> select * from SHARDINGADVISOR_QUERYTYPES;
+   
+   SHARDINGCONFIGURATIONNUM SQLID
+   ------------------------ -------------
+   QUERYTYPE
+   --------------------------------------------------
+   		       1 7a836gta3176u
+   SINGLE SHARD QUERY
+   
+   		       1 fmptaf9h11q1q
+   SINGLE SHARD QUERY
+   
+   
+   SQL> 
+   ```
+
    
