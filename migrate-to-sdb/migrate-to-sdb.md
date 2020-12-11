@@ -825,14 +825,9 @@ Now, we will load data into sharded database using the dump file which created i
 
 The duplicated tables reside in the shard catalog, they are always loaded into the shard catalog database using any of available data loading utilities, or plain SQL. 
 
-For the sharded tables, you have two options. 
-
-- Loaded using the sharding coordinator (catalog)
-- Loaded directly into the shards, using the Data Pump utility.
+When loading a sharded table, each database shard accommodates a distinct subset of the data set, so the data in each table must be split (partitioned) across shards during the load. You can use the Oracle Data Pump utility to load the data across database shards in subsets. Data from the source database can be exported into a Data Pump dump file. Then Data Pump import can be run on each shard concurrently by using the same dump file.
 
 Loading the data directly into the database shards is much faster, because each shard is loaded separately. The Data Pump Import detects that you are importing into a shard and only load rows that belong to that shard.  
-
-In this lab, we will load the public table to the catalog database and load sharded tables directly into the shards.
 
 1. Use SQLPLUS, connect to the catalog pdb with `app_schema` user.
 
