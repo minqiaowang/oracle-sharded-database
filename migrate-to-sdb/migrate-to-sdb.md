@@ -1,8 +1,8 @@
-# Migrate Application to Sharded Dataabase
+# Migrate Application to Sharded Database
 
 ## Introduction
 
-When you want to migrate the application from the non-shard database to the sharded database, you need re-design the schema, migrate the data and modify the applications.
+When you want to migrate the application from the non-shard database to the shard database, you need re-design the schema, migrate the data and modify the application.
 
 Estimated Lab Time: 60 minutes.
 
@@ -10,7 +10,7 @@ Estimated Lab Time: 60 minutes.
 
 In this lab, you will perform the following steps:
 
-- Re-Design and create the demo schema.
+- Re-design and create the demo schema.
 - Verify the shard demo schema.
 
 - Migrate data to the sharded database.
@@ -29,7 +29,7 @@ This lab assumes you have already completed the following:
 
 ## **Step 1:** Re-Design and Create the Demo Schema
 
-Before the existing database can be migrated to the sharded database, you must decide how to organize the sharded database. You must decide which tables in the application are sharded and which tables are duplicated tables. In this lab, we have already created a scripts for the sharded demo schema. It's create a sharded table family: `Customers-->Orders-->LineItems` using the sharding key `CustId`, and the `Products` is the duplicated table.
+Before the existing database can be migrated to the sharded database, you must decide how to organize the sharded database. You must decide which tables in the application are sharded and which tables are duplicated tables. In this lab, we have already created a scripts for the sharded demo schema. It creates a sharded table family: `Customers-->Orders-->LineItems` using the sharding key `CustId`, and the `Products` is the duplicated table.
 
 1. Login to the catalog database host, switch to oracle user.
 

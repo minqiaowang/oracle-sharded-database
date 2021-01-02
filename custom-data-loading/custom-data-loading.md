@@ -536,7 +536,7 @@ This lab assumes you have already completed the following:
 
    
 
-5. From you laptop, launch a browser and use the URL: `http://xxx.xxx.xxx.xxx/8081`. Using the public ip address of the catalog host and the port number is 8081.
+5. From your laptop, launch a browser and use the URL: `http://xxx.xxx.xxx.xxx:8081`. Using the public ip address of the catalog host and the port number is 8081.
 
    ![image-20201130144513997](images/image-20201130144513997.png)
 
