@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this lab, you will create a shard app schema. You will create a sharded table family `Customers->Orders->LineItems` sharded by `CustId`, and a duplicate table `Products`.
+In this lab you will create a shard app schema. You will create a sharded table family `Customers->Orders->LineItems` sharded by `CustId`, and a duplicate table `Products`.
 
 Estimated Lab Time: 10 minutes.
 
@@ -199,7 +199,7 @@ This lab assumes you have already completed the following:
 
    
 
-5. The result screen like the following:
+5. The result screen is like the following:
 
    ```
    SQL> set termout on
@@ -801,4 +801,5 @@ This lab assumes you have already completed the following:
     ```
 
     
+
 You may proceed to the next lab.

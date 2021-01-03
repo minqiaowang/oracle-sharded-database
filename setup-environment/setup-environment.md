@@ -132,7 +132,7 @@ When using Resource Manager to deploy an environment, execute a terraform **Plan
 
     ![](./images/putty-setup.png " ")
 
-3.  Click **Connection** > **Data** in the left navigation pane and set the Auto-login username to root.
+3.  Click **Connection** > **Data** in the left navigation pane and set the Auto-login username to **opc**.
 
 4.  Click **Connection** > **SSH** > **Auth** in the left navigation pane and configure the SSH private key to use by clicking Browse under Private key file for authentication.
 

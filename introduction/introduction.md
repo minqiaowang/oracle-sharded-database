@@ -3,7 +3,7 @@
 
 ## About this Workshop
 
-In this workshop, you will learn how to deploy the oracle sharded database, working with the sharded database and scale the shard database. You will also learn how to migrate application from a non-shard database to sharded database.
+In this workshop you will learn how to deploy Oracle Sharding, work with the sharded database and scale the sharded database. You will also learn how to migrate an application from a non-shard database to a sharded database.
 
 ### About Oracle Sharding
 
@@ -13,7 +13,7 @@ Oracle Sharding provides superior run-time performance and simpler life-cycle ma
 
 When deploying a sharded configuration, there are two different `GDSCTL` commands, `ADD SHARD` and `CREATE SHARD`, that can be used to add a shard.
 
-Before you start to configure the sharding topology, decide which shard creation method to use because this decision affects some of the configuration steps. In this workshop, We will use the multitenant database for the shard database, so only the `ADD SHARD` command supported. 
+Before you start to configure the sharding topology, decide which shard creation method to use because this decision affects some of the configuration steps. In this workshop, We will use the multitenant database for the shard database, so only the `ADD SHARD` command is supported. 
 
 The differences between the `ADD SHARD` and `CREATE SHARD` methods are explained where necessary in the configuration instructions.
 
@@ -48,8 +48,8 @@ The differences between the `ADD SHARD` and `CREATE SHARD` methods are explained
 
 In this workshop, you will
 
-- Deploy sharded database with 2 shard using system managed sharding.
-- Migrate application to the sharded database
+- Deploy a shard database with two shards using system managed sharding.
+- Migrate application to the shard database
 - Working with the shard database.
 - Extent the shard database with the third shard.
 
