@@ -329,79 +329,7 @@ A multi-shard query maps to more than one shard and the coordinator might need t
 
    
 
-2. Insert some sample rows into the tables, and commit.
-
-   ```
-   SQL> INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('scott.tiger@x.bogus', 'Scott', 'Tiger', NULL, 'free', 'west', hextoraw('7d1b00f'));
-   
-   1 row created.
-   
-   SQL> INSERT INTO Customers (CustId, FirstName, LastName, CustProfile, Class, Geo, Passwd) VALUES ('may.parker@x.bogus', 'May', 'Parker', NULL, 'Gold', 'east', hextoraw('8d1c00e'));
-   
-   1 row created.
-   
-   SQL> commit;
-   
-   Commit complete.
-   
-   SQL> 
-   ```
-
-   
-
-3. Now, let’s run a multi-shard query which does a SELECT with ORDER BY query accessing multiple shards but not all shards.
-
-   ```
-   SQL> set termout on
-   SQL> set linesize 120 pagesize 200
-   SQL> set echo on
-   SQL> column firstname format a20
-   SQL> column lastname format a20
-   SQL> explain plan for SELECT FirstName,LastName, geo, class FROM Customers WHERE CustId in ('scott.Tiger@x.bogus', 'may.parker@x.bogus') AND class != 'free' ORDER BY geo, class;
-   
-   Explained.
-   
-   SQL> set echo off
-   SQL> select * from table(dbms_xplan.display());
-   
-   PLAN_TABLE_OUTPUT
-   ------------------------------------------------------------------------------------------------------------------------
-   Plan hash value: 1622328711
-   
-   -------------------------------------------------------------------------------------------------------
-   | Id  | Operation	  | Name	      | Rows  | Bytes | Cost (%CPU)| Time     | Inst   |IN-OUT|
-   -------------------------------------------------------------------------------------------------------
-   |   0 | SELECT STATEMENT  |		      |     1 |    77 |     3  (34)| 00:00:01 |        |      |
-   |   1 |  SORT ORDER BY	  |		      |     1 |    77 |     3  (34)| 00:00:01 |        |      |
-   |   2 |   VIEW		  | VW_SHARD_5B3ACD5D |     1 |    77 |     2	(0)| 00:00:01 |        |      |
-   |   3 |    SHARD ITERATOR |		      |       |       | 	   |	      |        |      |
-   |   4 |     REMOTE	  |		      |       |       | 	   |	      | ORA_S~ | R->S |
-   -------------------------------------------------------------------------------------------------------
-   
-   Remote SQL Information (identified by operation id):
-   ----------------------------------------------------
-   
-      4 - EXPLAIN PLAN INTO PLAN_TABLE@! FOR SELECT
-          "A1"."FIRSTNAME","A1"."LASTNAME","A1"."GEO","A1"."CLASS" FROM "CUSTOMERS" "A1" WHERE
-          ("A1"."CUSTID"='may.parker@x.bogus' OR "A1"."CUSTID"='scott.tiger@x.bogus') AND
-          "A1"."CLASS"<>'free' /* coord_sql_id=dqhthgpwkpank */  (accessing
-          'ORA_SHARD_POOL@ORA_MULTI_TARGET' )
-   
-   
-   21 rows selected.
-   
-   SQL> SELECT FirstName,LastName, geo, class FROM Customers WHERE CustId in ('scott.tiger@x.bogus', 'may.parker@x.bogus') AND class != 'free' ORDER BY geo, class;
-   
-   FIRSTNAME	     LASTNAME		  GEO	   CLASS
-   -------------------- -------------------- -------- ----------
-   May		     Parker		  east	   Gold
-   
-   SQL> 
-   ```
-
-    
-
-4. Let’s run a multi-shard query which joins sharded and duplicated table (join on non sharding key) to get the fast moving products (qty sold > 10). The output that you will observe will be different (due to data load randomization).
+2. Let’s run a multi-shard query which joins sharded and duplicated table (join on non sharding key) to get the fast moving products (qty sold > 10). The output that you will observe will be different (due to data load randomization).
 
    ```
    SQL> set echo on
@@ -516,10 +444,21 @@ A multi-shard query maps to more than one shard and the coordinator might need t
 
    
 
-6. Let’s run a multi-shard query that calculates customer distribution based on the number of orders placed. Please wait several minutes for the results return.
+4. Let’s run a multi-shard query that calculates customer distribution based on the number of orders placed. Please wait several minutes for the results return.
 
    ```
    SQL> set echo off
+   SQL> column name format a40
+   SQL> explain plan for SELECT ordercount, COUNT(*) as custdist
+       FROM (SELECT c.custid, COUNT(orderid) ordercount
+       	   FROM customers c LEFT OUTER JOIN orders o
+       	   ON c.custid = o.custid AND
+       	   orderdate BETWEEN sysdate-4 AND sysdate GROUP BY c.custid)
+       GROUP BY ordercount
+       ORDER BY custdist desc, ordercount desc;  2    3    4    5    6    7  
+   
+   Explained.
+   
    SQL> select * from table(dbms_xplan.display());
    
    PLAN_TABLE_OUTPUT
