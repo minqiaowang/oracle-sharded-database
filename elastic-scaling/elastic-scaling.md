@@ -368,7 +368,7 @@ This lab assumes you have already completed the following:
 
    
 
-3. Manually update the monitored shard list. The package `dbms_global_views` is used by the monitor tools to monitor the status of shards. If you skip this step, the monitor tools will not show the status of the latest added shard database. Exit SQLPLUS.
+3. Manually update the monitored shard list. The package `dbms_global_views` is used by the monitor tools to monitor the status of shards. It will create a public `shard_dblinks_view` and a public dblink to each shard. If you skip this step, the monitor tools will not show the status of the latest added shard database.
 
    ```
    SQL> <copy>exec dbms_global_views.create_all_database_links();</copy>
