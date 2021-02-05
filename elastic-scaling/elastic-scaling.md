@@ -368,13 +368,21 @@ This lab assumes you have already completed the following:
 
    
 
-3. Manually update the monitored shard list. Exit SQLPLUS.
+3. Manually update the monitored shard list. The package `dbms_global_views` is used by the monitor tools to monitor the status of shards. If you skip this step, the monitor tools will not show the status of the latest added shard database. Exit SQLPLUS.
 
    ```
    SQL> <copy>exec dbms_global_views.create_all_database_links();</copy>
    
    PL/SQL procedure successfully completed.
    
+   SQL> 
+   ```
+   
+   
+   
+4. Exit Sqlplus.
+
+   ```
    SQL> exit
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
@@ -383,7 +391,7 @@ This lab assumes you have already completed the following:
 
    
 
-4. Change the directory to `sdb_demo_app`. 
+5. Change the directory to `sdb_demo_app`. 
 
    ```
    [oracle@cata ~]$ cd sdb_demo_app
@@ -392,15 +400,15 @@ This lab assumes you have already completed the following:
 
    
 
-5. Start the workload by executing command:
+6. Start the workload by executing command:
 
    ```
    [oracle@cata sdb_demo_app]$ <copy>./run.sh demo sdbdemo.properties</copy>
    ```
+
    
-   
-   
-6. The result likes the following. Wait several minutes, compare the APS values with non-shard database and 2 sharded database.
+
+7. The result likes the following. Wait several minutes, compare the APS values with non-shard database and 2 sharded database.
 
    ```
     RO Queries | RW Queries | RO Failed  | RW Failed  | APS 
@@ -423,7 +431,7 @@ This lab assumes you have already completed the following:
 
    
 
-7. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
+8. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
 
    ```
    $ ssh -i labkey opc@xxx.xxx.xxx.xxx
@@ -439,7 +447,7 @@ This lab assumes you have already completed the following:
 
    
 
-8. Start the monitoring tool via the following command. (Note: due to the resource limit, start monitor may impact the application performance).
+9. Start the monitoring tool via the following command. (Note: due to the resource limit, start monitor may impact the application performance).
 
    ```
    [oracle@cata sdb_demo_app]$ <copy>./run.sh monitor sdbdemo.properties</copy>
@@ -451,17 +459,17 @@ This lab assumes you have already completed the following:
 
    
 
-9. From you laptop, launch a browser and use the URL: `http://xxx.xxx.xxx.xxx:8081`. Using the public ip address of the catalog host and the port number is 8081.
+10. From you laptop, launch a browser and use the URL: `http://xxx.xxx.xxx.xxx:8081`. Using the public ip address of the catalog host and the port number is 8081.
 
    ![image-20201208164029240](images/image-20201208164029240.png)
 
    
 
-10. Scroll down the screen, you can see the Last inserted orders:
+11. Scroll down the screen, you can see the Last inserted orders:
 
    ![image-20201208164117229](images/image-20201208164117229.png)
 
    
 
-11. Press `Ctrl+C` to cancel the demo in both of the terminal.
+12. Press `Ctrl+C` to cancel the demo in both of the terminal.
 
