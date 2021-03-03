@@ -23,9 +23,12 @@ variableGroups:
 #  - title: "# Enter the number of instances:"
 #    variables:
 #      - ${num_instances}
-  - title: "# Enter the instance shape:"
+  - title: "# Enter the Catalog DB Shape:"
     variables:
-      - ${instance_shape}
+      - ${catadb_shape}
+  - title: "# Enter the Shard DB Shape:"
+    variables:
+      - ${shard_shape}
   - title: "Enter the Image Cloud ID from your workshop guide"
     variables:
       - ${instance_image_ocid}

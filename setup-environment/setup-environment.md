@@ -18,7 +18,7 @@ This lab assumes you have already completed the following:
 
 Click on the link below to download the Resource Manager zip files you need to build your enviornment.
 
-- [sdb19c-primary-num.zip](https://github.com/minqiaowang/oracle-sharded-database/raw/main/setup-environment/sdb19c-primary-num.zip) - Packaged terraform primary database instances creation script.
+- [sdb19c-market-num.zip](https://github.com/minqiaowang/oracle-sharded-database/raw/main/setup-environment/sdb19c-market-num.zip) - Packaged terraform primary database instances creation script.
 
 
 
@@ -157,7 +157,7 @@ When using Resource Manager to deploy an environment, execute a terraform **Plan
     ````
     ![](./images/tailOfBuildDBInstanceLog.png " ")
 
-2.  When you see the following message, the database setup is complete - **Completed successfully in XXXX seconds** (this may take up to 30 minutes). You can do the **Step 6** to setup the standby environment while waiting the primary database ready .
+2.  When you see the following message, the database setup is complete - **Completed successfully in XXXX seconds** (this may take up to 30 minutes). You can press Ctrl-C to exit from the tail command.
 
     ![](./images/tailOfBuildDBInstanceLog_finished.png " ")
 
@@ -181,7 +181,7 @@ When using Resource Manager to deploy an environment, execute a terraform **Plan
 
     ![](./images/pseftns.png " ")
 
-5.  Connect to the Database using SQL*Plus as the **oracle** user. The 4 CDBs we created named `cata, shd1, shd2, shd3` and the PDB named `catapdb, shdpdb1, shdpdb2, shdpdb3`.
+5.  Do the same steps to the other VMs, make sure all the databases are create correctly. Connect to the Database using SQL*Plus as the **oracle** user. The 4 CDBs we created named `cata, shd1, shd2, shd3` and the PDB named `catapdb, shdpdb1, shdpdb2, shdpdb3`.
 
     ````
     <copy>

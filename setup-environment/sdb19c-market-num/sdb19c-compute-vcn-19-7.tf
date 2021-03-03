@@ -3,7 +3,10 @@ variable "region" {}
 // variable "display_name" { default = "workshop" }
 variable "AD" { default = 1 }
 //variable "Image-Id" {default="ocid1.image.oc1..aaaaaaaafc323nq572bujhzwja7e6df532ioqq7qididhmnujpgbshm2zrzq"}
-variable "instance_shape" {
+variable "catadb_shape" {
+  default = "VM.Standard2.4"
+}
+variable "shard_shape" {
   default = "VM.Standard2.1"
 }
 variable "compartment_ocid" {}
@@ -127,50 +130,66 @@ resource "oci_core_default_security_list" "default-security-list" {
 ##
 # Found image id from Marketplace and get signature
 ##
-resource "oci_core_app_catalog_listing_resource_version_agreement" "test_app_catalog_listing_resource_version_agreement" {
+resource "oci_marketplace_accepted_agreement" "test_accepted_agreement" {
   #Required
-  listing_id               = lookup(data.oci_core_app_catalog_listing_resource_versions.test_app_catalog_listing_resource_versions.app_catalog_listing_resource_versions[0], "listing_id")
-  listing_resource_version = lookup(data.oci_core_app_catalog_listing_resource_versions.test_app_catalog_listing_resource_versions.app_catalog_listing_resource_versions[2], "listing_resource_version")
+  agreement_id    = oci_marketplace_listing_package_agreement.test_listing_package_agreement.agreement_id
+  compartment_id  = var.compartment_ocid
+  listing_id      = data.oci_marketplace_listing.test_listing.id
+  #package_version = data.oci_marketplace_listing.test_listing.default_package_version
+  package_version = data.oci_marketplace_listing_packages.test_listing_packages.listing_packages[0].package_version
+  signature       = oci_marketplace_listing_package_agreement.test_listing_package_agreement.signature
 }
-
-resource "oci_core_app_catalog_subscription" "test_app_catalog_subscription" {
-  compartment_id           = var.compartment_ocid
-  eula_link                = oci_core_app_catalog_listing_resource_version_agreement.test_app_catalog_listing_resource_version_agreement.eula_link
-  listing_id               = oci_core_app_catalog_listing_resource_version_agreement.test_app_catalog_listing_resource_version_agreement.listing_id
-  listing_resource_version = oci_core_app_catalog_listing_resource_version_agreement.test_app_catalog_listing_resource_version_agreement.listing_resource_version
-  oracle_terms_of_use_link = oci_core_app_catalog_listing_resource_version_agreement.test_app_catalog_listing_resource_version_agreement.oracle_terms_of_use_link
-  signature                = oci_core_app_catalog_listing_resource_version_agreement.test_app_catalog_listing_resource_version_agreement.signature
-  time_retrieved           = oci_core_app_catalog_listing_resource_version_agreement.test_app_catalog_listing_resource_version_agreement.time_retrieved
-
-  timeouts {
-    create = "20m"
-  }
-}
-
-data "oci_core_app_catalog_listings" "test_app_catalog_listings" {
-  filter {
-    name   = "display_name"
-    values = ["Oracle Database"]
-  }
-}
-
-data "oci_core_app_catalog_listing_resource_versions" "test_app_catalog_listing_resource_versions" {
+resource "oci_marketplace_listing_package_agreement" "test_listing_package_agreement" {
   #Required
-  listing_id = "${lookup(data.oci_core_app_catalog_listings.test_app_catalog_listings.app_catalog_listings[0],"listing_id")}"
+  agreement_id    = data.oci_marketplace_listing_package_agreements.test_listing_package_agreements.agreements[0].id
+  listing_id      = data.oci_marketplace_listing.test_listing.id
+  #package_version = data.oci_marketplace_listing.test_listing.default_package_version
+  package_version = data.oci_marketplace_listing_packages.test_listing_packages.listing_packages[0].package_version
 }
 
-data "oci_core_app_catalog_subscriptions" "test_app_catalog_subscriptions" {
+#    Data Elements
+
+data "oci_marketplace_listing_package_agreements" "test_listing_package_agreements" {
   #Required
+  listing_id      = data.oci_marketplace_listing.test_listing.id
+  #package_version = data.oci_marketplace_listing.test_listing.default_package_version
+  package_version = data.oci_marketplace_listing_packages.test_listing_packages.listing_packages[0].package_version
+  #Optional
   compartment_id = var.compartment_ocid
+}
+data "oci_marketplace_listing_package" "test_listing_package" {
+  #Required
+  listing_id      = data.oci_marketplace_listing.test_listing.id
+  #package_version = data.oci_marketplace_listing.test_listing.default_package_version
+  package_version = data.oci_marketplace_listing_packages.test_listing_packages.listing_packages[0].package_version
+  #Optional
+  compartment_id = var.compartment_ocid
+}
+data "oci_marketplace_listing_packages" "test_listing_packages" {
+  #Required
+  listing_id = data.oci_marketplace_listing.test_listing.id
 
   #Optional
-  listing_id = oci_core_app_catalog_subscription.test_app_catalog_subscription.listing_id
-
-  filter {
-    name   = "listing_resource_version"
-    values = [oci_core_app_catalog_subscription.test_app_catalog_subscription.listing_resource_version]
-  }
+  compartment_id = var.compartment_ocid
+  package_version = "Oracle Database 19.7.0.0.200414"
 }
+
+data "oci_marketplace_listing" "test_listing" {
+  listing_id     = data.oci_marketplace_listings.test_listings.listings[0].id
+  compartment_id = var.compartment_ocid
+}
+
+data "oci_marketplace_listings" "test_listings" {
+  #category       = ["Other"]
+  name = ["Oracle Database"]
+  compartment_id = var.compartment_ocid
+}
+
+data "oci_core_app_catalog_listing_resource_version" "test_catalog_listing" {
+  listing_id = data.oci_marketplace_listing_package.test_listing_package.app_catalog_listing_id
+  resource_version = data.oci_marketplace_listing_package.test_listing_package.app_catalog_listing_resource_version
+}
+
 
 ##
 # Create Compute Instance
@@ -180,7 +199,7 @@ resource "oci_core_instance" "cata_instance" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "cata"
-  shape               = "${var.instance_shape}"
+  shape               = "${var.catadb_shape}"
 
   create_vnic_details {
     subnet_id = "${oci_core_subnet.example-public-subnet1.id}"
@@ -191,7 +210,7 @@ resource "oci_core_instance" "cata_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = lookup(data.oci_core_app_catalog_subscriptions.test_app_catalog_subscriptions.app_catalog_subscriptions[0], "listing_resource_id")
+    source_id   = data.oci_core_app_catalog_listing_resource_version.test_catalog_listing.listing_resource_id
 
   }
 
@@ -207,7 +226,7 @@ resource "oci_core_instance" "shd1_instance" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "shd1"
-  shape               = "${var.instance_shape}"
+  shape               = "${var.shard_shape}"
 
   create_vnic_details {
     subnet_id = "${oci_core_subnet.example-public-subnet1.id}"
@@ -218,7 +237,7 @@ resource "oci_core_instance" "shd1_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = lookup(data.oci_core_app_catalog_subscriptions.test_app_catalog_subscriptions.app_catalog_subscriptions[0], "listing_resource_id")
+    source_id   = data.oci_core_app_catalog_listing_resource_version.test_catalog_listing.listing_resource_id
 
   }
 
@@ -234,7 +253,7 @@ resource "oci_core_instance" "shd2_instance" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "shd2"
-  shape               = "${var.instance_shape}"
+  shape               = "${var.shard_shape}"
 
   create_vnic_details {
     subnet_id = "${oci_core_subnet.example-public-subnet1.id}"
@@ -245,7 +264,7 @@ resource "oci_core_instance" "shd2_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = lookup(data.oci_core_app_catalog_subscriptions.test_app_catalog_subscriptions.app_catalog_subscriptions[0], "listing_resource_id")
+    source_id   = data.oci_core_app_catalog_listing_resource_version.test_catalog_listing.listing_resource_id
 
   }
 
@@ -261,7 +280,7 @@ resource "oci_core_instance" "shd3_instance" {
   availability_domain = "${lookup(data.oci_identity_availability_domains.ADs.availability_domains[var.AD - 1], "name")}"
   compartment_id      = "${var.compartment_ocid}"
   display_name        = "shd3"
-  shape               = "${var.instance_shape}"
+  shape               = "${var.shard_shape}"
 
   create_vnic_details {
     subnet_id = "${oci_core_subnet.example-public-subnet1.id}"
@@ -272,7 +291,7 @@ resource "oci_core_instance" "shd3_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = lookup(data.oci_core_app_catalog_subscriptions.test_app_catalog_subscriptions.app_catalog_subscriptions[0], "listing_resource_id")
+    source_id   = data.oci_core_app_catalog_listing_resource_version.test_catalog_listing.listing_resource_id
 
   }
 
