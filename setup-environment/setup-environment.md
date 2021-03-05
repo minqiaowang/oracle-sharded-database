@@ -4,7 +4,7 @@
 
 In this lab you will setup 4 compute instances using Oracle Resource Manager and Terraform. The databases are automatically installed in the instances. One will be used as the sharding catalog named cata. Others are used as the sharded database name shd1, shd2 and shd3.
 
-Estimated Lab Time: 30 minutes.
+Estimated Lab Time: 45 minutes.
 
 ### Objectives
 
