@@ -1,4 +1,4 @@
-# Data Dependent Routing
+# Database Request Rout to Shard
 
 ## Introduction
 In Oracle Sharding, database query and DML requests are routed to the shards in two main ways, depending on whether a sharding key is supplied with the request. 

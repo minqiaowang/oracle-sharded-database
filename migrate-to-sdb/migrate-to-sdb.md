@@ -4,7 +4,7 @@
 
 When you want to migrate the application from the non-shard database to the shard database, you need re-design the schema, migrate the data and modify the application.
 
-Estimated Lab Time: 40 minutes.
+Estimated Lab Time: 30 minutes.
 
 ### Objectives
 
