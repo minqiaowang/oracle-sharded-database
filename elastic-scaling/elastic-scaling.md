@@ -24,11 +24,11 @@ This lab assumes you have already completed the following:
 1. Connect to the catalog database host. Switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
    Last login: Tue Dec  1 01:01:30 2020 from 202.45.129.206
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
-   [opc@cata ~]$ sudo su - oracle
+   [opc@cata ~]$ <copy>sudo su - oracle</copy>
    Last login: Tue Dec  1 01:01:32 GMT 2020 on pts/0
    [oracle@cata ~]$ 
    ```
@@ -38,7 +38,7 @@ This lab assumes you have already completed the following:
 2. Switch to the GSM environment.
 
    ```
-   [oracle@cata ~]$ . ./gsm.sh
+   [oracle@cata ~]$ <copy>. ./gsm.sh</copy>
    [oracle@cata ~]$
    ```
 
@@ -47,7 +47,7 @@ This lab assumes you have already completed the following:
 3. Launch `GDSCTL`.
 
    ```
-   [oracle@cata ~]$ gdsctl
+   [oracle@cata ~]$ <copy>gdsctl</copy>
    GDSCTL: Version 19.0.0.0.0 - Production on Tue Dec 01 01:55:50 GMT 2020
    
    Copyright (c) 2011, 2019, Oracle.  All rights reserved.
@@ -63,7 +63,7 @@ This lab assumes you have already completed the following:
 4. Show current shard configuration.
 
    ```
-   GDSCTL> config shard
+   GDSCTL> <copy>config shard</copy>
    Catalog connection is established
    Name                Shard Group         Status    State       Region    Availability 
    ----                -----------         ------    -----       ------    ------------ 
@@ -168,10 +168,10 @@ This lab assumes you have already completed the following:
 
    
 
-10. The host name of shard3 is already there. Manually add shard3 IP addresses to the shard catalog metadata.
+10. The host name of shard3 is already there. Manually add shard3 private IP addresses to the shard catalog metadata.
 
     ```
-    GDSCTL> add invitednode 10.0.1.3
+    GDSCTL> <copy>add invitednode 10.0.1.3<copy>
     GDSCTL>
     ```
 
@@ -205,7 +205,7 @@ This lab assumes you have already completed the following:
 1. Run the deploy command to add the new shard.
 
    ```
-   GDSCTL> deploy
+   GDSCTL> <copy>deploy</copy>
    deploy: examining configuration...
    deploy: requesting Data Guard configuration on shards via GSM
    deploy: shards configured; background operations in progress
@@ -259,7 +259,7 @@ This lab assumes you have already completed the following:
 4. If you encounter some issues, the chunk movement status is **Suspended**. You can run the following command to resume the chunk movement.
 
    ```
-   GDSCTL> alter move -resume -chunk all -shard shd1_shdpdb1,shd2_shdpdb2,shd3_shdpdb3
+   GDSCTL> <copy>alter move -resume -chunk all -shard shd1_shdpdb1,shd2_shdpdb2,shd3_shdpdb3</copy>
    ```
    
    
@@ -267,7 +267,7 @@ This lab assumes you have already completed the following:
 5. Observe that the chunks are automatically rebalanced upon the addition of new shard.
 
    ```
-   GDSCTL> config chunks -show_reshard
+   GDSCTL> <copy>config chunks -show_reshard</copy>
    Chunks
    ------------------------
    Database                      From      To        
@@ -327,7 +327,7 @@ This lab assumes you have already completed the following:
 8. Exit GDSCTL.
 
    ```
-   GDSCTL> exit
+   GDSCTL> <copy>exit</copy>
    [oracle@cata ~]$
    ```
 
@@ -347,7 +347,7 @@ This lab assumes you have already completed the following:
 2. Login to the sqlplus as sysdba, switch to the pdb.
 
    ```
-   [oracle@cata ~]$ sqlplus / as sysdba
+   [oracle@cata ~]$ <copy>sqlplus / as sysdba</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Tue Dec 1 03:27:17 2020
    Version 19.7.0.0.0
@@ -359,7 +359,7 @@ This lab assumes you have already completed the following:
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    
-   SQL> alter session set container=catapdb;
+   SQL> <copy>alter session set container=catapdb;</copy>
    
    Session altered.
    
@@ -383,7 +383,7 @@ This lab assumes you have already completed the following:
 4. Exit Sqlplus.
 
    ```
-   SQL> exit
+   SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    [oracle@cata ~]$
@@ -394,7 +394,7 @@ This lab assumes you have already completed the following:
 5. Change the directory to `sdb_demo_app`. 
 
    ```
-   [oracle@cata ~]$ cd sdb_demo_app
+   [oracle@cata ~]$ <copy>cd sdb_demo_app</copy>
    [oracle@cata sdb_demo_app]$ 
    ```
 
@@ -434,14 +434,14 @@ This lab assumes you have already completed the following:
 8. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
    Last login: Mon Nov 30 06:07:40 2020 from 202.45.129.206
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
-   [opc@cata ~]$ sudo su - oracle
+   [opc@cata ~]$ <copy>sudo su - oracle</copy>
    Last login: Mon Nov 30 06:08:03 GMT 2020 on pts/0
    
-   [oracle@cata ~]$ cd ~/sdb_demo_app
+   [oracle@cata ~]$ <copy>cd ~/sdb_demo_app</copy>
    [oracle@cata sdb_demo_app]$
    ```
 

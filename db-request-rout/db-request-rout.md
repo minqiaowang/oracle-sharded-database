@@ -27,10 +27,10 @@ This lab assumes you have already completed the following:
 1. Login to the catalog host, switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
    Last login: Mon Nov 30 03:06:29 2020 from 202.45.129.206
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-   [opc@cata ~]$ sudo su - oracle
+   [opc@cata ~]$ <copy>sudo su - oracle</copy>
    Last login: Mon Nov 30 03:06:34 GMT 2020 on pts/0
    [oracle@cata ~]$ 
    ```
@@ -65,7 +65,7 @@ This lab assumes you have already completed the following:
    
    1 row created.
    
-   SQL> commit;
+   SQL> <copy>commit;</copy>
    
    Commit complete.
    
@@ -129,7 +129,7 @@ This lab assumes you have already completed the following:
 7. Exit from the sqlplus.
 
    ```
-   SQL> exit
+   SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    [oracle@cata ~]$ 
@@ -165,7 +165,7 @@ This lab assumes you have already completed the following:
    
    1 row created.
    
-   SQL> commit;
+   SQL> <copy>commit;</copy>
    
    Commit complete.
    
@@ -229,7 +229,7 @@ This lab assumes you have already completed the following:
 12. Exit from the sqlplus.
 
     ```
-    SQL> exit
+    SQL> <copy>exit</copy>
     Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
     Version 19.7.0.0.0
     [oracle@cata ~]$ 
@@ -293,7 +293,7 @@ This lab assumes you have already completed the following:
 
    ```
    
-   SQL> exit
+   SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    [oracle@cata ~]$ 
@@ -332,14 +332,14 @@ A multi-shard query maps to more than one shard and the coordinator might need t
 2. Let’s run a multi-shard query which joins sharded and duplicated table (join on non sharding key) to get the fast moving products (qty sold > 10). The output that you will observe will be different (due to data load randomization).
 
    ```
-   SQL> set echo on
-   SQL> column name format a40
-   SQL> explain plan for SELECT name, SUM(qty) qtysold FROM lineitems l, products p WHERE l.productid = p.productid GROUP BY name HAVING sum(qty) > 10 ORDER BY qtysold desc;
+   SQL> <copy>set echo on</copy>
+   SQL> <copy>column name format a40</copy>
+   SQL> <copy>explain plan for SELECT name, SUM(qty) qtysold FROM lineitems l, products p WHERE l.productid = p.productid GROUP BY name HAVING sum(qty) > 10 ORDER BY qtysold desc;</copy>
    
    Explained.
    
-   SQL> set echo off
-   SQL> select * from table(dbms_xplan.display());
+   SQL> <copy>set echo off</copy>
+   SQL> <copy>select * from table(dbms_xplan.display());</copy>
    
    PLAN_TABLE_OUTPUT
    ------------------------------------------------------------------------------------------------------------------------
@@ -371,7 +371,7 @@ A multi-shard query maps to more than one shard and the coordinator might need t
    
    25 rows selected.
    
-   SQL> SELECT name, SUM(qty) qtysold FROM lineitems l, products p WHERE l.productid = p.productid GROUP BY name HAVING sum(qty) > 10 ORDER BY qtysold desc;
+   SQL> <copy>SELECT name, SUM(qty) qtysold FROM lineitems l, products p WHERE l.productid = p.productid GROUP BY name HAVING sum(qty) > 10 ORDER BY qtysold desc;</copy>
    
    NAME					    QTYSOLD
    ---------------------------------------- ----------
@@ -399,14 +399,14 @@ A multi-shard query maps to more than one shard and the coordinator might need t
 5. Let’s run a multi-shard query which runs an IN subquery to get orders that includes product with `price > 900000`.
 
    ```
-   SQL> set echo on
-   SQL> column name format a20
-   SQL> explain plan for SELECT COUNT(orderid) FROM orders o WHERE orderid IN (SELECT orderid FROM lineitems l, products p WHERE l.productid = p.productid AND o.custid = l.custid AND p.lastprice > 900000);
+   SQL> <copy>set echo on</copy>
+   SQL> <copy>column name format a20</copy>
+   SQL> <copy>explain plan for SELECT COUNT(orderid) FROM orders o WHERE orderid IN (SELECT orderid FROM lineitems l, products p WHERE l.productid = p.productid AND o.custid = l.custid AND p.lastprice > 900000);</copy>
    
    Explained.
    
-   SQL> set echo off
-   SQL> select * from table(dbms_xplan.display());
+   SQL> <copy>set echo off</copy>
+   SQL> <copy>select * from table(dbms_xplan.display());</copy>
    
    PLAN_TABLE_OUTPUT
    ------------------------------------------------------------------------------------------------------------------------
@@ -433,7 +433,7 @@ A multi-shard query maps to more than one shard and the coordinator might need t
    
    20 rows selected.
    
-   SQL> SELECT COUNT(orderid) FROM orders o WHERE orderid IN (SELECT orderid FROM lineitems l, products p WHERE l.productid = p.productid AND o.custid = l.custid AND p.lastprice > 900000);
+   SQL> <copy>SELECT COUNT(orderid) FROM orders o WHERE orderid IN (SELECT orderid FROM lineitems l, products p WHERE l.productid = p.productid AND o.custid = l.custid AND p.lastprice > 900000);</copy>
    
    COUNT(ORDERID)
    --------------
@@ -447,19 +447,19 @@ A multi-shard query maps to more than one shard and the coordinator might need t
 4. Let’s run a multi-shard query that calculates customer distribution based on the number of orders placed. Please wait several minutes for the results return.
 
    ```
-   SQL> set echo off
-   SQL> column name format a40
-   SQL> explain plan for SELECT ordercount, COUNT(*) as custdist
+   SQL> <copy>set echo off</copy>
+   SQL> <copy>column name format a40</copy>
+   SQL> <copy>explain plan for SELECT ordercount, COUNT(*) as custdist
        FROM (SELECT c.custid, COUNT(orderid) ordercount
        	   FROM customers c LEFT OUTER JOIN orders o
        	   ON c.custid = o.custid AND
        	   orderdate BETWEEN sysdate-4 AND sysdate GROUP BY c.custid)
        GROUP BY ordercount
-       ORDER BY custdist desc, ordercount desc;  2    3    4    5    6    7  
+       ORDER BY custdist desc, ordercount desc;</copy>  2    3    4    5    6    7  
    
    Explained.
    
-   SQL> select * from table(dbms_xplan.display());
+   SQL> <copy>select * from table(dbms_xplan.display());</copy>
    
    PLAN_TABLE_OUTPUT
    ------------------------------------------------------------------------------------------------------------------------
@@ -494,13 +494,13 @@ A multi-shard query maps to more than one shard and the coordinator might need t
    
    28 rows selected.
    
-   SQL> SELECT ordercount, COUNT(*) as custdist
+   SQL> <copy>SELECT ordercount, COUNT(*) as custdist
        FROM (SELECT c.custid, COUNT(orderid) ordercount
        	   FROM customers c LEFT OUTER JOIN orders o
        	   ON c.custid = o.custid AND
        	   orderdate BETWEEN sysdate-4 AND sysdate GROUP BY c.custid)
        GROUP BY ordercount
-       ORDER BY custdist desc, ordercount desc;  2    3    4    5    6    7  
+       ORDER BY custdist desc, ordercount desc;</copy>  2    3    4    5    6    7  
    
    ORDERCOUNT   CUSTDIST
    ---------- ----------
@@ -526,7 +526,7 @@ A multi-shard query maps to more than one shard and the coordinator might need t
 7. Exit the sqlplus.
 
    ```
-   SQL> exit
+   SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    [oracle@cata ~]$ 

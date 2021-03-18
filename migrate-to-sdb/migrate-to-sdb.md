@@ -34,11 +34,11 @@ Before the existing database can be migrated to the sharded database, you must d
 1. Login to the catalog database host, switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxxx</copy>
    Last login: Sun Nov 29 01:26:28 2020 from 59.66.120.23
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
-   [opc@cata ~]$ sudo su - oracle
+   [opc@cata ~]$ <copy>sudo su - oracle</copy>
    Last login: Sun Nov 29 02:49:51 GMT 2020 on pts/0
     
    [oracle@cata ~]$ 
@@ -193,7 +193,7 @@ Before the existing database can be migrated to the sharded database, you must d
 4. Use SQLPLUS to run this sql scripts
 
    ```
-   [oracle@cata ~]$ sqlplus /nolog
+   [oracle@cata ~]$ <copy>sqlplus /nolog</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 01:26:03 2020
    Version 19.7.0.0.0
@@ -201,7 +201,7 @@ Before the existing database can be migrated to the sharded database, you must d
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
    
-   SQL> @sdb-app-schema.sql
+   SQL> <copy>@sdb-app-schema.sql</copy>
    ```
 
    
@@ -421,7 +421,7 @@ Before the existing database can be migrated to the sharded database, you must d
 6. The shard app demo schema is created. Exit the sqlplus.
 
    ```
-   01:26:41 SQL> exit
+   01:26:41 SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    [oracle@cata ~]$
@@ -436,7 +436,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 1. Switch to the GSM environment, run GDSCTL.
 
    ```
-   [oracle@cata ~]$ . ./gsm.sh 
+   [oracle@cata ~]$ <copy>. ./gsm.sh</copy> 
    [oracle@cata ~]$ 
    ```
    
@@ -445,7 +445,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 2. Launch GDSCTL.
 
    ```
-   [oracle@cata ~]$ gdsctl
+   [oracle@cata ~]$ <copy>gdsctl</copy>
    GDSCTL: Version 19.0.0.0.0 - Production on Mon Nov 30 01:41:47 GMT 2020
    
    Copyright (c) 2011, 2019, Oracle.  All rights reserved.
@@ -461,7 +461,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 3. Run the following commands to observe that there are no failures during the creation of tablespaces.
 
    ```
-   GDSCTL> show ddl
+   GDSCTL> <copy>show ddl</copy>
    Catalog connection is established
    id      DDL Text                                 Failed shards 
    --      --------                                 ------------- 
@@ -484,7 +484,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 4. Run the config commands as shown below for each of the shards and verify if there are any DDL error.
 
    ```
-   GDSCTL> config shard -shard shd1_shdpdb1
+   GDSCTL> <copy>config shard -shard shd1_shdpdb1</copy>
    Name: shd1_shdpdb1
    Shard Group: shardgroup_primary
    Status: Ok
@@ -509,7 +509,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
    ----                                                            --------- ------    
    oltp_rw_srvc                                                    Yes       Enabled   
    
-   GDSCTL> config shard -shard shd2_shdpdb2
+   GDSCTL> <copy>config shard -shard shd2_shdpdb2</copy>
    Name: shd2_shdpdb2
    Shard Group: shardgroup_primary
    Status: Ok
@@ -542,7 +542,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 5. Show the created chunks.
 
    ```
-   GDSCTL> config chunks
+   GDSCTL> <copy>config chunks</copy>
    Chunks
    ------------------------
    Database                      From      To        
@@ -558,7 +558,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 6. Exit GDSCTL.
 
    ```
-   GDSCTL> exit
+   GDSCTL> <copy>exit</copy>
    [oracle@cata ~]$ 
    ```
 
@@ -617,11 +617,11 @@ Now, we can verify the sharded demo schema which created in the previous step.
 9. Verify that the chunks and chunk tablespaces are created.
 
    ```
-   SQL> set linesize 140
-   SQL> column table_name format a20
-   SQL> column tablespace_name format a20
-   SQL> column partition_name format a20
-   SQL> select table_name, partition_name, tablespace_name from dba_tab_partitions where tablespace_name like 'C%TSP_SET_1' order by tablespace_name;
+   SQL> <copy>set linesize 140</copy>
+   SQL> <copy>column table_name format a20</copy>
+   SQL> <copy>column tablespace_name format a20</copy>
+   SQL> <copy>column partition_name format a20</copy>
+   SQL> <copy>select table_name, partition_name, tablespace_name from dba_tab_partitions where tablespace_name like 'C%TSP_SET_1' order by tablespace_name;</copy>
    
    TABLE_NAME	     PARTITION_NAME	  TABLESPACE_NAME
    -------------------- -------------------- --------------------
@@ -697,11 +697,11 @@ Now, we can verify the sharded demo schema which created in the previous step.
 12. Verify that the chunks and chunk tablespaces are created.
 
     ```
-    SQL> set linesize 140
-    SQL> column table_name format a20
-    SQL> column tablespace_name format a20
-    SQL> column partition_name format a20
-    SQL> select table_name, partition_name, tablespace_name from dba_tab_partitions where tablespace_name like 'C%TSP_SET_1' order by tablespace_name;
+    SQL> <copy>set linesize 140</copy>
+    SQL> <copy>column table_name format a20</copy>
+    SQL> <copy>column tablespace_name format a20</copy>
+    SQL> <copy>column partition_name format a20</copy>
+    SQL> <copy>select table_name, partition_name, tablespace_name from dba_tab_partitions where tablespace_name like 'C%TSP_SET_1' order by tablespace_name;</copy>
     
     TABLE_NAME	     PARTITION_NAME	  TABLESPACE_NAME
     -------------------- -------------------- --------------------
@@ -747,8 +747,8 @@ Now, we can verify the sharded demo schema which created in the previous step.
 14. Query the `gsmadmin_internal.chunk_loc` table to observe that the chunks are uniformly distributed.
 
     ```
-    SQL> column shard format a40
-    SQL> select a.name Shard,count( b.chunk_number) Number_of_Chunks from gsmadmin_internal.database a, gsmadmin_internal.chunk_loc b where a.database_num=b.database_num group by a.name;
+    SQL> <copy>column shard format a40</copy>
+    SQL> <copy>select a.name Shard,count( b.chunk_number) Number_of_Chunks from gsmadmin_internal.database a, gsmadmin_internal.chunk_loc b where a.database_num=b.database_num group by a.name;</copy>
     
     SHARD					 NUMBER_OF_CHUNKS
     ---------------------------------------- ----------------
@@ -763,9 +763,9 @@ Now, we can verify the sharded demo schema which created in the previous step.
 15. Connect into the app_schema/app_schema on the catadb, shard1, shard2 databases and verify that the sharded and duplicated tables are created.
 
     ```
-    SQL> connect app_schema/app_schema@cata:1521/catapdb
+    SQL> <copy>connect app_schema/app_schema@cata:1521/catapdb</copy>
     Connected.
-    SQL> select table_name from user_tables;
+    SQL> <copy>select table_name from user_tables;</copy>
     
     TABLE_NAME
     --------------------------------------------------------------------------------
@@ -778,9 +778,9 @@ Now, we can verify the sharded demo schema which created in the previous step.
     
     6 rows selected.
     
-    SQL> connect app_schema/app_schema@shd1:1521/shdpdb1
+    SQL> <copy>connect app_schema/app_schema@shd1:1521/shdpdb1</copy>
     Connected.
-    SQL> select table_name from user_tables;
+    SQL> <copy>select table_name from user_tables;</copy>
     
     TABLE_NAME
     --------------------------------------------------------------------------------
@@ -790,9 +790,9 @@ Now, we can verify the sharded demo schema which created in the previous step.
     PRODUCTS
     USLOG$_PRODUCTS
     
-    SQL> connect app_schema/app_schema@shd2:1521/shdpdb2
+    SQL> <copy>connect app_schema/app_schema@shd2:1521/shdpdb2</copy>
     Connected.
-    SQL> select table_name from user_tables;
+    SQL> <copy>select table_name from user_tables;</copy>
     
     TABLE_NAME
     --------------------------------------------------------------------------------
@@ -810,7 +810,7 @@ Now, we can verify the sharded demo schema which created in the previous step.
 16. Exit the sqlplus.
 
     ```
-    SQL> exit
+    SQL> <copy>exit</copy>
     Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
     Version 19.7.0.0.0
     [oracle@cata ~]$
@@ -852,14 +852,14 @@ Loading the data directly into the database shards is much faster, because each 
 2. Create a data pump directory. When shard ddl enabled, it will be created in catalog db and each of the sharded db. Exit the SQLPLUS.
 
    ```
-   SQL> alter session enable shard ddl;
+   SQL> <copy>alter session enable shard ddl;</copy>
    Session altered.
    
-   SQL> create directory demo_pump_dir as '/home/oracle';
+   SQL> <copy>create directory demo_pump_dir as '/home/oracle';</copy>
    
    Directory created.
    
-   SQL> exit
+   SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    [oracle@cata ~]$ 
@@ -1033,7 +1033,7 @@ Migrate application to the sharded database a slight change to the application c
 4. Using SQLPLUS to run the script.
 
    ```
-   [oracle@cata sql]$ sqlplus /nolog
+   [oracle@cata sql]$ <copy>sqlplus /nolog</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 05:54:14 2020
    Version 19.7.0.0.0
@@ -1045,7 +1045,7 @@ Migrate application to the sharded database a slight change to the application c
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    
-   SQL> @sdb_demo_app_ext.sql
+   SQL> <copy>@sdb_demo_app_ext.sql</copy>
    ```
 
    
@@ -1237,14 +1237,14 @@ Migrate application to the sharded database a slight change to the application c
 10. Open another terminal, connect to the catalog host, switch to oracle user. Change the directory to `sdb_demo_app`.
 
     ```
-    $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+    $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
     Last login: Mon Nov 30 06:07:40 2020 from 202.45.129.206
     -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
     
-    [opc@cata ~]$ sudo su - oracle
+    [opc@cata ~]$ <copy>sudo su - oracle</copy>
     Last login: Mon Nov 30 06:08:03 GMT 2020 on pts/0
     
-    [oracle@cata ~]$ cd ~/sdb_demo_app
+    [oracle@cata ~]$ <copy>cd ~/sdb_demo_app</copy>
     [oracle@cata sdb_demo_app]$
     ```
 

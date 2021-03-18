@@ -10,7 +10,7 @@ Estimated Lab Time: 30 minutes.
 
 In this lab, you will perform the following steps:
 
-- Create a non-sharded instance.
+- Create a non-shard service.
 - Create the demo schema
 - Setup and run the demo application
 - Export the demo data.
@@ -21,20 +21,20 @@ In this lab, you will perform the following steps:
 
 This lab assumes you have already completed the following:
 
-- Environment setup 
+- Access the Workshop Environment 
 
 
 
-## **Step 1:** Create a Non-Sharded Instance
+## **Step 1:** Create a Non-Shard Service
 
 1. Connect to the shard3 host, switch to the oracle user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx</copy>
    Last login: Mon Nov 30 11:24:36 2020 from 59.66.120.23
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
-   [opc@shd3 ~]$ sudo su - oracle
+   [opc@shd3 ~]$ <copy>sudo su - oracle</copy>
    Last login: Mon Nov 30 11:27:34 GMT 2020 on pts/0
    [oracle@shd3 ~]$ 
    ```
@@ -44,7 +44,7 @@ This lab assumes you have already completed the following:
 2. Connect to the database as sysdba.
 
    ```
-   [oracle@shd3 ~]$ sqlplus / as sysdba
+   [oracle@shd3 ~]$ <copy>sqlplus / as sysdba</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Fri Dec 4 11:32:41 2020
    Version 19.7.0.0.0
@@ -64,10 +64,10 @@ This lab assumes you have already completed the following:
 3. Create a new pdb name sipdb.
 
    ```
-   SQL> CREATE PLUGGABLE DATABASE nspdb ADMIN USER admin IDENTIFIED BY Ora_DB4U 
+   SQL> <copy>CREATE PLUGGABLE DATABASE nspdb ADMIN USER admin IDENTIFIED BY Ora_DB4U 
      DEFAULT TABLESPACE users DATAFILE '/u01/app/oracle/oradata/SHD3/nspdb/users01.dbf' 
      SIZE 10G AUTOEXTEND ON 
-     FILE_NAME_CONVERT = ('/pdbseed/', '/nspdb/');  2    3    4  
+     FILE_NAME_CONVERT = ('/pdbseed/', '/nspdb/');</copy>  2    3    4  
    
    Pluggable database created.
    
@@ -79,7 +79,7 @@ This lab assumes you have already completed the following:
 4. Open the PDB.
 
    ```
-   SQL> alter pluggable database nspdb open;
+   SQL> <copy>alter pluggable database nspdb open;</copy>
    
    Pluggable database altered.
    
@@ -91,7 +91,7 @@ This lab assumes you have already completed the following:
 5. Connect to the PDB as sysdba.
 
    ```
-   SQL> alter session set container = nspdb;
+   SQL> <copy>alter session set container = nspdb;</copy>
    
    Session altered.
    
@@ -103,22 +103,22 @@ This lab assumes you have already completed the following:
 6. Create a service named `GDS$CATALOG.ORADBCLOUD` and start it in order to run the demo application correctly.  (The demo application is designed for sharded database, it's need connect to the shard catalog. The service name is hard code in the demo application).
 
    ```
-   SQL> BEGIN
+   SQL> <copy>BEGIN
      DBMS_SERVICE.create_service(
        service_name => 'GDS$CATALOG.ORADBCLOUD',
        network_name => 'GDS$CATALOG.ORADBCLOUD'
      );
    END;
-   /  2    3    4    5    6    7  
+   /</copy>  2    3    4    5    6    7  
    
    PL/SQL procedure successfully completed.
    
-   SQL> BEGIN
+   SQL> <copy>BEGIN
      DBMS_SERVICE.start_service(
        service_name => 'GDS$CATALOG.ORADBCLOUD'
      );
    END;
-   /  2    3    4    5    6  
+   /</copy>  2    3    4    5    6  
    
    PL/SQL procedure successfully completed.
    
@@ -130,7 +130,7 @@ This lab assumes you have already completed the following:
 7. Exit from the sqlplus.
 
    ```
-   SQL> exit
+   SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    [oracle@shd3 ~]$ 
@@ -296,14 +296,14 @@ This lab assumes you have already completed the following:
 3. Use SQLPLUS to run this sql scripts.
 
    ```
-   [oracle@shd3 ~]$ sqlplus /nolog
+   [oracle@shd3 ~]$ <copy>sqlplus /nolog</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sat Dec 5 01:44:19 2020
    Version 19.7.0.0.0
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
-   SQL> @nonshard-app-schema.sql
+   SQL> <copy>@nonshard-app-schema.sql</copy>
    ```
 
    
@@ -444,12 +444,12 @@ This lab assumes you have already completed the following:
 5. The single instance demo schema is created. Exit the sqlplus. and Exit the Shard3 host.
 
    ```
-   02:37:45 SQL> exit
+   02:37:45 SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
-   [oracle@shd3 ~]$ exit
+   [oracle@shd3 ~]$ <copy>exit</copy>
    logout
-   [opc@shd3 ~]$ exit
+   [opc@shd3 ~]$ <copy>exit</copy>
    logout
    Connection to 152.67.196.227 closed.
    $ 
@@ -463,10 +463,10 @@ This lab assumes you have already completed the following:
 1. Connect to the catalog host, switch to the oracle user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
    Last login: Fri Dec  4 06:48:49 2020 from 202.45.129.206
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
-   [opc@cata ~]$ sudo su - oracle
+   [opc@cata ~]$ <copy>sudo su - oracle</copy>
    Last login: Fri Dec  4 06:48:55 GMT 2020 on pts/0
    [oracle@cata ~]$ 
    ```
@@ -501,7 +501,7 @@ This lab assumes you have already completed the following:
 3. Unzip the file. This will create `sdb_demo_app` directory under the `/home/oracle`.
 
    ```
-   [oracle@cata ~]$ unzip sdb_demo_app.zip 
+   [oracle@cata ~]$ <copy>unzip sdb_demo_app.zip</copy>
    Archive:  sdb_demo_app.zip
       creating: sdb_demo_app/
      inflating: sdb_demo_app/demo.properties  
@@ -667,7 +667,7 @@ This lab assumes you have already completed the following:
 4. Change to the `sdb_demo_app/sql` directory.
 
    ```
-   [oracle@cata ~]$ cd sdb_demo_app/sql
+   [oracle@cata ~]$ <copy>cd sdb_demo_app/sql</copy>
    [oracle@cata sql]$
    ```
 
@@ -676,7 +676,7 @@ This lab assumes you have already completed the following:
 5. View the content of the `nonshard_demo_app_ext.sql`. Make sure the connect string is correct to the non-sharded instance pdb.
 
    ```
-   [oracle@cata sql]$ cat nonshard_demo_app_ext.sql 
+   [oracle@cata sql]$ <copy>cat nonshard_demo_app_ext.sql</copy> 
    -- Create catalog monitor packages
    connect sys/Ora_DB4U@shd3:1521/nspdb as sysdba;
    @catalog_monitor.sql
@@ -718,14 +718,14 @@ This lab assumes you have already completed the following:
 6. Using SQLPLUS to run the script.
 
    ```
-   [oracle@cata sql]$ sqlplus /nolog
+   [oracle@cata sql]$ <copy>sqlplus /nolog</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Fri Dec 4 12:23:11 2020
    Version 19.7.0.0.0
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
-   SQL> @nonshard_demo_app_ext.sql
+   SQL> <copy>@nonshard_demo_app_ext.sql</copy>
    ```
 
    
@@ -854,7 +854,7 @@ This lab assumes you have already completed the following:
 8. Exit the sqlplus. Then change directory to the `sdb_demo_app`.
 
    ```
-   [oracle@cata sql]$ cd ~/sdb_demo_app
+   [oracle@cata sql]$ <copy>cd ~/sdb_demo_app</copy>
    [oracle@cata sdb_demo_app]$ 
    ```
 
@@ -863,7 +863,7 @@ This lab assumes you have already completed the following:
 9. Review the `nonsharddemo.properties` file content. Make sure the `connect_string` and service name  is correct.
 
    ```
-   [oracle@cata sdb_demo_app]$ cat nonsharddemo.properties 
+   [oracle@cata sdb_demo_app]$ <copy>cat nonsharddemo.properties</copy> 
    name=demo
    connect_string=(ADDRESS_LIST=(LOAD_BALANCE=off)(FAILOVER=on)(ADDRESS=(HOST=shd3)(PORT=1521)(PROTOCOL=tcp)))
    monitor.user=dbmonuser
@@ -882,7 +882,7 @@ This lab assumes you have already completed the following:
 10. Start the workload by executing command: `./run.sh demo nonsharddemo.properties`.
 
    ```
-   [oracle@cata sdb_demo_app]$ ./run.sh demo nonsharddemo.properties
+   [oracle@cata sdb_demo_app]$ <copy>./run.sh demo nonsharddemo.properties</copy>
    ```
 
    
@@ -949,11 +949,11 @@ In this step, you will export the demo application data and copy the dmp file to
 1. Connect to the shard3 host, switch to the oracle user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
    Last login: Mon Nov 30 11:24:36 2020 from 59.66.120.23
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
-   [opc@shd3 ~]$ sudo su - oracle
+   [opc@shd3 ~]$ <copy>sudo su - oracle</copy>
    Last login: Mon Nov 30 11:27:34 GMT 2020 on pts/0
    [oracle@shd3 ~]$ 
    ```
@@ -963,7 +963,7 @@ In this step, you will export the demo application data and copy the dmp file to
 2. Connect to the non-sharded database as `app_schema` user with SQLPLUS.
 
    ```
-   [oracle@shd3 ~]$ sqlplus app_schema/app_schema@shd3:1521/nspdb
+   [oracle@shd3 ~]$ <copy>sqlplus app_schema/app_schema@shd3:1521/nspdb</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sat Dec 5 07:43:15 2020
    Version 19.7.0.0.0
@@ -984,11 +984,11 @@ In this step, you will export the demo application data and copy the dmp file to
 3. Create a dump directory and exit the SQLPLUS.
 
    ```
-   SQL> create directory demo_pump_dir as '/home/oracle';
+   SQL> <copy>create directory demo_pump_dir as '/home/oracle';</copy>
    
    Directory created.
    
-   SQL> exit
+   SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    [oracle@shd3 ~]$
@@ -1097,11 +1097,11 @@ In this step, you will export the demo application data and copy the dmp file to
 8. Open another terminal to connect to the cata host. Switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
    Last login: Mon Nov 30 11:22:42 2020 from 59.66.120.23
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
-   [opc@shd1 ~]$ sudo su - oracle
+   [opc@shd1 ~]$ <copy>sudo su - oracle</copy>
    Last login: Sun Nov 29 03:15:53 GMT 2020 on pts/0
    [oracle@cata ~]$ 
    ```
@@ -1111,8 +1111,8 @@ In this step, you will export the demo application data and copy the dmp file to
 9. Make a `.ssh` directory and edit the authorized_keys file.
 
    ```
-   [oracle@cata ~]$ mkdir .ssh
-   [oracle@cata ~]$ vi .ssh/authorized_keys
+   [oracle@cata ~]$ <copy>mkdir .ssh</copy>
+   [oracle@cata ~]$ <copy>vi .ssh/authorized_keys</copy>
    ```
 
    
@@ -1131,7 +1131,7 @@ In this step, you will export the demo application data and copy the dmp file to
 12. From shard3 host side. Copy the dmp file to the catalog, shard1 and shard2 host. Press yes when prompt ask if you want to  continue.
 
     ```
-    [oracle@shd3 ~]$ scp original.dmp oracle@cata:~
+    [oracle@shd3 ~]$ <copy>scp original.dmp oracle@cata:~</copy>
     The authenticity of host 'shd1 (10.0.0.3)' can't be established.
     ECDSA key fingerprint is SHA256:fdIUiIXRNQ8LsOsDjN1/OLeLaz2kDeIzpLngV/15tPs.
     ECDSA key fingerprint is MD5:ea:d8:d5:fe:6e:a4:98:3e:e3:a4:dc:a3:24:ed:40:65.
@@ -1139,7 +1139,7 @@ In this step, you will export the demo application data and copy the dmp file to
     Warning: Permanently added 'cata,10.0.0.2' (ECDSA) to the list of known hosts.
     original.dmp                                                  100% 6864KB  46.0MB/s   00:00    
     
-    [oracle@shd3 ~]$ scp original.dmp oracle@shd1:~
+    [oracle@shd3 ~]$ <copy>scp original.dmp oracle@shd1:~</copy>
     The authenticity of host 'shd1 (10.0.0.3)' can't be established.
     ECDSA key fingerprint is SHA256:fdIUiIXRNQ8LsOsDjN1/OLeLaz2kDeIzpLngV/15tPs.
     ECDSA key fingerprint is MD5:ea:d8:d5:fe:6e:a4:98:3e:e3:a4:dc:a3:24:ed:40:65.
@@ -1147,7 +1147,7 @@ In this step, you will export the demo application data and copy the dmp file to
     Warning: Permanently added 'shd1,10.0.0.3' (ECDSA) to the list of known hosts.
     original.dmp                                                  100% 6864KB  46.0MB/s   00:00    
     
-    [oracle@shd3 ~]$ scp original.dmp oracle@shd2:~
+    [oracle@shd3 ~]$ <copy>scp original.dmp oracle@shd2:~</copy>
     The authenticity of host 'shd2 (10.0.0.4)' can't be established.
     ECDSA key fingerprint is SHA256:DZD3FA2afLdsB17yvn1IoGxHqmTiei6fiqnUHRJXVNw.
     ECDSA key fingerprint is MD5:49:b0:06:11:14:1f:85:76:47:4f:9c:04:d2:15:a9:00.

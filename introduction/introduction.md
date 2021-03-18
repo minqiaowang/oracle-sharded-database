@@ -77,5 +77,5 @@ In order to do this workshop, you need
 
 * **Author** - Minqiao Wang, DB Product Management, Dec 2020
 * **Contributors** -  
-* **Last Updated By/Date** - Minqiao Wang, DB Product Management, Dec 2020
-* **Workshop Expiry Date** - Nov 30, 2021
+* **Last Updated By/Date** - Minqiao Wang, DB Product Management, Mar 2021
+* **Workshop Expiry Date** - 

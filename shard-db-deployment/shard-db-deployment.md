@@ -8,10 +8,10 @@ The 4 database instances sample information like this:
 
 | Public IP       | Private IP | Hostname | CDB Name | PDB Name |
 | --------------- | ---------- | -------- | -------- | -------- |
-| 193.122.102.140 | 10.0.1.5   | cata     | cata     | catapdb  |
-| 193.122.120.205 | 10.0.1.2   | shd1     | shd1     | shdpdb1  |
-| 193.123.240.181 | 10.0.1.4   | shd2     | shd2     | shdpdb2  |
-| 193.123.236.194 | 10.0.1.3   | shd3     | shd3     | shdpdb3  |
+| xxx.xxx.xxx.xxx | 10.0.1.x   | cata     | cata     | catapdb  |
+| xxx.xxx.xxx.xxx | 10.0.1.x   | shd1     | shd1     | shdpdb1  |
+| xxx.xxx.xxx.xxx | 10.0.1.x   | shd2     | shd2     | shdpdb2  |
+| xxx.xxx.xxx.xxx | 10.0.1.x   | shd3     | shd3     | shdpdb3  |
 
 Following is the topology used for System Managed Sharding we will create in this workshop:
 
@@ -33,7 +33,7 @@ This lab assumes you have already completed the following:
 1. Connect to the catalog host and each of the shard hosts with opc user. edit the `/etc/hosts` file.
 
    ```
-   $ ssh -i labkey opc@152.67.196.50
+   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
    The authenticity of host '152.67.196.50 (152.67.196.50)' can't be established.
    ECDSA key fingerprint is SHA256:pa9pwe2ytZJQPPEJxdCSaR2E0IBtp+jtsVN2qXIbcoI.
    Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
@@ -55,10 +55,10 @@ This lab assumes you have already completed the following:
 3. Add the private ip address and host names in the hosts file.
 
    ```
-   10.0.1.5 cata
-   10.0.1.2 shd1
-   10.0.1.4 shd2
-   10.0.1.3 shd3
+   10.0.1.x cata
+   10.0.1.x shd1
+   10.0.1.x shd2
+   10.0.1.x shd3
    ```
 
    
@@ -92,19 +92,15 @@ In this workshop we choose to co-locate the shard director software on the same 
 1. Connect to the catalog host, switch to the **oracle** user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
-   The authenticity of host 'xxx.xxx.xxx.xxx (xxx.xxx.xxx.xxx)' can't be established.
-   ECDSA key fingerprint is SHA256:pa9pwe2ytZJQPPEJxdCSaR2E0IBtp+jtsVN2qXIbcoI.
-   Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-   Warning: Permanently added 'xxx.xxx.xxx.xxx' (ECDSA) to the list of known hosts.
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx<copy>
    
-   [opc@cata ~]$ sudo su - oracle
+   [opc@cata ~]$ <copy>sudo su - oracle</copy>
    Last login: Fri Nov 27 06:57:03 UTC 2020
    [oracle@cata ~]$
    ```
-
    
-
+   
+   
 2. Edit two config files to switch environment between catalog and GSM.
 
    - create a file named gsm.sh.
@@ -138,7 +134,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 
    
 
-4. Download the GSM installation file. You can download it from [OTN](https://otn.oracle.com) or [edelivery](https://edelivery.oracle.com/) using your own account. We have download it and save it in the object storage. You can use the following command to get the installation file.
+4. Download the GSM installation file. You can download it from [OTN](https://otn.oracle.com) or [edelivery](https://edelivery.oracle.com/) using your own account. We have downloaded it and save it in the object storage. You can use the following command to get the installation file.
 
    ```
    [oracle@cata ~]$ <copy>wget https://objectstorage.ap-seoul-1.oraclecloud.com/p/yb_DbuhcpKQjOWPpU2Z4kpR3j0a9B-p1X-OZAqVICk2ssp8zCrIuJNIuME_HSjkA/n/oraclepartnersas/b/DB19c-GSM/o/LINUX.X64_193000_gsm.zip</copy>
@@ -292,7 +288,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 10. When you see the installation `100% Done`, press **Enter** to return to the command line. Exit to the opc user.
 
   ```
-  [oracle@cata ~]$ exit
+  [oracle@cata ~]$ <copy>exit</copy>
   logout
   
   [opc@cata ~]$ 
@@ -313,7 +309,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 12. Switch back to the oracle user
 
     ```
-    [opc@cata ~]$ sudo su - oracle
+    [opc@cata ~]$ <copy>sudo su - oracle</copy>
     Last login: Sat Nov 28 01:30:02 UTC 2020 on pts/0
     [oracle@cata ~]$ 
     ```
@@ -325,7 +321,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 
 ## **Step 3:** Setup Catalog Database
 
-1. Make sure you are in the catalog database environmet.
+1. Make sure you are in the catalog database environment.
 
    ```
    [oracle@cata ~]$ <copy>. ./cata.sh</copy>
@@ -357,11 +353,11 @@ In this workshop we choose to co-locate the shard director software on the same 
 3. Because the shard catalog database can run multi-shard queries which connect to shards over database links, the `OPEN_LINKS` and `OPEN_LINKS_PER_INSTANCE` database initialization parameter values must be greater than or equal to the number of shards that will be part of the sharded database configuration.
 
    ```
-   SQL> alter system set open_links=20 scope=spfile;
+   SQL> <copy>alter system set open_links=20 scope=spfile;</copy>
    
    System altered.
    
-   SQL> alter system set open_links_per_instance=20 scope=spfile;
+   SQL> <copy>alter system set open_links_per_instance=20 scope=spfile;</copy>
    
    System altered.
    
@@ -397,11 +393,11 @@ In this workshop we choose to co-locate the shard director software on the same 
 6. Unlock the gsmcatalog user.
 
    ```
-   SQL> alter user gsmcatuser account unlock;
+   SQL> <copy>alter user gsmcatuser account unlock;</copy>
    
    User altered.
    
-   SQL> alter user gsmcatuser identified by Ora_DB4U;
+   SQL> <copy>alter user gsmcatuser identified by Ora_DB4U;</copy>
    
    User altered.
    
@@ -413,26 +409,26 @@ In this workshop we choose to co-locate the shard director software on the same 
 7. Connect to the catalog pdb, Unlock the gsmcatalog user and create a shard catalog administrator account.
 
    ```
-   SQL> show pdbs
+   SQL> <copy>show pdbs</copy>
    
        CON_ID CON_NAME			  OPEN MODE  RESTRICTED
    ---------- ------------------------------ ---------- ----------
    	 2 PDB$SEED			  READ ONLY  NO
    	 3 CATAPDB			  READ WRITE NO
    	 
-   SQL> alter session set container=catapdb;
+   SQL> <copy>alter session set container=catapdb;</copy>
    
    Session altered.
    
-   SQL> alter user gsmcatuser account unlock;
+   SQL> <copy>alter user gsmcatuser account unlock;</copy>
    
    User altered.
    
-   SQL> create user mysdbadmin identified by Ora_DB4U;
+   SQL> <copy>create user mysdbadmin identified by Ora_DB4U;</copy>
    
    User created.
    
-   SQL> grant gsmadmin_role to mysdbadmin;
+   SQL> <copy>grant gsmadmin_role to mysdbadmin;</copy>
    
    Grant succeeded.
    
@@ -444,7 +440,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 8. Connect as sysdba. Check the database archivelog mode. 
 
    ```
-   SQL> connect / as sysdba
+   SQL> <copy>connect / as sysdba</copy>
    Connected.
    
    SQL> archive log list
@@ -461,13 +457,13 @@ In this workshop we choose to co-locate the shard director software on the same 
 9. Check the flashback status.
 
    ```
-   SQL> select flashback_on from v$database;
+   SQL> <copy>select flashback_on from v$database;</copy>
    
    FLASHBACK_ON
    ------------------
    NO
    
-   SQL> show parameter db_recovery_file
+   SQL> <copy>show parameter db_recovery_file</copy>
    
    NAME				     TYPE	 VALUE
    ------------------------------------ ----------- ------------------------------
@@ -481,22 +477,22 @@ In this workshop we choose to co-locate the shard director software on the same 
 10. Enable archivelog and flashback on.
 
   ```
-  SQL> !mkdir -p /u01/app/oracle/fast_recovery_area
+  SQL> <copy>!mkdir -p /u01/app/oracle/fast_recovery_area</copy>
   
-  SQL> alter system set db_recovery_file_dest_size=50G scope=both;
-  
-  System altered.
-  
-  SQL> alter system set db_recovery_file_dest='/u01/app/oracle/fast_recovery_area' scope=both;
+  SQL> <copy>alter system set db_recovery_file_dest_size=50G scope=both;</copy>
   
   System altered.
   
-  SQL> shutdown immediate
+  SQL> <copy>alter system set db_recovery_file_dest='/u01/app/oracle/fast_recovery_area' scope=both;</copy>
+  
+  System altered.
+  
+  SQL> <copy>shutdown immediate</copy>
   Database closed.
   Database dismounted.
   ORACLE instance shut down.
   
-  SQL> startup mount;
+  SQL> <copy>startup mount;</copy>
   ORACLE instance started.
   
   Total System Global Area 4647286504 bytes
@@ -506,15 +502,15 @@ In this workshop we choose to co-locate the shard director software on the same 
   Redo Buffers		    7630848 bytes
   Database mounted.
   
-  SQL> alter database archivelog;
+  SQL> <copy>alter database archivelog;</copy>
   
   Database altered.
   
-  SQL> alter database flashback on;
+  SQL> <copy>alter database flashback on;</copy>
   
   Database altered.
   
-  SQL> alter database open;
+  SQL> <copy>alter database open;</copy>
   
   Database altered.
   
@@ -526,7 +522,7 @@ In this workshop we choose to co-locate the shard director software on the same 
 11. Exit from SQLPLUS.
 
    ```
-   SQL> exit
+   SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
    Version 19.7.0.0.0
    [oracle@cata ~]$ 
@@ -542,11 +538,11 @@ The following steps need to do in all the shard database side. We only provide s
 1. From your laptop, connect to the shard1 host, switch to the oracle user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx</copy>
    Last login: Sun Nov 29 01:36:00 2020 from 59.66.120.23
    -bash: warning: setlocale: LC_CTYPE: cannot change locale (UTF-8): No such file or directory
    
-   [opc@shd1 ~]$ sudo su - oracle
+   [opc@shd1 ~]$ <copy>sudo su - oracle</copy>
    Last login: Sun Nov 29 02:04:38 GMT 2020
    [oracle@shd1 ~]$ 
    ```
@@ -576,15 +572,15 @@ The following steps need to do in all the shard database side. We only provide s
 3. Unlock the gsmrootuser user.
 
    ```
-   SQL> alter user gsmrootuser account unlock;
+   SQL> <copy>alter user gsmrootuser account unlock;</copy>
    
    User altered.
    
-   SQL> alter user gsmrootuser identified by Ora_DB4U;
+   SQL> <copy>alter user gsmrootuser identified by Ora_DB4U;</copy>
    
    User altered.
    
-   SQL> grant SYSDG, SYSBACKUP to gsmrootuser;
+   SQL> <copy>grant SYSDG, SYSBACKUP to gsmrootuser;</copy>
    
    Grant succeeded.
    
@@ -596,13 +592,13 @@ The following steps need to do in all the shard database side. We only provide s
 4. A directory object named `DATA_PUMP_DIR` must be created and accessible in the shard database from the `GSMADMIN_INTERNAL` account.
 
    ```
-   SQL> select directory_path from dba_directories where directory_name='DATA_PUMP_DIR';
+   SQL> <copy>select directory_path from dba_directories where directory_name='DATA_PUMP_DIR';</copy>
    
    DIRECTORY_PATH
    --------------------------------------------------------------------------------
    /u01/app/oracle/admin/shd1/dpdump/
    
-   SQL> grant read, write on directory DATA_PUMP_DIR to gsmadmin_internal;
+   SQL> <copy>grant read, write on directory DATA_PUMP_DIR to gsmadmin_internal;</copy>
    
    Grant succeeded.
    
@@ -614,15 +610,15 @@ The following steps need to do in all the shard database side. We only provide s
 5. Unlock the gsmuser.
 
    ```
-   SQL> alter user gsmuser account unlock;
+   SQL> <copy>alter user gsmuser account unlock;</copy>
    
    User altered.
    
-   SQL> alter user gsmuser identified by Ora_DB4U;
+   SQL> <copy>alter user gsmuser identified by Ora_DB4U;</copy>
    
    User altered.
    
-   SQL> grant SYSDG, SYSBACKUP to gsmuser;
+   SQL> <copy>grant SYSDG, SYSBACKUP to gsmuser;</copy>
    
    Grant succeeded.
    
@@ -670,14 +666,14 @@ The following steps need to do in all the shard database side. We only provide s
 9. Connect to the shard pdb.
 
    ```
-   SQL> show pdbs
+   SQL> <copy>show pdbs</copy>
    
        CON_ID CON_NAME			  OPEN MODE  RESTRICTED
    ---------- ------------------------------ ---------- ----------
    	 2 PDB$SEED			  READ ONLY  NO
    	 3 SHDPDB1			  READ WRITE NO
    	 
-   SQL> alter session set container=shdpdb1;
+   SQL> <copy>alter session set container=shdpdb1;</copy>
    
    Session altered.
    
@@ -689,11 +685,11 @@ The following steps need to do in all the shard database side. We only provide s
 10. Unlock the gsmuser in pdb.
 
    ```
-   SQL> alter user gsmuser account unlock;
+   SQL> <copy>alter user gsmuser account unlock;</copy>
    
    User altered.
    
-   SQL> grant SYSDG, SYSBACKUP to gsmuser;
+   SQL> <copy>grant SYSDG, SYSBACKUP to gsmuser;</copy>
    
    Grant succeeded.
    
@@ -705,13 +701,13 @@ The following steps need to do in all the shard database side. We only provide s
 11. To support Oracle Managed Files, used by the sharding chunk management infrastructure, the `DB_CREATE_FILE_DEST` database parameter must be set to a valid value.
 
     ```
-    SQL> show parameter db_create_file_dest
+    SQL> <copy>show parameter db_create_file_dest</copy>
     
     NAME				     TYPE	 VALUE
     ------------------------------------ ----------- ------------------------------
     db_create_file_dest		     string
     
-    SQL> alter system set db_create_file_dest='/u01/app/oracle/oradata' scope=both;
+    SQL> <copy>alter system set db_create_file_dest='/u01/app/oracle/oradata' scope=both;</copy>
     
     System altered.
     
@@ -734,25 +730,25 @@ The following steps need to do in all the shard database side. We only provide s
 13. Connect to the CDB. Enable achivelog and flashback on.
 
     ```
-    SQL> connect / as sysdba 
+    SQL> <copy>connect / as sysdba</copy> 
     Connected.
     
-    SQL> !mkdir -p /u01/app/oracle/fast_recovery_area
+    SQL> <copy>!mkdir -p /u01/app/oracle/fast_recovery_area</copy>
     
-    SQL> alter system set db_recovery_file_dest_size=50G scope=both;
-    
-    System altered.
-    
-    SQL> alter system set db_recovery_file_dest='/u01/app/oracle/fast_recovery_area' scope=both;
+    SQL> <copy>alter system set db_recovery_file_dest_size=50G scope=both;</copy>
     
     System altered.
     
-    SQL> shutdown immediate
+    SQL> <copy>alter system set db_recovery_file_dest='/u01/app/oracle/fast_recovery_area' scope=both;</copy>
+    
+    System altered.
+    
+    SQL> <copy>shutdown immediate</copy>
     Database closed.
     Database dismounted.
     ORACLE instance shut down.
     
-    SQL> startup mount;
+    SQL> <copy>startup mount;</copy>
     ORACLE instance started.
     
     Total System Global Area 4647286504 bytes
@@ -762,15 +758,15 @@ The following steps need to do in all the shard database side. We only provide s
     Redo Buffers		    7630848 bytes
     Database mounted.
     
-    SQL> alter database archivelog;
+    SQL> <copy>alter database archivelog;</copy>
     
     Database altered.
     
-    SQL> alter database flashback on;
+    SQL> <copy>alter database flashback on;</copy>
     
     Database altered.
     
-    SQL> alter database open;
+    SQL> <copy>alter database open;</copy>
     
     Database altered.
     
@@ -794,12 +790,12 @@ The following steps need to do in all the shard database side. We only provide s
 15. Connect to the shard pdb and validate the shard. The `validateShard` procedure can and should be run against primary, mounted (unopened) standby, and Active Data Guard standby databases that are part of the sharded database configuration. 
 
     ```
-    SQL> alter session set container=shdpdb1;
+    SQL> <copy>alter session set container=shdpdb1;</copy>
     
     Session altered.
     
-    SQL> set serveroutput on
-    SQL> execute dbms_gsm_fix.validateShard
+    SQL> <copy>set serveroutput on</copy>
+    SQL> <copy>execute dbms_gsm_fix.validateShard</copy>
     ```
 
     
@@ -852,9 +848,9 @@ The following steps need to do in all the shard database side. We only provide s
 1. Connect to the catalog database host. Switch to oracle user.
 
    ```
-   $ ssh -i labkey opc@xxx.xxx.xxx.xxx
+   $ <copy>ssh -i labkey opc@xxx.xxx.xxx.xxx<copy>
    Last login: Sat Nov 28 03:43:05 2020 from 59.66.120.23
-   [opc@cata ~]$ sudo su - oracle
+   [opc@cata ~]$ <copy>sudo su - oracle</copy>
    Last login: Sat Nov 28 03:43:21 UTC 2020 on pts/0
    [oracle@cata ~]$ 
    ```
@@ -900,16 +896,16 @@ The following steps need to do in all the shard database side. We only provide s
 5. Add and start the shard director.
 
    ```
-   GDSCTL> connect mysdbadmin/Ora_DB4U@cata:1521/catapdb
+   GDSCTL> <copy>connect mysdbadmin/Ora_DB4U@cata:1521/catapdb</copy>
    Catalog connection is established
    
-   GDSCTL> add gsm -gsm sharddirector1 -catalog cata:1521/catapdb -pwd Ora_DB4U -region region1
+   GDSCTL> <copy>add gsm -gsm sharddirector1 -catalog cata:1521/catapdb -pwd Ora_DB4U -region region1</copy>
    GSM successfully added
    
-   GDSCTL> start gsm -gsm sharddirector1
+   GDSCTL> <copy>start gsm -gsm sharddirector1</copy>
    GSM is started successfully
    
-   GDSCTL> set gsm -gsm sharddirector1
+   GDSCTL> <copy>set gsm -gsm sharddirector1</copy>
    GDSCTL> 
    ```
 
@@ -928,7 +924,7 @@ The following steps need to do in all the shard database side. We only provide s
 7. Verify the Sharding Topology. Before adding information about your shard databases to the catalog, verify that your sharding topology is correct before proceeding by using the various `GDSCTL CONFIG` commands.
 
    ```
-   GDSCTL> config
+   GDSCTL> <copy>config</copy>
    
    Regions
    ------------------------
@@ -976,11 +972,11 @@ The following steps need to do in all the shard database side. We only provide s
 8. Add shard CDB. Repeat the `ADD CDB` command for all of the CDBs that contain a shard PDB in the configuration. In this lab, we only add shd1 and shd2.
 
    ```
-   GDSCTL> add cdb -connect shd1:1521/shd1 -pwd Ora_DB4U
+   GDSCTL> <copy>add cdb -connect shd1:1521/shd1 -pwd Ora_DB4U</copy>
    DB Unique Name: shd1
    The operation completed successfully
    
-   GDSCTL> add cdb -connect shd2:1521/shd2 -pwd Ora_DB4U
+   GDSCTL> <copy>add cdb -connect shd2:1521/shd2 -pwd Ora_DB4U</copy>
    DB Unique Name: shd2
    The operation completed successfully
    GDSCTL> 
@@ -991,7 +987,7 @@ The following steps need to do in all the shard database side. We only provide s
 9. When all of the CDBs are added, run `GDSCTL CONFIG CDB` to display a list of CDBs in the catalog.
 
    ```
-   GDSCTL> config cdb
+   GDSCTL> <copy>config cdb</copy>
    shd1                          
    shd2                          
    
@@ -1003,7 +999,7 @@ The following steps need to do in all the shard database side. We only provide s
 10. Add the primary shard information to the shard catalog. The shard group is `shardgroup_primary`.
 
    ```
-   GDSCTL> add shard -connect shd1:1521/shdpdb1 -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd1
+   GDSCTL> <copy>add shard -connect shd1:1521/shdpdb1 -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd1</copy>
    INFO: Data Guard shard validation requested.
    INFO: Database role is PRIMARY.
    INFO: Database name is SHD1.
@@ -1030,7 +1026,7 @@ The following steps need to do in all the shard database side. We only provide s
    DB Unique Name: shd1_shdpdb1
    The operation completed successfully
    
-   GDSCTL> add shard -connect shd2:1521/shdpdb2 -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd2
+   GDSCTL> <copy>add shard -connect shd2:1521/shdpdb2 -pwd Ora_DB4U -shardgroup shardgroup_primary -cdb shd2</copy>
    INFO: Data Guard shard validation requested.
    INFO: Database role is PRIMARY.
    INFO: Database name is SHD2.
@@ -1064,7 +1060,7 @@ The following steps need to do in all the shard database side. We only provide s
 11. Run `CONFIG SHARD` to view the shard metadata on the shard catalog.
 
     ```
-    GDSCTL> config shard
+    GDSCTL> <copy>config shard</copy>
     Name                Shard Group         Status    State       Region    Availability 
     ----                -----------         ------    -----       ------    ------------ 
     shd1_shdpdb1        shardgroup_primary  U         none        region1   -            
@@ -1078,7 +1074,7 @@ The following steps need to do in all the shard database side. We only provide s
 12. Add all of the host names and IP addresses of your shard hosts to the shard catalog. First, View a list of trusted hosts.
 
     ```
-    GDSCTL> config vncr
+    GDSCTL> <copy>config vncr</copy>
     Name                          Group ID                      
     ----                          --------                      
     10.0.1.5                                                    
@@ -1093,10 +1089,10 @@ The following steps need to do in all the shard database side. We only provide s
 13. Run the `ADD INVITEDNODE` command to manually add all host names and IP addresses of your shard hosts to the shard catalog metadata.
 
     ```
-    GDSCTL> add invitednode 127.0.0.1
-    GDSCTL> add invitednode cata
-    GDSCTL> add invitednode 10.0.1.2
-    GDSCTL> add invitednode 10.0.1.4
+    GDSCTL> <copy>add invitednode 127.0.0.1</copy>
+    GDSCTL> <copy>add invitednode cata</copy>
+    GDSCTL> <copy>add invitednode 10.0.1.2</copy>
+    GDSCTL> <copy>add invitednode 10.0.1.4</copy>
     GDSCTL> 
     ```
 
@@ -1105,7 +1101,7 @@ The following steps need to do in all the shard database side. We only provide s
 14. View the list of trusted hosts again.
 
     ```
-    GDSCTL> config vncr
+    GDSCTL> <copy>config vncr</copy>
     Name                          Group ID                      
     ----                          --------                      
     10.0.1.2                                                    
@@ -1127,7 +1123,7 @@ The following steps need to do in all the shard database side. We only provide s
 1. When the sharded database topology has been fully configured, run the `GDSCTL DEPLOY` command to deploy the sharded database configuration.
 
    ```
-   GDSCTL> deploy
+   GDSCTL> <copy>deploy</copy>
    deploy: examining configuration...
    deploy: requesting Data Guard configuration on shards via GSM
    deploy: shards configured successfully
@@ -1140,7 +1136,7 @@ The following steps need to do in all the shard database side. We only provide s
 2. Check the shard status, It's may look similar to the following.
 
    ```
-   GDSCTL> config shard
+   GDSCTL> <copy>config shard</copy>
    Name                Shard Group         Status    State       Region    Availability 
    ----                -----------         ------    -----       ------    ------------ 
    shd1_shdpdb1        shardgroup_primary  Ok        Deployed    region1   ONLINE       
@@ -1154,7 +1150,7 @@ The following steps need to do in all the shard database side. We only provide s
 3. Observe all shard are registered.
 
    ```
-   GDSCTL> databases
+   GDSCTL> <copy>databases</copy>
    Database: "shd1_shdpdb1" Registered: Y State: Ok ONS: N. Role: PRIMARY Instances: 1 Region: region1
       Registered instances:
         orasdb%1
@@ -1170,10 +1166,10 @@ The following steps need to do in all the shard database side. We only provide s
 4. Create and start a global service named `oltp_rw_srvc` that a client can use to connect to the sharded database. The `oltp_rw_srvc` service runs read/write transactions on the primary shards.
 
    ```
-   GDSCTL> add service -service oltp_rw_srvc -role primary
+   GDSCTL> <copy>add service -service oltp_rw_srvc -role primary</copy>
    The operation completed successfully
    
-   GDSCTL> start service -service oltp_rw_srvc
+   GDSCTL> <copy>start service -service oltp_rw_srvc</copy>
    The operation completed successfully
    GDSCTL> 
    ```
@@ -1183,7 +1179,7 @@ The following steps need to do in all the shard database side. We only provide s
 5. Check the status of the service.
 
    ```
-   GDSCTL> config service
+   GDSCTL> <copy>config service</copy>
    
    
    Name           Network name                  Pool           Started Preferred all 
@@ -1201,7 +1197,7 @@ The following steps need to do in all the shard database side. We only provide s
 6. Exit the GDSCTL.
 
    ```
-   GDSCTL> exit
+   GDSCTL> <copy>exit</copy>
    [oracle@cata ~]$
    ```
 
