@@ -285,14 +285,14 @@ This lab assumes you have already completed the following:
    [oracle@cata sql]$ sqlplus / as sysdba
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Mon Nov 30 05:54:14 2020
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
    
    Connected to:
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    SQL> @demo_app_ext.sql
    ```

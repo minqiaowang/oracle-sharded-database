@@ -46,7 +46,7 @@ This lab assumes you have already completed the following:
    
    Connected to:
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    SQL> 
    ```
@@ -126,7 +126,7 @@ This lab assumes you have already completed the following:
    ```
    SQL> exit
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    [oracle@cata ~]$ 
    ```
 
@@ -146,7 +146,7 @@ This lab assumes you have already completed the following:
    
    Connected to:
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    SQL> 
    ```
@@ -226,7 +226,7 @@ This lab assumes you have already completed the following:
     ```
     SQL> exit
     Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-    Version 19.7.0.0.0
+    Version 19.10.0.0.0
     [oracle@cata ~]$ 
     ```
 
@@ -248,7 +248,7 @@ This lab assumes you have already completed the following:
    
    Connected to:
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    SQL> 
    ```
@@ -290,7 +290,7 @@ This lab assumes you have already completed the following:
    
    SQL> exit
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    [oracle@cata ~]$ 
    ```
 

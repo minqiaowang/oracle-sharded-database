@@ -47,14 +47,14 @@ This lab assumes you have already completed the following:
    [oracle@shd3 ~]$ <copy>sqlplus / as sysdba</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Fri Dec 4 11:32:41 2020
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
    
    Connected to:
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    SQL> 
    ```
@@ -132,7 +132,7 @@ This lab assumes you have already completed the following:
    ```
    SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    [oracle@shd3 ~]$ 
    ```
 
@@ -299,7 +299,7 @@ This lab assumes you have already completed the following:
    [oracle@shd3 ~]$ <copy>sqlplus /nolog</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sat Dec 5 01:44:19 2020
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
@@ -446,7 +446,7 @@ This lab assumes you have already completed the following:
    ```
    02:37:45 SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    [oracle@shd3 ~]$ <copy>exit</copy>
    logout
    [opc@shd3 ~]$ <copy>exit</copy>
@@ -721,7 +721,7 @@ This lab assumes you have already completed the following:
    [oracle@cata sql]$ <copy>sqlplus /nolog</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Fri Dec 4 12:23:11 2020
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
@@ -966,7 +966,7 @@ In this step, you will export the demo application data and copy the dmp file to
    [oracle@shd3 ~]$ <copy>sqlplus app_schema/app_schema@shd3:1521/nspdb</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sat Dec 5 07:43:15 2020
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
@@ -974,7 +974,7 @@ In this step, you will export the demo application data and copy the dmp file to
    
    Connected to:
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    SQL> 
    ```
@@ -990,7 +990,7 @@ In this step, you will export the demo application data and copy the dmp file to
    
    SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    [oracle@shd3 ~]$
    ```
 
@@ -1012,7 +1012,7 @@ In this step, you will export the demo application data and copy the dmp file to
 
    ```
    Export: Release 19.0.0.0.0 - Production on Mon Dec 7 01:35:33 2020
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    Copyright (c) 1982, 2019, Oracle and/or its affiliates.  All rights reserved.
    

@@ -336,14 +336,14 @@ In this workshop we choose to co-locate the shard director software on the same 
    [oracle@cata ~]$ <copy>sqlplus / as sysdba</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sun Nov 29 02:50:15 2020
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
    
    Connected to:
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    SQL> 
    ```
@@ -524,7 +524,7 @@ In this workshop we choose to co-locate the shard director software on the same 
    ```
    SQL> <copy>exit</copy>
    Disconnected from Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    [oracle@cata ~]$ 
    ```
 
@@ -555,14 +555,14 @@ The following steps need to do in all the shard database side. We only provide s
    [oracle@shd1 ~]$ <copy>sqlplus / as sysdba</copy>
    
    SQL*Plus: Release 19.0.0.0.0 - Production on Sun Nov 29 03:16:25 2020
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    Copyright (c) 1982, 2020, Oracle.  All rights reserved.
    
    
    Connected to:
    Oracle Database 19c Enterprise Edition Release 19.0.0.0.0 - Production
-   Version 19.7.0.0.0
+   Version 19.10.0.0.0
    
    SQL> 
    ```
