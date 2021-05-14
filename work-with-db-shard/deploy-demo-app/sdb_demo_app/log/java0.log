@@ -1,0 +1,26 @@
+Jan 09, 2020 3:12:15 PM oracle.ucp.logging.ClioSupport _log
+FINE: :::Universal Connection Pool Manager MBean created
+Jan 09, 2020 3:12:15 PM oracle.ucp.logging.ClioSupport _log
+FINE: oracle.ucp.jdbc.PoolDataSourceImpl:createPoolWithDefaultProperties:oracle.ucp.jdbc.PoolDataSourceImpl@63d7be6e:Connection pool instance is created with default properties
+Jan 09, 2020 3:12:15 PM oracle.ucp.logging.ClioSupport _log
+FINE: oracle.ucp.jdbc.PoolDataSourceImpl:createPool:oracle.ucp.jdbc.PoolDataSourceImpl@63d7be6e:Connection pool instance is created
+Jan 09, 2020 3:12:15 PM oracle.ucp.logging.ClioSupport _log
+FINE: :::Heuristically determine whether to enable FAN
+Jan 09, 2020 3:12:15 PM oracle.ucp.logging.ClioSupport _log
+FINE: :::RAC/GDS 12.x, FAN is heuristically enabled
+Jan 09, 2020 3:12:17 PM oracle.ucp.logging.ClioSupport _log
+FINE: oracle.ucp.common.UniversalConnectionPoolBase:start:oracle.ucp.jdbc.oracle.OracleConnectionConnectionPool@2f37fc88:pool started
+Jan 09, 2020 3:12:17 PM oracle.ucp.logging.ClioSupport _log
+FINE: oracle.ucp.jdbc.PoolDataSourceImpl:startPool:oracle.ucp.jdbc.PoolDataSourceImpl@63d7be6e:connection pool is started
+Jan 09, 2020 3:12:17 PM oracle.ucp.logging.ClioSupport _log
+FINE: oracle.ucp.jdbc.PoolDataSourceImpl:createPoolWithDefaultProperties:oracle.ucp.jdbc.PoolDataSourceImpl@2ef60c31:Connection pool instance is created with default properties
+Jan 09, 2020 3:12:17 PM oracle.ucp.logging.ClioSupport _log
+FINE: oracle.ucp.jdbc.PoolDataSourceImpl:createPool:oracle.ucp.jdbc.PoolDataSourceImpl@2ef60c31:Connection pool instance is created
+Jan 09, 2020 3:12:18 PM oracle.ucp.logging.ClioSupport _log
+FINE: :::Heuristically determine whether to enable FAN
+Jan 09, 2020 3:12:18 PM oracle.ucp.logging.ClioSupport _log
+FINE: :::RAC/GDS 12.x, FAN is heuristically enabled
+Jan 09, 2020 3:12:19 PM oracle.ucp.logging.ClioSupport _log
+FINE: oracle.ucp.common.UniversalConnectionPoolBase:start:oracle.ucp.jdbc.oracle.OracleConnectionConnectionPool@5f872576:pool started
+Jan 09, 2020 3:12:19 PM oracle.ucp.logging.ClioSupport _log
+FINE: oracle.ucp.jdbc.PoolDataSourceImpl:startPool:oracle.ucp.jdbc.PoolDataSourceImpl@2ef60c31:connection pool is started

@@ -1,0 +1,592 @@
+Jan 09, 2020 3:12:18 PM sun.net.httpserver.ServerImpl <init>
+CONFIG: HttpServer created http null
+Jan 09, 2020 3:12:19 PM sun.net.httpserver.ServerImpl createContext
+CONFIG: context created: /
+Jan 09, 2020 3:12:19 PM sun.net.httpserver.ServerImpl createContext
+CONFIG: context created: /db/demo/info
+Jan 09, 2020 3:12:19 PM oracle.monitor.Main registerDatabase
+INFO: Context : /db/demo/info
+Jan 09, 2020 3:12:19 PM oracle.monitor.DatabaseMonitor$BackgroundStatusCheck run
+FINE: connection : jdbc:oracle:thin:@(description=(ADDRESS_LIST=(LOAD_BALANCE=off)(FAILOVER=on)(ADDRESS=(HOST=slc10tzz)(PORT=2527)(PROTOCOL=tcp)))(connect_data=(service_name=GDS$CATALOG.oradbcloud)))
+Jan 09, 2020 3:12:21 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:12:25 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:12:25 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/dash.html]
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/dash.html
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET / HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap.css
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap.min.css, web/bootstrap.css]
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap.min.css
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap.css HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap-theme.css
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap-theme.min.css, web/bootstrap-theme.css]
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap-theme.min.css
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap-theme.css HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /jquery-2.1.4.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/jquery-2.min.1.min.4.min.js, web/jquery-2.1.4.js]
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/jquery-2.min.1.min.4.min.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/jquery-2.1.4.js
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /jquery-2.1.4.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /DatabaseWidgets.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/DatabaseWidgets.min.js, web/DatabaseWidgets.js]
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/DatabaseWidgets.min.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/DatabaseWidgets.js
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /DatabaseWidgets.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /Chart.HorizontalBar.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/Chart.min.HorizontalBar.min.js, web/Chart.HorizontalBar.js]
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.min.HorizontalBar.min.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.HorizontalBar.js
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /Chart.HorizontalBar.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /setup.js
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /setup.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /masonry.pkgd.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/masonry.min.pkgd.min.js, web/masonry.pkgd.js]
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/masonry.min.pkgd.min.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/masonry.pkgd.js
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /masonry.pkgd.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap.min.js, web/bootstrap.js]
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap.min.js
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /Chart.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/Chart.min.js, web/Chart.js]
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.min.js
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.js
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /Chart.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /favicon.ico
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /favicon.ico HTTP/1.1 [404  Not Found] ()
+Jan 09, 2020 3:12:30 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:12:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:33 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /
+Jan 09, 2020 3:12:33 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/dash.html]
+Jan 09, 2020 3:12:33 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/dash.html
+Jan 09, 2020 3:12:33 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET / HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:33 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /jquery-2.1.4.js
+Jan 09, 2020 3:12:33 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/jquery-2.min.1.min.4.min.js, web/jquery-2.1.4.js]
+Jan 09, 2020 3:12:33 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/jquery-2.min.1.min.4.min.js
+Jan 09, 2020 3:12:33 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/jquery-2.1.4.js
+Jan 09, 2020 3:12:33 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /jquery-2.1.4.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /Chart.HorizontalBar.js
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/Chart.min.HorizontalBar.min.js, web/Chart.HorizontalBar.js]
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.min.HorizontalBar.min.js
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.HorizontalBar.js
+Jan 09, 2020 3:12:34 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /Chart.HorizontalBar.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /masonry.pkgd.js
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/masonry.min.pkgd.min.js, web/masonry.pkgd.js]
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/masonry.min.pkgd.min.js
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/masonry.pkgd.js
+Jan 09, 2020 3:12:34 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /masonry.pkgd.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap.js
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap.min.js, web/bootstrap.js]
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap.min.js
+Jan 09, 2020 3:12:34 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /Chart.js
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/Chart.min.js, web/Chart.js]
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.min.js
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.js
+Jan 09, 2020 3:12:34 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /Chart.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap.css
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap.min.css, web/bootstrap.css]
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap.min.css
+Jan 09, 2020 3:12:34 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap.css HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap-theme.css
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap-theme.min.css, web/bootstrap-theme.css]
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap-theme.min.css
+Jan 09, 2020 3:12:34 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap-theme.css HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /DatabaseWidgets.js
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/DatabaseWidgets.min.js, web/DatabaseWidgets.js]
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/DatabaseWidgets.min.js
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/DatabaseWidgets.js
+Jan 09, 2020 3:12:34 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /DatabaseWidgets.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:34 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /setup.js
+Jan 09, 2020 3:12:34 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /setup.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:34 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:12:34 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/dash.html]
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/dash.html
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET / HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap.css
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap.min.css, web/bootstrap.css]
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap.min.css
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap.css HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /masonry.pkgd.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/masonry.min.pkgd.min.js, web/masonry.pkgd.js]
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/masonry.min.pkgd.min.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/masonry.pkgd.js
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /masonry.pkgd.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap-theme.css
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap-theme.min.css, web/bootstrap-theme.css]
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap-theme.min.css
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap-theme.css HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap.min.js, web/bootstrap.js]
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap.min.js
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /Chart.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/Chart.min.js, web/Chart.js]
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.min.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.js
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /Chart.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /Chart.HorizontalBar.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/Chart.min.HorizontalBar.min.js, web/Chart.HorizontalBar.js]
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.min.HorizontalBar.min.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.HorizontalBar.js
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /Chart.HorizontalBar.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /jquery-2.1.4.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/jquery-2.min.1.min.4.min.js, web/jquery-2.1.4.js]
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/jquery-2.min.1.min.4.min.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/jquery-2.1.4.js
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /jquery-2.1.4.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /DatabaseWidgets.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/DatabaseWidgets.min.js, web/DatabaseWidgets.js]
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/DatabaseWidgets.min.js
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/DatabaseWidgets.js
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /DatabaseWidgets.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /setup.js
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /setup.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:40 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:12:40 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:41 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:12:41 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:12:44 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:12:44 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:12:46 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:12:46 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:12:47 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:12:47 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:47 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:12:47 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:12:50 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:12:50 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:12:52 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:12:52 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:12:54 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute done : select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:12:54 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:12:54 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:54 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /db.svg
+Jan 09, 2020 3:12:54 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/db.min.svg, web/db.svg]
+Jan 09, 2020 3:12:54 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/db.min.svg
+Jan 09, 2020 3:12:54 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/db.svg
+Jan 09, 2020 3:12:54 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db.svg HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/dash.html]
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/dash.html
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET / HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /jquery-2.1.4.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/jquery-2.min.1.min.4.min.js, web/jquery-2.1.4.js]
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/jquery-2.min.1.min.4.min.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/jquery-2.1.4.js
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /jquery-2.1.4.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /DatabaseWidgets.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/DatabaseWidgets.min.js, web/DatabaseWidgets.js]
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/DatabaseWidgets.min.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/DatabaseWidgets.js
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /DatabaseWidgets.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /masonry.pkgd.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/masonry.min.pkgd.min.js, web/masonry.pkgd.js]
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/masonry.min.pkgd.min.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/masonry.pkgd.js
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /masonry.pkgd.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /Chart.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/Chart.min.js, web/Chart.js]
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.min.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.js
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /Chart.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap.min.js, web/bootstrap.js]
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap.min.js
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /Chart.HorizontalBar.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/Chart.min.HorizontalBar.min.js, web/Chart.HorizontalBar.js]
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.min.HorizontalBar.min.js
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/Chart.HorizontalBar.js
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /Chart.HorizontalBar.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap-theme.css
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap-theme.min.css, web/bootstrap-theme.css]
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap-theme.min.css
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap-theme.css HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /bootstrap.css
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/bootstrap.min.css, web/bootstrap.css]
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/bootstrap.min.css
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /bootstrap.css HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /setup.js
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /setup.js HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:55 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:12:55 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:56 PM oracle.monitor.FileHandler handle
+FINE: Static file query : /db.svg
+Jan 09, 2020 3:12:56 PM oracle.monitor.FileHandler handle
+FINE: Trying files : [web/db.min.svg, web/db.svg]
+Jan 09, 2020 3:12:56 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/db.min.svg
+Jan 09, 2020 3:12:56 PM oracle.monitor.FileHandler handle
+FINE: Trying : /scratch/zzeng/downloads/demo-master/web/db.svg
+Jan 09, 2020 3:12:56 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db.svg HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:12:57 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:13:02 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:13:02 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:13:03 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:13:03 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:13:05 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:13:05 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:13:06 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:13:06 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:13:07 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:13:07 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:13:09 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:13:09 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:13:09 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:13:09 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:13:10 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:13:10 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:13:11 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute done : select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:13:14 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:13:16 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:13:16 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:13:21 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:13:21 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:13:23 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:13:23 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:13:23 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:13:23 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:13:24 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:13:24 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:13:25 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:13:25 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:13:27 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:13:27 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:13:28 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:13:28 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:13:30 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute done : select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:13:30 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:13:30 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:13:33 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:13:37 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:13:37 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:13:42 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:13:42 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:13:44 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:13:44 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:13:44 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:13:44 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:13:45 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:13:45 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:13:46 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:13:46 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:13:48 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:13:48 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:13:49 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:13:49 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:13:50 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute done : select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:13:51 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:13:51 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:13:53 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:13:58 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:13:58 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:14:00 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
+Jan 09, 2020 3:14:00 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:14:02 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT R.DB_UNIQUE_NAME,DECODE(BITAND(L.FLAGS, 2), 2, 'PRIMARY', 'STANDBY'),DECODE(BITAND(L.FLAGS, 1), 1, '*ONLINE', '*OFFLINE'),R.PRIMARY_DB_UNIQUE_NAME,L.RACK,REGION.NAME FROM GSMADMIN_INTERNAL.DATABASE L  LEFT JOIN SGV$DATABASE R ON R.PUBLIC_DBNAME=L.NAME  LEFT JOIN GSMADMIN_INTERNAL.REGION REGION ON L.REGION_NUM = REGION.NUM
+Jan 09, 2020 3:14:02 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:14:03 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PUBLIC_DBNAME,CHUNK_NAME,STATE FROM  GLOBAL_CHUNKS 
+Jan 09, 2020 3:14:03 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:14:05 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select public_dbname, count(*) from sgv$session where type='USER' group by public_dbname
+Jan 09, 2020 3:14:05 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:14:05 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:14:05 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:14:08 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : SELECT PARTITION_NAME, SUM(NUM_ROWS) TOTAL_ROWS    FROM GLOBAL_DBA_TAB_PARTITIONS WHERE READ_ONLY = 'NO' AND TABLE_OWNER='APP_SCHEMA'        GROUP BY PARTITION_NAME
+Jan 09, 2020 3:14:08 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:14:09 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute done : select PUBLIC_DBNAME, 0, 0, sum(CALLSPERSEC) from SGV$SERVICEMETRIC where service_name like 'oltp%' and group_id=10 group by PUBLIC_DBNAME
+Jan 09, 2020 3:14:09 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:14:10 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper getAsTable
+FINE: Execute done : select PUBLIC_DBNAME DATABASE, OrderId ID, CustId CUSTOMER, OrderDate "DATE", TO_CHAR(SumTotal, '999,999,999.00') SUM  FROM (SELECT * FROM GLOBAL_SAMPLE_ORDERS ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM < 10 ORDER BY OrderId DESC
+Jan 09, 2020 3:14:12 PM oracle.monitor.DatabaseMonitor$InfoHandler handle
+FINE: /db/demo/info
+Jan 09, 2020 3:14:12 PM sun.net.httpserver.ServerImpl logReply
+FINE: GET /db/demo/info HTTP/1.1 [200  OK] ()
+Jan 09, 2020 3:14:13 PM oracle.monitor.DatabaseMonitor$SimpleStatementWrapper executeAndProcess
+FINE: Execute select * from table(sys.shard_helper_remote.execute_at_shards('declare pragma autonomous_transaction;  begin dbms_stats.gather_schema_stats(''APP_SCHEMA'', null, false, ''FOR ALL INDEXED COLUMNS SIZE 1'',  null, ''ALL'', false, null, null, ''GATHER''); end;', 1))
