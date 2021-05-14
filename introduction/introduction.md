@@ -5,9 +5,7 @@
 
 In this workshop you will learn how to deploy Oracle Sharding, work with the sharded database and scale the sharded database. You will also learn how to migrate an application from a non-shard database to a sharded database.
 
-If you want use a pre-deployed database sharding environment, working with the sharded database and scale the sharded database directly, you can use the following link:
-
-[Working with Oracle Shard Database](https://minqiaowang.github.io/oracle-sharded-database/work-with-db-shard/workshops/freetier)
+If you want use a pre-deployed database sharding environment, working with the sharded database and scale the sharded database directly, you can use this link: [Working with Oracle Shard Database](https://minqiaowang.github.io/oracle-sharded-database/work-with-db-shard/workshops/freetier)
 
 Estimated Lab Time: 4 hours.
 
