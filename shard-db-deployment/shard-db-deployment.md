@@ -1246,3 +1246,12 @@ The following steps need to do in all the shard database side. We only provide s
 
 You may proceed to the next lab.
 
+## Acknowledgements
+* **Author** - Minqiao Wang, DB Product Management, Dec 2020
+* **Contributors** -  
+* **Last Updated By/Date** - Minqiao Wang, DB Product Management, Apr 2021
+* **Workshop Expiry Date** - 
+
+## See an issue?
+Please submit feedback using this [form](https://apexapps.oracle.com/pls/apex/f?p=133:1:::::P1_FEEDBACK:1). Please include the *workshop name*, *lab* and *step* in your request.  If you don't see the workshop name listed, please enter it manually. If you would like us to follow up with you, enter your email in the *Feedback Comments* section.
+
