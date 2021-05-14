@@ -1,0 +1,35 @@
+{
+    "workshoptitle": "Oracle Sharded Database",
+    "tutorials": [
+        {
+            "title": "Introduction",
+            "description": "The Introduction is always second. The title and contents menu title match for the Introduction.",
+            "filename": "../../introduction/introduction.md"
+        },
+        {
+            "title": "Lab 1: Setup the Environment",
+            "description": "Labs that follow the introduction are numbered, starting with Lab 1",
+            "filename": "../../setup-environment/setup-environment.md"
+        },
+        {
+            "title": "Lab 2: Deployment the Sharded Database",
+            "filename": "../../shard-db-deployment/shard-db-deployment.md"
+        },
+        {
+            "title": "Lab 3: Setup a Non-Shard Database Application",
+            "filename": "../../setup-nonshard-app/setup-nonshard-app.md"
+        },
+        {
+            "title": "Lab 4: Migrate to Sharded Database",
+            "filename": "../../migrate-to-sdb/migrate-to-sdb.md"
+        },
+        {
+            "title": "Lab 5: Database Request Rout to Shard",
+            "filename": "../../db-request-rout/db-request-rout.md"
+        },
+        {
+            "title": "Lab 6: Sharded Database Elastic Scaling",
+            "filename": "../../elastic-scaling/elastic-scaling.md"
+        }
+    ]
+}
