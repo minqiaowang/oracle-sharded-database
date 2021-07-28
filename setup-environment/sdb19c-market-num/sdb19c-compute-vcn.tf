@@ -131,10 +131,10 @@ resource "oci_core_default_security_list" "default-security-list" {
 # Found image id from Marketplace and get signature
 ##
 resource "oci_core_app_catalog_subscription" "generated_oci_core_app_catalog_subscription" {
-	compartment_id = "ocid1.compartment.oc1..aaaaaaaahnn5lmnbuqbbyddbtpd5ixrvi5kuibzbeksokn2nm6ar6zcc5d7q"
+	compartment_id = "${var.compartment_ocid}"
 	eula_link = "${oci_core_app_catalog_listing_resource_version_agreement.generated_oci_core_app_catalog_listing_resource_version_agreement.eula_link}"
 	listing_id = "${oci_core_app_catalog_listing_resource_version_agreement.generated_oci_core_app_catalog_listing_resource_version_agreement.listing_id}"
-	listing_resource_version = "Oracle_Database_19.10.0.0.210119_-_OL7U9"
+	listing_resource_version = "Oracle_Database_19.11.0.0.210420_-_OL7U9"
 	oracle_terms_of_use_link = "${oci_core_app_catalog_listing_resource_version_agreement.generated_oci_core_app_catalog_listing_resource_version_agreement.oracle_terms_of_use_link}"
 	signature = "${oci_core_app_catalog_listing_resource_version_agreement.generated_oci_core_app_catalog_listing_resource_version_agreement.signature}"
 	time_retrieved = "${oci_core_app_catalog_listing_resource_version_agreement.generated_oci_core_app_catalog_listing_resource_version_agreement.time_retrieved}"
@@ -142,7 +142,7 @@ resource "oci_core_app_catalog_subscription" "generated_oci_core_app_catalog_sub
 
 resource "oci_core_app_catalog_listing_resource_version_agreement" "generated_oci_core_app_catalog_listing_resource_version_agreement" {
 	listing_id = "ocid1.appcataloglisting.oc1..aaaaaaaaheuwo4wunrr4eqn6hab36sgeur5xb25nbs5v4f4w3cytjcqysurq"
-	listing_resource_version = "Oracle_Database_19.10.0.0.210119_-_OL7U9"
+	listing_resource_version = "Oracle_Database_19.11.0.0.210420_-_OL7U9"
 }
 
 ##
@@ -164,7 +164,7 @@ resource "oci_core_instance" "cata_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = "ocid1.image.oc1..aaaaaaaae27qas3nmkx2pjngxacb7jj5yhxop7nxego2pfjen47xjtrjucqa"
+    source_id   = "ocid1.image.oc1..aaaaaaaahrfms5ckc6iifgwvz53mx3e4pxnc52iubgw2ntqjzlpdkswso7lq"
 
   }
 
@@ -193,7 +193,7 @@ resource "oci_core_instance" "shd1_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = "ocid1.image.oc1..aaaaaaaae27qas3nmkx2pjngxacb7jj5yhxop7nxego2pfjen47xjtrjucqa"
+    source_id   = "ocid1.image.oc1..aaaaaaaahrfms5ckc6iifgwvz53mx3e4pxnc52iubgw2ntqjzlpdkswso7lq"
 
   }
 
@@ -222,7 +222,7 @@ resource "oci_core_instance" "shd2_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = "ocid1.image.oc1..aaaaaaaae27qas3nmkx2pjngxacb7jj5yhxop7nxego2pfjen47xjtrjucqa"
+    source_id   = "ocid1.image.oc1..aaaaaaaahrfms5ckc6iifgwvz53mx3e4pxnc52iubgw2ntqjzlpdkswso7lq"
 
   }
 
@@ -251,7 +251,7 @@ resource "oci_core_instance" "shd3_instance" {
 
   source_details {
     source_type = "image"
-    source_id   = "ocid1.image.oc1..aaaaaaaae27qas3nmkx2pjngxacb7jj5yhxop7nxego2pfjen47xjtrjucqa"
+    source_id   = "ocid1.image.oc1..aaaaaaaahrfms5ckc6iifgwvz53mx3e4pxnc52iubgw2ntqjzlpdkswso7lq"
 
   }
 
